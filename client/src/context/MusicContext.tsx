@@ -227,8 +227,8 @@ export const useMusicContext = () => {
     const context = useContext(MusicContext);
     if (!context) {
         throw new Error('useMusicContext must be used within a MusicProvider');
-        return context;
     }
+    return context;
 }
 
 
