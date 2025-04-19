@@ -1,12 +1,12 @@
 import "./App.css";
-import BubbleTags from "./components/BubbleTags";
+import Home from "./pages/Home";
 import { MusicProvider } from "./context/MusicContext";
 
 function App() {
   return (
     <>
-    <MusicProvider>
-      <BubbleTags/>
+      <MusicProvider>
+        <Home />
       </MusicProvider>
     </>
   );

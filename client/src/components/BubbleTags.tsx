@@ -78,26 +78,39 @@ const handleClick2 = (tag: string) => {
 
     return (
         <>
-        <div className={styles.cloudTags}>
-            <ul>
-            <ul>
-                {cloudTags.map((tag, index) => (
-                    <li key={index} onClick={() => handleClick(tag)} className={styles[`tag${index + 1}`]}>{tag}</li>
+        <div className={styles.bubbleTagsContainer}>
+        <ul className={styles.topCloudTagList}>
+            {cloudTags.slice(0, 5).map((tag, index) => (
+                <li key={index} onClick={() => handleClick(tag)} className={styles[`tag${index + 1}`]}>
+                    {tag}
+                </li>
+            ))}
+        </ul>
+        
+        <div className="bubbleWrapper">
+            <div className={styles.bubbleContainer}>
+                <img src="/src/assets/images/bubble2.png" alt="bubble" className={styles.imgBubble} />
+                
+                <ul>
+                    <li onClick={() => handleClick2(bubbleTags[0])} className={styles.bubbleTag1}>{bubbleTags[0]}</li>
+                    <li onClick={() => handleClick2(bubbleTags[1])} className={styles.bubbleTag2}>{bubbleTags[1]}</li>
+                    <li onClick={() => handleClick2(bubbleTags[2])} className={styles.bubbleTag3}>{bubbleTags[2]}</li>
+                    <li onClick={() => handleClick2(bubbleTags[3])} className={styles.bubbleTag4}>{bubbleTags[3]}</li>
+                    <li onClick={() => handleClick2(bubbleTags[4])} className={styles.bubbleTag5}>{bubbleTags[4]}</li>
+                </ul>
+                
+            </div>
+        </div>
+
+        <ul className={styles.botCloudTagList}>
+                {cloudTags.slice(5, 10).map((tag, index) => (
+                    <li key={index + 5} onClick={() => handleClick(tag)} className={styles[`tag${index + 6}`]}>
+                        {tag}
+                    </li>
                 ))}
-            </ul>
-            </ul>
+        </ul>
         </div>
         
-        <div className={styles.bubbleContainer}>
-            <img src="/src/assets/images/Bubble.png" alt="bubble" className={styles.imgBubble} />
-            <ul>
-                <li onClick={() => handleClick2(bubbleTags[0])} className={styles.bubbleTag1}>{bubbleTags[0]}</li>
-                <li onClick={() => handleClick2(bubbleTags[1])} className={styles.bubbleTag2}>{bubbleTags[1]}</li>
-                <li onClick={() => handleClick2(bubbleTags[2])} className={styles.bubbleTag3}>{bubbleTags[2]}</li>
-                <li onClick={() => handleClick2(bubbleTags[3])} className={styles.bubbleTag4}>{bubbleTags[3]}</li>
-                <li onClick={() => handleClick2(bubbleTags[4])} className={styles.bubbleTag5}>{bubbleTags[4]}</li>
-            </ul>
-        </div>
             </>
         );
     }
