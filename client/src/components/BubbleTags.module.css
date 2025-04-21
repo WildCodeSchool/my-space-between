@@ -21,6 +21,7 @@
     width : 80%;
     max-width : 500px;
     font-size: large;
+    user-select: none;
 }
 
 .topCloudTagList li {
@@ -28,6 +29,14 @@
     text-align: center;
     white-space: nowrap;
     text-overflow: ellipsis;
+    cursor: pointer;
+  }
+  
+  .dragging {
+    opacity: 0.5;
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+    cursor: grabbing !important;
   }
 
 .botCloudTagList {
@@ -42,6 +51,7 @@
     max-width : 500px;
     font-size: large;
     align-items: flex-end; 
+    user-select: none;
 }
 
 .botCloudTagList li {
@@ -49,6 +59,7 @@
     text-align: center;
     white-space: nowrap;
     text-overflow: ellipsis;
+    cursor: pointer;
   }
 
 .bubbleContainer {
@@ -67,18 +78,18 @@
 
 .bubbleWrapper {
     position: absolute; 
-
-    height: 1000px;
-
 }
 
 .bubbleContainer ul {
     list-style: none;
+    user-select: none;
+    cursor: pointer;
 }
 
 .imgBubble {
 width : 100%;
-max-width: 750px;
+max-width: 600px;
+user-select: none;
 }
 
 
@@ -154,3 +165,66 @@ max-width: 750px;
     padding: 0 5px 0 5px;
 }
 
+@media screen and (min-width: 1000px) {
+
+
+    .bubbleTagsContainer {
+        flex-direction: row; 
+        justify-content: center; 
+        align-items: center; 
+        gap: 220px; 
+        width: 100%;
+        height: 100svh; 
+        position: relative;
+    }
+
+    .topCloudTagList {
+        flex-wrap: wrap-reverse;
+        align-items: center;
+        flex-direction: column;
+        width: auto; 
+    }
+
+    
+    .botCloudTagList {
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center; 
+        width: auto; 
+    }
+    
+    .bubbleContainer {
+        flex-shrink: 0; 
+        width: auto; 
+        top: 50%; 
+        left: 50%; 
+        transform: translate(-50%, -50%); 
+        position: absolute; 
+        overflow: visible; 
+    }
+
+    .imgBubble {
+        object-fit: contain; 
+        max-width: 500px; 
+        height: auto; 
+    }
+
+    .imgBubble {
+        width : 100%;
+        width: 500px;
+        user-select: none;
+        }
+
+    .topCloudTagList li {
+       font-size: xx-large;
+       text-align: center;
+       width: 300px;
+         }
+      
+     .botCloudTagList li {
+        font-size: xx-large;
+        text-align: center;
+        width: 300px;
+         }  
+           
+}

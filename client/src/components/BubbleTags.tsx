@@ -29,7 +29,7 @@ useEffect(() => {
         }
         setCloudTags(newCloudTags);
     }
-}, [tags]); 
+}, [tags, bubbleTags]); 
 
 
 const handleClick = (tag: string) => {
@@ -67,7 +67,7 @@ const handleClick = (tag: string) => {
     }
 };
 
-const handleClick2 = (tag: string) => {
+const handleRemoveTag = (tag: string) => {
     const newBubbleTags = [...bubbleTags];
     newBubbleTags.splice(newBubbleTags.indexOf(tag),  1);
     setBubbleTags(newBubbleTags);
@@ -81,22 +81,44 @@ const handleClick2 = (tag: string) => {
         <div className={styles.bubbleTagsContainer}>
         <ul className={styles.topCloudTagList}>
             {cloudTags.slice(0, 5).map((tag, index) => (
-                <li key={index} onClick={() => handleClick(tag)} className={styles[`tag${index + 1}`]}>
-                    {tag}
-                </li>
+                <li
+                key={index}
+                onClick={() => handleClick(tag)}
+                className={styles[`tag${index + 1}`]}
+                draggable
+                onDragStart={(e) => {
+                    e.dataTransfer.setData("text/plain", tag);
+                    e.currentTarget.classList.add(styles.dragging);
+                  }}
+                  onDragEnd={(e) => {
+                    e.currentTarget.classList.remove(styles.dragging);
+                  }}
+              >
+                {tag}
+              </li>
             ))}
         </ul>
         
         <div className="bubbleWrapper">
             <div className={styles.bubbleContainer}>
-                <img src="/src/assets/images/bubble2.png" alt="bubble" className={styles.imgBubble} />
+            <img
+  src="/src/assets/images/bubble2.png"
+  alt="bubble"
+  className={styles.imgBubble}
+  onDragOver={(e) => e.preventDefault()}
+  onDrop={(e) => {
+    e.preventDefault();
+    const draggedTag = e.dataTransfer.getData("text/plain");
+    handleClick(draggedTag);
+  }}
+/>
                 
                 <ul>
-                    <li onClick={() => handleClick2(bubbleTags[0])} className={styles.bubbleTag1}>{bubbleTags[0]}</li>
-                    <li onClick={() => handleClick2(bubbleTags[1])} className={styles.bubbleTag2}>{bubbleTags[1]}</li>
-                    <li onClick={() => handleClick2(bubbleTags[2])} className={styles.bubbleTag3}>{bubbleTags[2]}</li>
-                    <li onClick={() => handleClick2(bubbleTags[3])} className={styles.bubbleTag4}>{bubbleTags[3]}</li>
-                    <li onClick={() => handleClick2(bubbleTags[4])} className={styles.bubbleTag5}>{bubbleTags[4]}</li>
+                    <li onClick={() => handleRemoveTag(bubbleTags[0])} className={styles.bubbleTag1}>{bubbleTags[0]}</li>
+                    <li onClick={() => handleRemoveTag(bubbleTags[1])} className={styles.bubbleTag2}>{bubbleTags[1]}</li>
+                    <li onClick={() => handleRemoveTag(bubbleTags[2])} className={styles.bubbleTag3}>{bubbleTags[2]}</li>
+                    <li onClick={() => handleRemoveTag(bubbleTags[3])} className={styles.bubbleTag4}>{bubbleTags[3]}</li>
+                    <li onClick={() => handleRemoveTag(bubbleTags[4])} className={styles.bubbleTag5}>{bubbleTags[4]}</li>
                 </ul>
                 
             </div>
@@ -104,9 +126,21 @@ const handleClick2 = (tag: string) => {
 
         <ul className={styles.botCloudTagList}>
                 {cloudTags.slice(5, 10).map((tag, index) => (
-                    <li key={index + 5} onClick={() => handleClick(tag)} className={styles[`tag${index + 6}`]}>
-                        {tag}
-                    </li>
+                    <li
+                    key={index + 5}
+                    onClick={() => handleClick(tag)}
+                    className={styles[`tag${index + 6}`]}
+                    draggable
+                    onDragStart={(e) => {
+                        e.dataTransfer.setData("text/plain", tag);
+                        e.currentTarget.classList.add(styles.dragging);
+                      }}
+                      onDragEnd={(e) => {
+                        e.currentTarget.classList.remove(styles.dragging);
+                      }}
+                  >
+                    {tag}
+                  </li>
                 ))}
         </ul>
         </div>
