@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #eee;
+  margin: 0;
+  
+}
+
+#root {
+  background: #5C39C4;
+  background: radial-gradient(circle,rgba(92, 57, 196, 1) 0%, rgba(28, 7, 89, 1) 100%);
+  height: 100vh;
+  background-size: cover;
+  background-position: top;
+}

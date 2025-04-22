@@ -1,11 +1,16 @@
 import "./App.css";
 import BurgerMenu from "./components/BurgerMenu";
+import Home from "./pages/Home";
+import { MusicProvider } from "./context/MusicContext";
 
 function App() {
   return (
-    <div className="app">
-      <BurgerMenu />
-    </div>
+    <>
+      <MusicProvider>
+        <BurgerMenu />
+        <Home />
+      </MusicProvider>
+    </>
   );
 }
 
