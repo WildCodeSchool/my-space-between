@@ -81,8 +81,7 @@ const handleRemoveTag = (tag: string) => {
         <div className={styles.bubbleTagsContainer}>
         <ul className={styles.topCloudTagList}>
             {cloudTags.slice(0, 5).map((tag, index) => (
-                <li
-                key={index}
+                <button 
                 onClick={() => handleClick(tag)}
                 className={styles[`tag${index + 1}`]}
                 draggable
@@ -92,10 +91,12 @@ const handleRemoveTag = (tag: string) => {
                   }}
                   onDragEnd={(e) => {
                     e.currentTarget.classList.remove(styles.dragging);
-                  }}
+                  }}><li
+                key={index}
+                
               >
                 {tag}
-              </li>
+              </li></button>
             ))}
         </ul>
         
@@ -114,11 +115,11 @@ const handleRemoveTag = (tag: string) => {
 />
                 
                 <ul>
-                    <li onClick={() => handleRemoveTag(bubbleTags[0])} className={styles.bubbleTag1}>{bubbleTags[0]}</li>
-                    <li onClick={() => handleRemoveTag(bubbleTags[1])} className={styles.bubbleTag2}>{bubbleTags[1]}</li>
-                    <li onClick={() => handleRemoveTag(bubbleTags[2])} className={styles.bubbleTag3}>{bubbleTags[2]}</li>
-                    <li onClick={() => handleRemoveTag(bubbleTags[3])} className={styles.bubbleTag4}>{bubbleTags[3]}</li>
-                    <li onClick={() => handleRemoveTag(bubbleTags[4])} className={styles.bubbleTag5}>{bubbleTags[4]}</li>
+                    <button><li onClick={() => handleRemoveTag(bubbleTags[0])} className={styles.bubbleTag1}>{bubbleTags[0]}</li></button>
+                    <button><li onClick={() => handleRemoveTag(bubbleTags[1])} className={styles.bubbleTag2}>{bubbleTags[1]}</li></button>
+                    <button><li onClick={() => handleRemoveTag(bubbleTags[2])} className={styles.bubbleTag3}>{bubbleTags[2]}</li></button>
+                    <button><li onClick={() => handleRemoveTag(bubbleTags[3])} className={styles.bubbleTag4}>{bubbleTags[3]}</li></button>
+                    <button><li onClick={() => handleRemoveTag(bubbleTags[4])} className={styles.bubbleTag5}>{bubbleTags[4]}</li></button>
                 </ul>
                 
             </div>
@@ -126,8 +127,7 @@ const handleRemoveTag = (tag: string) => {
 
         <ul className={styles.botCloudTagList}>
                 {cloudTags.slice(5, 10).map((tag, index) => (
-                    <li
-                    key={index + 5}
+                    <button 
                     onClick={() => handleClick(tag)}
                     className={styles[`tag${index + 6}`]}
                     draggable
@@ -137,10 +137,13 @@ const handleRemoveTag = (tag: string) => {
                       }}
                       onDragEnd={(e) => {
                         e.currentTarget.classList.remove(styles.dragging);
-                      }}
+                      }}><li
+                    key={index + 5}
+                    
                   >
                     {tag}
                   </li>
+                  </button>
                 ))}
         </ul>
         </div>

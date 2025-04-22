@@ -1,3 +1,11 @@
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    font-size: 1.3rem;
+}
+
 .bubbleTagsContainer {
     display: flex;
     flex-direction: column; 
@@ -123,6 +131,7 @@ user-select: none;
     background-color: rgb(255, 255, 255);
     border-radius: 20px;
     padding: 0 5px 0 5px;
+    font-size:1.3rem;
 }
 .bubbleTag2 {
     position: absolute;
@@ -133,6 +142,7 @@ user-select: none;
     background-color: rgb(255, 255, 255);
     border-radius: 20px;
     padding: 0 5px 0 5px;
+    font-size:1.3rem;
 }
 .bubbleTag3 {
     position: absolute;
@@ -143,6 +153,7 @@ user-select: none;
     background-color: white;
     border-radius: 20px;
     padding: 0 5px 0 5px;
+    font-size:1.3rem;
 }
 .bubbleTag4 {
     position: absolute;
@@ -153,6 +164,7 @@ user-select: none;
     background-color: white;
     border-radius: 20px;
     padding: 0 5px 0 5px;
+    font-size:1.3rem;
 }
 .bubbleTag5 {
     position: absolute;
@@ -163,6 +175,7 @@ user-select: none;
     background-color: white;
     border-radius: 20px;
     padding: 0 5px 0 5px;
+    font-size:1.3rem;
 }
 
 @media screen and (min-width: 1000px) {
@@ -183,6 +196,7 @@ user-select: none;
         align-items: center;
         flex-direction: column;
         width: auto; 
+        gap : 20px;
     }
 
     
@@ -191,6 +205,7 @@ user-select: none;
         flex-direction: column;
         align-items: center; 
         width: auto; 
+        gap : 20px;
     }
     
     .bubbleContainer {
