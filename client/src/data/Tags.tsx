@@ -203,5 +203,8 @@ export const Tags :string[] =
       "Sunny Day",
       "Snowy Day",
       "Beach",
-      "Road Trip"
+      "Road Trip",
+      "Dragon",
+      "legendary",
+      "Tavern"
     ]
