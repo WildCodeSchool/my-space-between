@@ -2,8 +2,8 @@ button {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    color: rgb(255, 255, 255);
     font-size: 1.3rem;
+    color: white;
 }
 
 .bubbleTagsContainer {
@@ -122,7 +122,7 @@ user-select: none;
 
 /* ---------------------- BUBBLE TAGS --------------------- */
 
-.bubbleTag1 {
+.bubbleTag1 button {
     position: absolute;
     top: 50%; 
     left: 50%; 
@@ -133,7 +133,7 @@ user-select: none;
     padding: 0 5px 0 5px;
     font-size:1.3rem;
 }
-.bubbleTag2 {
+.bubbleTag2 button {
     position: absolute;
     top: 35%; 
     left: 30%; 
@@ -144,7 +144,7 @@ user-select: none;
     padding: 0 5px 0 5px;
     font-size:1.3rem;
 }
-.bubbleTag3 {
+.bubbleTag3 button {
     position: absolute;
     top: 25%; 
     left: 70%; 
@@ -155,7 +155,7 @@ user-select: none;
     padding: 0 5px 0 5px;
     font-size:1.3rem;
 }
-.bubbleTag4 {
+.bubbleTag4 button {
     position: absolute;
     top: 70%; 
     left: 65%; 
@@ -166,7 +166,9 @@ user-select: none;
     padding: 0 5px 0 5px;
     font-size:1.3rem;
 }
-.bubbleTag5 {
+
+
+.bubbleTag5 button {
     position: absolute;
     top: 75%; 
     left: 30%; 
