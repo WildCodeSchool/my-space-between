@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Tags } from '../data/Tags';
+import styles from '../components/S01-Us02-SearchBar.module.css'
 //import { useMusicContext } from '../context/MusicContext';
 
 const SearchBar = ({ tags = Tags }) => {
@@ -25,26 +26,28 @@ const SearchBar = ({ tags = Tags }) => {
 
     const handleSelect = (result: string) => {
         setSelectedResult(result);
-        setSearchStyle(result);
+        setSearchStyle("");
         setResults([]);
     };
+    
 
     return (
-        <div>
-            <input
+        <div >
+            <input className ={styles.researchBar}
                 type="text"
                 value={searchStyle}
                 onChange={handleSearch}
                 placeholder="Search any genre, mood..."
             />
             {results.length > 0 && (
-                <ul>
-                    {results.map((result, index) => (
+                <ul className = {styles.resultList}>
+                    {results.slice(0, 5).map((result, index) => (
                         <li key={index} onClick={() => handleSelect(result)}>
                             {result}
                         </li>
                     ))}
                 </ul>
+                
             )}
             {selectedResult && (
                 <div>{selectedResult}</div>

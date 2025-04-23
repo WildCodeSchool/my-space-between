@@ -73,10 +73,7 @@ const handleRemoveTag = (tag: string) => {
     setBubbleTags(newBubbleTags);
 }
 
-
-
-
-    return (
+  return (
         <>
         <div className={styles.bubbleTagsContainer}>
         <ul className={styles.topCloudTagList}>

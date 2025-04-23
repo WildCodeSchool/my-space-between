@@ -1,0 +1,14 @@
+.researchBar{
+    margin: 15px;
+    height: 30px;
+    width: 250px;
+    border-radius: 10px;
+    background-color: transparent;
+    color: aliceblue;
+}
+
+.resultList {
+    
+   margin-left: 15px;
+   list-style: none;
+}
