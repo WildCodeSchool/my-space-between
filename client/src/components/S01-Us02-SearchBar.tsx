@@ -1,42 +1,56 @@
 import React, { useState } from 'react';
 import { Tags } from '../data/Tags';
-import { useMusicContext } from '../context/MusicContext';
+//import { useMusicContext } from '../context/MusicContext';
 
+const SearchBar = ({ tags = Tags }) => {
+    const [searchStyle, setSearchStyle] = useState("");
+    const [results, setResults] = useState<string[]>([]);
+    const [selectedResult, setSelectedResult] = useState<string | null>(null);
 
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setSearchStyle(value);
 
-const SearchBar = ({tags}) => {
-    const [searchStyle, setSearchStyle] = useState("")
+        if (value.trim() === "") {
+            setResults([]);
+            return;
+        }
 
-    const handleChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
-        setSearchStyle(event.target.value)
-    }
+        const filteredResults = tags.filter(tag =>
+            tag.toLowerCase().startsWith(value.toLowerCase())
+        );
 
-    const filteredTags = Tags.filter(tag => 
-    tag.toLowerCase().startsWith(searchStyle.toLowerCase()) &&
-    searchStyle.trim() !== ""
-)
-    .slice(0, 5)
+        setResults(filteredResults);
+    };
 
-return (
-    <div>
-        <input type ="text"
-                placeholder ="Search any genre, mood,..."
-                value = {searchStyle}
-                onChange = {handleChange}/>
+    const handleSelect = (result: string) => {
+        setSelectedResult(result);
+        setSearchStyle(result);
+        setResults([]);
+    };
 
-            {filteredTags.length > 0 && (
+    return (
+        <div>
+            <input
+                type="text"
+                value={searchStyle}
+                onChange={handleSearch}
+                placeholder="Search any genre, mood..."
+            />
+            {results.length > 0 && (
                 <ul>
-                    {filteredTags.map((tag, index) => (
-                        <li key = {index}>{tag}</li>
+                    {results.map((result, index) => (
+                        <li key={index} onClick={() => handleSelect(result)}>
+                            {result}
+                        </li>
                     ))}
                 </ul>
             )}
-    </div>
-)
-}
+            {selectedResult && (
+                <div>{selectedResult}</div>
+            )}
+        </div>
+    );
+};
 
-
-
-
-
-export default SearchBar
+export default SearchBar;
