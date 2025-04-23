@@ -3,13 +3,19 @@ import { Tags } from '../data/Tags';
 
 type MusicContextType = {
     tags: string[];
+    bubbleTags: string[];
+    setBubbleTags: React.Dispatch<React.SetStateAction<string[]>>
 };
 
-export const MusicContext = createContext<MusicContextType>({ tags: [] });
+export const MusicContext = createContext<MusicContextType>({
+    tags: [],
+    bubbleTags: [],
+    setBubbleTags: () => {}
+});
 
 export const MusicProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     return (
-        <MusicContext value={{ tags: Tags }}>
+        <MusicContext value={{ tags: Tags, bubbleTags: [], setBubbleTags: () => {} }}>
             {children}
         </MusicContext>
     );

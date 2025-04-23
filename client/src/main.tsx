@@ -11,8 +11,13 @@ import App from "./App";
 // Import additional components for new routes
 // Try creating these components in the "pages" folder
 
+import { FetchDataProvider } from "./context/FetchDataContext";
+import { MusicProvider } from "./context/MusicContext"; 
+
 // import About from "./pages/About";
 // import Contact from "./pages/Contact";
+import Home from "./pages/Home"; // 
+import Player from "./pages/Player"; // 
 
 /* ************************************************************************* */
 
@@ -20,9 +25,18 @@ import App from "./App";
 // You can add more routes as you build out your app!
 const router = createBrowserRouter([
   {
-    path: "/", // The root path
-    element: <App />, // Renders the App component for the home page
-  },
+    element: <App/>,
+    children: [
+      {
+        path: "/", // The root path
+        element: <Home />,
+       }, // Renders the App component for the home page
+      { path: "/player", 
+        element: <Player /> 
+      },
+    ]
+  }
+   // Renders the App component for the home page
   // Try adding a new route! For example, "/about" with an About component
 ]);
 
@@ -37,7 +51,11 @@ if (rootElement == null) {
 // Render the app inside the root element
 createRoot(rootElement).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <FetchDataProvider>
+      <MusicProvider>
+        <RouterProvider router={router} />
+      </MusicProvider>
+    </FetchDataProvider>
   </StrictMode>,
 );
 

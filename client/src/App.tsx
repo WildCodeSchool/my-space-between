@@ -1,13 +1,14 @@
 import "./App.css";
-import Home from "./pages/Home";
-import { MusicProvider } from "./context/MusicContext";
+
+import { Outlet } from "react-router-dom";
+
 
 function App() {
   return (
     <>
-      <MusicProvider>
-        <Home />
-      </MusicProvider>
+    
+        <Outlet/>
+
     </>
   );
 }

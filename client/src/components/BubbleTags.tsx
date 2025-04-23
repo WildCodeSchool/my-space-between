@@ -1,17 +1,11 @@
 import { useState, useEffect } from 'react';
 import styles from '../components/BubbleTags.module.css';
-import { useMusicContext } from '../context/MusicContext'
-
-
-
-
-
+import { useMusicContext } from '../context/MusicContext';
+import DiscoverButton from './DiscoverButton'; 
 
 function BubbleTags() {
 
 const { tags } = useMusicContext();
-
-
 
 const [bubbleTags, setBubbleTags] = useState<string[]>([]);
 const [cloudTags, setCloudTags] = useState<string[]>([]);
@@ -31,7 +25,6 @@ useEffect(() => {
     }
 }, [tags, bubbleTags]); 
 
-
 const handleClick = (tag: string) => {
 
     if (bubbleTags.length < 5) {
@@ -45,10 +38,8 @@ const handleClick = (tag: string) => {
             setBubbleTags(newBubbleTags);
         }
 
-
         const newCloudTags = [...cloudTags];
         let randomTag: string = '';
-
 
         while (
             randomTag === '' ||
@@ -58,9 +49,7 @@ const handleClick = (tag: string) => {
             randomTag = tags[Math.floor(Math.random() * tags.length)];
         }
 
-
         newCloudTags[index] = randomTag;
-
 
         setCloudTags(newCloudTags);
     }
@@ -72,9 +61,6 @@ const handleRemoveTag = (tag: string) => {
     newBubbleTags.splice(newBubbleTags.indexOf(tag),  1);
     setBubbleTags(newBubbleTags);
 }
-
-
-
 
     return (
         <>
@@ -149,7 +135,7 @@ const handleRemoveTag = (tag: string) => {
                 ))}
         </ul>
         </div>
-        
+        <DiscoverButton bubbleTags={bubbleTags} /> 
             </>
         );
     }
