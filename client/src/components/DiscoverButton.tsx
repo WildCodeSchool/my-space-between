@@ -39,7 +39,7 @@ interface DiscoverButtonProps {
 }
 
 const DiscoverButton: React.FC<DiscoverButtonProps> = ({ bubbleTags }) => {
-  const { loading, error, fetchMusicData } = useFetchDataContext();
+  const { fetchMusicData } = useFetchDataContext();
   const navigate = useNavigate();
 
   const handleDiscover = () => {
@@ -50,8 +50,7 @@ const DiscoverButton: React.FC<DiscoverButtonProps> = ({ bubbleTags }) => {
   return (
     <div>
       <button className={styles.discoverButton} onClick={handleDiscover}>Go Discover</button>
-      {loading && <div>Chargement...</div>}
-      {error && <div>Erreur : {error}</div>}
+
     </div>
   );
 };
