@@ -32,7 +32,7 @@ const SearchBar = ({ tags = Tags }) => {
     
 
     return (
-        <div >
+        <div className = {styles.mainSearchMenu}>
             <input className ={styles.researchBar}
                 type="text"
                 value={searchStyle}
@@ -40,14 +40,15 @@ const SearchBar = ({ tags = Tags }) => {
                 placeholder="Search any genre, mood..."
             />
             {results.length > 0 && (
+                <section className = {styles.listContainer}>
                 <ul className = {styles.resultList}>
-                    {results.slice(0, 5).map((result, index) => (
+                    {results.slice(0, 10).map((result, index) => (
                         <li key={index} onClick={() => handleSelect(result)}>
                             {result}
                         </li>
                     ))}
                 </ul>
-                
+                </section>
             )}
             {selectedResult && (
                 <div>{selectedResult}</div>
