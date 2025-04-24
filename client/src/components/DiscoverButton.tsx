@@ -52,7 +52,7 @@ interface DiscoverButtonProps {
 }
 
 const DiscoverButton: React.FC<DiscoverButtonProps> = ({ bubbleTags }) => {
-  const navigate = useNavigate(); // Hook pour la navigation
+  const navigate = useNavigate();
   const { tags } = useMusicContext();
 
   const { musicList, setMusicList, loading, setLoading, error, setError } =
