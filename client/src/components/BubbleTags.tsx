@@ -2,17 +2,9 @@ import { useState, useEffect } from 'react';
 import styles from '../components/BubbleTags.module.css';
 import { useMusicContext } from '../context/MusicContext'
 
-
-
-
-
-
 function BubbleTags() {
 
 const { tags } = useMusicContext();
-
-
-
 const [bubbleTags, setBubbleTags] = useState<string[]>([]);
 const [cloudTags, setCloudTags] = useState<string[]>([]);
 
@@ -45,10 +37,8 @@ const handleClick = (tag: string) => {
             setBubbleTags(newBubbleTags);
         }
 
-
         const newCloudTags = [...cloudTags];
         let randomTag: string = '';
-
 
         while (
             randomTag === '' ||
@@ -58,13 +48,10 @@ const handleClick = (tag: string) => {
             randomTag = tags[Math.floor(Math.random() * tags.length)];
         }
 
-
         newCloudTags[index] = randomTag;
-
-
         setCloudTags(newCloudTags);
     }
-    }
+  }
 };
 
 const handleRemoveTag = (tag: string) => {
@@ -111,45 +98,42 @@ const handleRemoveTag = (tag: string) => {
     handleClick(draggedTag);
   }}
 />
-                
-                <ul>
-                    <li onClick={() => handleRemoveTag(bubbleTags[0])} className={styles.bubbleTag1}><button>{bubbleTags[0]}</button></li>
-                    <li onClick={() => handleRemoveTag(bubbleTags[1])} className={styles.bubbleTag2}><button>{bubbleTags[1]}</button></li>
-                    <li onClick={() => handleRemoveTag(bubbleTags[2])} className={styles.bubbleTag3}><button>{bubbleTags[2]}</button></li>
-                    <li onClick={() => handleRemoveTag(bubbleTags[3])} className={styles.bubbleTag4}><button>{bubbleTags[3]}</button></li>
-                    <li onClick={() => handleRemoveTag(bubbleTags[4])} className={styles.bubbleTag5}><button>{bubbleTags[4]}</button></li>
-                </ul>
-                
-            </div>
+      <ul>
+          <li onClick={() => handleRemoveTag(bubbleTags[0])} className={styles.bubbleTag1}><button>{bubbleTags[0]}</button></li>
+          <li onClick={() => handleRemoveTag(bubbleTags[1])} className={styles.bubbleTag2}><button>{bubbleTags[1]}</button></li>
+          <li onClick={() => handleRemoveTag(bubbleTags[2])} className={styles.bubbleTag3}><button>{bubbleTags[2]}</button></li>
+          <li onClick={() => handleRemoveTag(bubbleTags[3])} className={styles.bubbleTag4}><button>{bubbleTags[3]}</button></li>
+          <li onClick={() => handleRemoveTag(bubbleTags[4])} className={styles.bubbleTag5}><button>{bubbleTags[4]}</button></li>
+      </ul>
         </div>
+      </div>
 
-        <ul className={styles.botCloudTagList}>
+      <ul className={styles.botCloudTagList}>
                 {cloudTags.slice(5, 10).map((tag, index) => (
-                    <li
-                    key={index + 5}
-                  >
-                    <button 
-                    onClick={() => handleClick(tag)}
-                    className={styles[`tag${index + 6}`]}
-                    draggable
-                    onDragStart={(e) => {
-                        e.dataTransfer.setData("text/plain", tag);
-                        e.currentTarget.classList.add(styles.dragging);
-                      }}
-                      onDragEnd={(e) => {
-                        e.currentTarget.classList.remove(styles.dragging);
-                      }}>
-                    {tag}
-                    </button>
-                  </li>
+          <li
+            key={index + 5}
+          >
+            <button 
+              onClick={() => handleClick(tag)}
+              className={styles[`tag${index + 6}`]}
+              draggable
+              onDragStart={(e) => {
+                  e.dataTransfer.setData("text/plain", tag);
+                  e.currentTarget.classList.add(styles.dragging);
+          }}
+              onDragEnd={(e) => {
+                  e.currentTarget.classList.remove(styles.dragging);
+          }}>
+              {tag}
+            </button>
+          </li>
                   
-                ))}
-        </ul>
-        </div>
-        
-            </>
-        );
-    }
+        ))}
+      </ul>
+      </div>
+    </>
+  );
+  }
     
     export default BubbleTags;
 
