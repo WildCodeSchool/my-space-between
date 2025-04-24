@@ -204,4 +204,5 @@ export const Tags: string[] = [
   "Dragon",
   "legendary",
   "Tavern",
+  "love",
 ];
