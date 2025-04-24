@@ -1,52 +1,51 @@
-.researchBar{
-    margin-left: 5%;
-    margin-top: 15px;
-    margin-bottom: 5px;
-    height: 40px;
-    width: 75%;
-    border-radius: 15px;
-    background-color: #3b0fbf;
-    color: white;
-    border : solid white;
-    font-size: 18px;
-    text-align:auto;
-    padding: 0 15px;
+.researchBar {
+  margin-left: 5%;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  height: 40px;
+  width: 75%;
+  border-radius: 15px;
+  background-color: #3b0fbf;
+  color: white;
+  border: solid white;
+  font-size: 18px;
+  text-align: auto;
+  padding: 0 15px;
 }
 
-.listContainer{
-    margin-left: 5%;
-    padding: 10px 15px;
-    background-color: #a88bfe;
-    border-radius: 15px;
-    height: 100px;
-    width: 75%;
+.listContainer {
+  margin-left: 5%;
+  padding: 10px 15px;
+  background-color: #a88bfe;
+  border-radius: 15px;
+  height: 100px;
+  width: 75%;
 }
 
-.resultList{
-    overflow: auto;
-    width: 100%;
-    height: 100%;
+.resultList {
+  overflow: auto;
+  width: 100%;
+  height: 100%;
 }
 
 .mainSearchMenu ul {
-   list-style: none;
+  list-style: none;
 }
 
-.mainSearchMenu li{
-    margin-left: 20px;
+.mainSearchMenu li {
+  margin-left: 20px;
 }
 
-.mainSearchMenu li:hover{
-    background-color: #7c62cc;
+.mainSearchMenu li:hover {
+  background-color: #7c62cc;
 }
 
 .resultList::-webkit-scrollbar {
-    width: 5px;
+  width: 5px;
 }
 
-.resultList::-webkit-scrollbar-thumb{
-    background-color: #706f6f;
-    outline: 2px solid #706f6f;
-    border-radius: 10px;
+.resultList::-webkit-scrollbar-thumb {
+  background-color: #706f6f;
+  outline: 2px solid #706f6f;
+  border-radius: 10px;
 }
-  

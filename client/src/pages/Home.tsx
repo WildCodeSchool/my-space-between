@@ -4,12 +4,12 @@ import SearchBar from "../components/S01-Us02-SearchBar";
 const Home = () => {
   return (
     <>
-    <div>
-      <SearchBar />
-    </div>
-    <div>
-      <BubbleTags />
-    </div>
+      <div>
+        <SearchBar />
+      </div>
+      <div>
+        <BubbleTags />
+      </div>
     </>
   );
 };
