@@ -1,10 +1,10 @@
-import "../styles/About.scss";
+import styles from "../styles/About.module.scss";
 
 export const About = () => {
   return (
-    <div className="about-container">
+    <div className={styles.aboutContainer}>
         <h2>ABOUT</h2>
-        <div className="underline"></div>
+        <div className={styles.underline}></div>
       <p>
       Welcome to Le Chineur , a music platform designed for everyone who can't go a day without listening to their favorite tunes .
 </p>

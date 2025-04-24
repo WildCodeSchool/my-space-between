@@ -1,16 +1,18 @@
+:global {
 body {
     margin: 0;
     padding: 0;
-    background: linear-gradient(to bottom right, #2c0073, #3e0a85);
+    background: radial-gradient(circle, #5C39C4 0%, #1C0759 100%);
   }
+}
   
-  .about-container {
+  .aboutContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;  
-    min-height: 100vh;
-    max-width: 800px;
+    min-height: 100svh;
+    max-width: 100svh;
     margin: 0 auto;
     padding: 2rem;
     text-align: center;  
@@ -23,21 +25,23 @@ body {
     font-family: 'Jaldi', sans-serif;
   }
   
-  
-  .about-container h2 {
-    margin-bottom: 0;
-    color: white;
-  }
+  .aboutContainer h2 {
+  margin-bottom: 0.2rem;
+  margin-top: 2rem;
+}
 
-  .underline {
-    width: 40rem;
-    height: 2px;
-    background-color: #ffffff;
-    margin: 0.5rem auto 2rem auto;
-    border-radius: 2px;
-  }
+.underline {
+  width: min(100%, 40rem);
+  max-width: 40rem;
+  height: 2px;
+  background-color: #fff;
+  margin: 0;     
+  margin-top: 0.5rem;  
+  margin-bottom: 1rem; 
+  border-radius: 2px;
+}
   
-  .about-container h4 {
+  .aboutContainer h4 {
     margin-top: 2rem;
     padding-bottom: 0.3rem;
   }
@@ -45,27 +49,28 @@ body {
   h2, h4 {
     font-family: 'Karantina', cursive;
     font-weight: 400;
-    letter-spacing: 1.2px;
     line-height: 1.4;
+    letter-spacing: 5px;
   }
 
   @media screen and (max-width: 768px) {
-    .about-container {
-      padding: 1rem;
+    .aboutContainer {
+      padding: 5rem 5rem;
     }
   
-    .about-container h2 {
+    .aboutContainer h2 {
       font-size: 1.8rem;
     }
   
-    .about-container h4 {
+    .aboutContainer h4 {
       font-size: 1.2rem;
     }
   
     .underline {
-      width: 70px;
+      width: 100%;
     }
   }
+
   
   
 
