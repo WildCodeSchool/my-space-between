@@ -1,16 +1,13 @@
 import React, { useState } from "react";
-import { Tags } from "../data/Tags";
+
 import styles from "../components/S01-Us02-SearchBar.module.css";
 import { useMusicContext } from "../context/MusicContext";
-import BubbleTags from "./BubbleTags";
 
 const SearchBar = () => {
-  console.log(useMusicContext().tags);
-  console.log(useMusicContext().bubbleTags);
-  const [tags, setTags] = useState(Tags);
+  const { tags, bubbleTags, setBubbleTags } = useMusicContext();
   const [searchStyle, setSearchStyle] = useState("");
   const [results, setResults] = useState<string[]>([]);
-  const [selectedResult, setSelectedResult] = useState<string | null>(null);
+  const [, setSelectedResult] = useState<string | null>(null);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -29,15 +26,12 @@ const SearchBar = () => {
   };
 
   const handleSelect = (result: string) => {
+    console.log("before set : ", bubbleTags);
     setSelectedResult(result);
     setSearchStyle("");
     setResults([]);
-    const newTags: string[] = useMusicContext().bubbleTags;
-    newTags.push(result);
-    useMusicContext().setBubbleTags(newTags);
-
-    // handle if more than 5 tags in the bubble
-    // Remove all tags in the bubble from the tags selection
+    setBubbleTags((prevTags) => [...prevTags, result]);
+    console.log("After set : ", bubbleTags);
   };
 
   return (

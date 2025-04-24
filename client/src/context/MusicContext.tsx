@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext } from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 import { Tags } from "../data/Tags";
 
 type MusicContextType = {
@@ -16,12 +16,17 @@ export const MusicContext = createContext<MusicContextType>({
 export const MusicProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
+  const [bubbleTags, setBubbleTags] = useState<string[]>([]);
   return (
-    <MusicContext
-      value={{ tags: Tags, bubbleTags: [], setBubbleTags: () => {} }}
+    <MusicContext.Provider
+      value={{
+        tags: Tags,
+        bubbleTags: bubbleTags,
+        setBubbleTags: setBubbleTags,
+      }}
     >
       {children}
-    </MusicContext>
+    </MusicContext.Provider>
   );
 };
 
