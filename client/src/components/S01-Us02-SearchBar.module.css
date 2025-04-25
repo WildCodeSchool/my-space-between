@@ -1,5 +1,4 @@
 .researchBar {
-  margin-left: 5%;
   margin-top: 15px;
   margin-bottom: 5px;
   height: 40px;
@@ -15,12 +14,12 @@
 }
 
 .listContainer {
-  margin-left: 5%;
   padding: 10px 15px;
   background-color: #a88bfe;
   border-radius: 15px;
   height: 100px;
-  width: 75%;
+  max-width: 20%;
+  min-width: 250px;
 }
 
 .resultList {
@@ -28,7 +27,12 @@
   width: 100%;
   height: 100%;
 }
-
+.mainSearchMenu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 .mainSearchMenu ul {
   list-style: none;
 }

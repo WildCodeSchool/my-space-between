@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import styles from "../components/S01-Us02-SearchBar.module.css";
+import styles from "./S01-Us02-SearchBar.module.css";
 import { useMusicContext } from "../context/MusicContext";
 
 const SearchBar = () => {
   const { tags, bubbleTags, setBubbleTags } = useMusicContext();
   const [searchStyle, setSearchStyle] = useState("");
   const [results, setResults] = useState<string[]>([]);
-  const [, setSelectedResult] = useState<string | null>(null);
   const [cloudTags] = useState<string[]>([]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,12 +28,9 @@ const SearchBar = () => {
   };
 
   const handleSelect = (result: string) => {
-    console.log("before set : ", bubbleTags);
-    setSelectedResult(result);
     setSearchStyle("");
     setResults([]);
     setBubbleTags((prevTags) => [...prevTags, result]);
-    console.log("After set : ", bubbleTags);
   };
 
   return (

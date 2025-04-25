@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import styles from "../components/BubbleTags.module.css";
+import styles from "./BubbleTags.module.css";
 import { useMusicContext } from "../context/MusicContext";
 
 function BubbleTags() {
