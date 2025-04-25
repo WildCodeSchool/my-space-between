@@ -1,20 +1,15 @@
 import "./App.css";
-import Home from "./pages/Home";
-import { MusicProvider } from "./context/MusicContext";
 
-
+import { Outlet } from "react-router-dom";
+import BurgerMenu from "./components/BurgerMenu";
 
 function App() {
   return (
     <>
-      <MusicProvider>
-        <Home />
-      </MusicProvider>
+      <BurgerMenu />
+      <Outlet />
     </>
   );
 }
 
-
 export default App;
-
-

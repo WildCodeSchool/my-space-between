@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styles from "./S01-Us02-SearchBar.module.css";
-import { useMusicContext } from "../context/MusicContext";
+import { useMusicDataContext } from "../context/MusicContext";
 
 const SearchBar = () => {
-  const { tags, bubbleTags, setBubbleTags } = useMusicContext();
+  const { tags, bubbleTags, setBubbleTags } = useMusicDataContext();
   const [searchStyle, setSearchStyle] = useState("");
   const [results, setResults] = useState<string[]>([]);
   const [cloudTags] = useState<string[]>([]);

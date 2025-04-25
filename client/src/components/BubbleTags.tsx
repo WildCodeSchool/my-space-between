@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import styles from "./BubbleTags.module.css";
-import { useMusicContext } from "../context/MusicContext";
+import { useMusicDataContext } from "../context/MusicContext";
+import DiscoverButton from "./DiscoverButton";
 
 function BubbleTags() {
-  const { tags } = useMusicContext();
-  const { bubbleTags, setBubbleTags } = useMusicContext();
+  const { tags } = useMusicDataContext();
+
+  const { bubbleTags, setBubbleTags } = useMusicDataContext();
   const [cloudTags, setCloudTags] = useState<string[]>([]);
-  console.log("inside bubble component : ", bubbleTags);
+
   useEffect(() => {
     if (cloudTags.length === 0) {
       const newCloudTags: string[] = [];
@@ -23,7 +25,7 @@ function BubbleTags() {
       }
       setCloudTags(newCloudTags);
     }
-  }, [tags, bubbleTags]);
+  }, [tags, bubbleTags, cloudTags]);
 
   const handleClick = (tag: string) => {
     if (bubbleTags.length < 5) {
@@ -133,6 +135,7 @@ function BubbleTags() {
           ))}
         </ul>
       </div>
+      <DiscoverButton bubbleTags={bubbleTags} />
     </>
   );
 }
