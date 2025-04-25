@@ -1,8 +1,15 @@
 import "./App.css";
-import {About} from "./pages/About";
+
+import { Outlet } from "react-router";
 
 function App() {
-  return <About />;
+  return (
+    <>
+      <Outlet />
+    </>
+  );
 }
 
 export default App;
+
+
