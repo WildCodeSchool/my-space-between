@@ -1,7 +1,8 @@
 import styles from "../components/DiscoverButton.module.css";
-import { useMusicContext } from "../context/MusicContext";
+import { useMusicDataContext } from "../context/MusicContext";
 import { useFetchDataContext } from "../context/FetchDataContext";
 import { useNavigate } from "react-router-dom";
+import { SelectedMusicModel } from "../models/SelectedMusic";
 
 export const getAccessToken = async () => {
   const CLIENT_ID = import.meta.env.VITE_CLIENT_ID as string;
@@ -34,26 +35,13 @@ export const getAccessToken = async () => {
   }
 };
 
-interface SelectedMusic {
-  id: string;
-  popularity: number;
-  url: string;
-  name: string;
-  artist: string;
-  image: string;
-  artistImage: string;
-  genre: string;
-  followers: number;
-  albums: any[];
-}
-
 interface DiscoverButtonProps {
   bubbleTags: string[];
 }
 
 const DiscoverButton: React.FC<DiscoverButtonProps> = ({ bubbleTags }) => {
   const navigate = useNavigate();
-  const { tags } = useMusicContext();
+  const { tags } = useMusicDataContext();
 
   const { musicList, setMusicList, loading, setLoading, error, setError } =
     useFetchDataContext();
@@ -74,7 +62,7 @@ const DiscoverButton: React.FC<DiscoverButtonProps> = ({ bubbleTags }) => {
         : `https://api.spotify.com/v1/search?q=${bubbleTags.join(
             "+"
           )}&type=track&limit=1&offset=${randomOffset}`;
-    console.log("API URL:", API_URL);
+
     setLoading(true);
     setError(null);
 
@@ -109,23 +97,21 @@ const DiscoverButton: React.FC<DiscoverButtonProps> = ({ bubbleTags }) => {
         const artistData = await fetchArtistData(artistId, token);
         const albumsData = await fetchAlbumsData(artistId, token);
 
-        const newSelectedMusic: SelectedMusic = {
-          id: item.id,
-          popularity: item.popularity,
-          url: item.external_urls.spotify,
-          name: item.name,
-          artist: item.artists[0]?.name,
-          image: item.album.images[0]?.url || "",
-          artistImage: artistData.artistImage,
-          genre: artistData.genre,
-          followers: artistData.followers,
-          albums: albumsData,
-        };
+        const newSelectedMusic = new SelectedMusicModel(
+          item.id,
+          item.popularity,
+          item.external_urls.spotify,
+          item.name,
+          item.artists[0]?.name,
+          item.album.images[0]?.url || "",
+          artistData.artistImage,
+          artistData.genre,
+          artistData.followers,
+          albumsData
+        );
 
         setMusicList([newSelectedMusic]);
-        console.log("Updated musicList:", [newSelectedMusic]);
       } else {
-        console.log("No data found, retrying...");
         fetchMusicData(bubbleTags);
       }
     } catch (err: any) {

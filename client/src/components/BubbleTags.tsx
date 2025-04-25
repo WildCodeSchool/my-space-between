@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import styles from "../components/BubbleTags.module.css";
-import { useMusicContext } from "../context/MusicContext";
+import styles from "./BubbleTags.module.css";
+import { useMusicDataContext } from "../context/MusicContext";
 import DiscoverButton from "./DiscoverButton";
 
 function BubbleTags() {
-  const { tags } = useMusicContext();
+  const { tags } = useMusicDataContext();
 
   const [bubbleTags, setBubbleTags] = useState<string[]>([]);
   const [cloudTags, setCloudTags] = useState<string[]>([]);
