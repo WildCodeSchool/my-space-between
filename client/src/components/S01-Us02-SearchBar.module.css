@@ -3,13 +3,14 @@
   margin-top: 15px;
   margin-bottom: 5px;
   height: 40px;
-  width: 75%;
+  max-width: 25%;
+  min-width: 250px;
   border-radius: 15px;
   background-color: #3b0fbf;
   color: white;
   border: solid white;
-  font-size: 18px;
-  text-align: auto;
+  font-size: 14px;
+  text-align: center;
   padding: 0 15px;
 }
 

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import styles from "../components/S01-Us02-SearchBar.module.css";
 import { useMusicContext } from "../context/MusicContext";
 
@@ -8,6 +7,7 @@ const SearchBar = () => {
   const [searchStyle, setSearchStyle] = useState("");
   const [results, setResults] = useState<string[]>([]);
   const [, setSelectedResult] = useState<string | null>(null);
+  const [cloudTags] = useState<string[]>([]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -18,8 +18,11 @@ const SearchBar = () => {
       return;
     }
 
-    const filteredResults = tags.filter((tag) =>
-      tag.toLowerCase().startsWith(value.toLowerCase())
+    const filteredResults = tags.filter(
+      (tag) =>
+        tag.toLowerCase().startsWith(value.toLowerCase()) &&
+        !bubbleTags.includes(tag) &&
+        !cloudTags.includes(tag)
     );
 
     setResults(filteredResults);
