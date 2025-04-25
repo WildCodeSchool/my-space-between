@@ -1,11 +1,16 @@
-import React from "react";
 import BubbleTags from "../components/BubbleTags";
+import SearchBar from "../components/S01-Us02-SearchBar";
 
 const Home = () => {
   return (
-    <div>
-      <BubbleTags />
-    </div>
+    <>
+      <div>
+        <SearchBar />
+      </div>
+      <div>
+        <BubbleTags />
+      </div>
+    </>
   );
 };
 
