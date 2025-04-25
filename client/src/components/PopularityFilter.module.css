@@ -1,0 +1,43 @@
+.filterButton {
+  cursor: pointer;
+}
+
+.popularityButton {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(111, 64, 150);
+  width: 90%;
+  max-width: 350px;
+  height: 90px;
+  border-radius: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.popularityButton.open {
+  flex-direction: column;
+  align-items: center;
+  opacity: 1;
+  visibility: visible;
+}
+
+.levelButtons {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding: 0px 10px;
+}
+
+.selected {
+  background-color: #3b0fbf;
+  border-radius: 20px;
+  padding: 0px 10px;
+  transition: background-color 0.3s ease;
+}
+
+.unselected {
+  padding: 0px 10px;
+  transition: background-color 0.3s ease;
+}
