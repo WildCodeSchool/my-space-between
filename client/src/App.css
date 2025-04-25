@@ -13,6 +13,8 @@ body {
   margin: 0;
 }
 
+html,
+body,
 #root {
   background: #5c39c4;
   background: radial-gradient(

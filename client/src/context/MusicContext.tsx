@@ -18,7 +18,7 @@ export const MusicProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [bubbleTags, setBubbleTags] = useState<string[]>([]);
   return (
-    <MusicContext.Provider
+    <MusicContext
       value={{
         tags: Tags,
         bubbleTags: bubbleTags,
@@ -26,14 +26,14 @@ export const MusicProvider: React.FC<{ children: ReactNode }> = ({
       }}
     >
       {children}
-    </MusicContext.Provider>
+    </MusicContext>
   );
 };
 
-export const useMusicContext = () => {
+export const useMusicDataContext = () => {
   const context = useContext(MusicContext);
   if (!context) {
-    throw new Error("useMusicContext must be used within a MusicProvider");
+    throw new Error("useMusicDataContext must be used within a MusicProvider");
   }
   return context;
 };
