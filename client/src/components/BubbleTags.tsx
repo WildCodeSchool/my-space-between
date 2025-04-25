@@ -6,7 +6,7 @@ import DiscoverButton from "./DiscoverButton";
 function BubbleTags() {
   const { tags } = useMusicDataContext();
 
-  const [bubbleTags, setBubbleTags] = useState<string[]>([]);
+  const { bubbleTags, setBubbleTags } = useMusicDataContext();
   const [cloudTags, setCloudTags] = useState<string[]>([]);
 
   useEffect(() => {
@@ -49,7 +49,6 @@ function BubbleTags() {
         }
 
         newCloudTags[index] = randomTag;
-
         setCloudTags(newCloudTags);
       }
     }
@@ -98,38 +97,19 @@ function BubbleTags() {
                 handleClick(draggedTag);
               }}
             />
-
             <ul>
-              <li
-                onClick={() => handleRemoveTag(bubbleTags[0])}
-                className={styles.bubbleTag1}
-              >
-                <button>{bubbleTags[0]}</button>
-              </li>
-              <li
-                onClick={() => handleRemoveTag(bubbleTags[1])}
-                className={styles.bubbleTag2}
-              >
-                <button>{bubbleTags[1]}</button>
-              </li>
-              <li
-                onClick={() => handleRemoveTag(bubbleTags[2])}
-                className={styles.bubbleTag3}
-              >
-                <button>{bubbleTags[2]}</button>
-              </li>
-              <li
-                onClick={() => handleRemoveTag(bubbleTags[3])}
-                className={styles.bubbleTag4}
-              >
-                <button>{bubbleTags[3]}</button>
-              </li>
-              <li
-                onClick={() => handleRemoveTag(bubbleTags[4])}
-                className={styles.bubbleTag5}
-              >
-                <button>{bubbleTags[4]}</button>
-              </li>
+              {bubbleTags.map((tag, index) => {
+                const classname = `bubbleTag${index + 1}`;
+                return (
+                  <li
+                    key={index + 1}
+                    onClick={() => handleRemoveTag(bubbleTags[index])}
+                    className={styles[classname]}
+                  >
+                    <button>{tag}</button>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>
