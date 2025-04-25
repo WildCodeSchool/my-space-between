@@ -6,7 +6,7 @@ function BubbleTags() {
   const { tags } = useMusicContext();
   const { bubbleTags, setBubbleTags } = useMusicContext();
   const [cloudTags, setCloudTags] = useState<string[]>([]);
-  console.log("inside bubble component : ", bubbleTags);
+
   useEffect(() => {
     if (cloudTags.length === 0) {
       const newCloudTags: string[] = [];
