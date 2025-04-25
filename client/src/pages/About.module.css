@@ -1,12 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Jaldi&family=Karantina&display=swap');
-
-
-body {
-  margin: 0;
-  padding: 0;
-  background: radial-gradient(circle, #5C39C4 0%, #1C0759 100%);
-}
-
 .aboutContainer {
   display: flex;
   flex-direction: column;
