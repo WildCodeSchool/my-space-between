@@ -1,19 +1,25 @@
 .filterButton {
+  position: relative;
+  top: 7px;
   cursor: pointer;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .popularityButton {
+  position: fixed;
+  bottom: 60px;
   display: flex;
   align-items: center;
   flex-direction: column;
   background-color: rgb(111, 64, 150);
-  width: 90%;
+  width: 100%;
   max-width: 350px;
-  height: 90px;
+  height: 80px;
   border-radius: 20px;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .popularityButton.open {
@@ -26,7 +32,6 @@
 .levelButtons {
   display: flex;
   justify-content: space-around;
-  width: 100%;
   padding: 0px 10px;
 }
 
@@ -40,4 +45,17 @@
 .unselected {
   padding: 0px 10px;
   transition: background-color 0.3s ease;
+  border-radius: 20px;
+}
+
+@media screen and (min-width: 1000px) {
+  .filterButton {
+    display: none;
+  }
+
+  .popularityButton {
+    visibility: visible;
+    opacity: 1;
+    position: inherit;
+  }
 }

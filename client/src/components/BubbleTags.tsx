@@ -140,11 +140,13 @@ function BubbleTags() {
           ))}
         </ul>
       </div>
-      <PopularityFilter
-        onChange={setPopularityFilter}
-        selected={popularityFilter}
-      />
-      <DiscoverButton bubbleTags={bubbleTags} filter={popularityFilter} />
+      <div className={styles.bottomButtons}>
+        <PopularityFilter
+          onChange={setPopularityFilter}
+          selected={popularityFilter}
+        />
+        <DiscoverButton bubbleTags={bubbleTags} filter={popularityFilter} />
+      </div>
     </>
   );
 }
