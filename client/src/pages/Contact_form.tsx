@@ -1,13 +1,29 @@
 import { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import useRecaptcha from '../../useRecaptcha';
+import Express from 'express';
 
-const App = () => {
+const ContactForm = () => {
   const [name, setName]       = useState('');
   const [surname, setSurName] = useState('');
   const [email, setEmail]     = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const { capchaToken, recaptchaRef, handleRecaptcha } = useRecaptcha();
+
+  const onSubmit = (e: FormEvent)  => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch('/useRecaptcha'), {
+       method: 'POST',
+       body: JSON.stringify({
+        name,
+        surname,
+        email,
+        message,
+        capchaToken,
+    })}
 
   return (
     <form onSubmit={handleSubmit}>
@@ -67,4 +83,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default ContactForm;
