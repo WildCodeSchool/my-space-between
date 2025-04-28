@@ -202,7 +202,7 @@ export const Tags: string[] = [
   "Beach",
   "Road Trip",
   "Dragon",
-  "legendary",
+  "Legendary",
   "Tavern",
-  "love",
+  "Love",
 ];

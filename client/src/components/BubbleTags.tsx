@@ -1,13 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "./BubbleTags.module.css";
 import { useMusicDataContext } from "../context/MusicContext";
 import DiscoverButton from "./DiscoverButton";
+import ShakeToRandom from "./ShakeToRandom";
 
 function BubbleTags() {
   const { tags } = useMusicDataContext();
 
   const { bubbleTags, setBubbleTags } = useMusicDataContext();
   const [cloudTags, setCloudTags] = useState<string[]>([]);
+
+  const shakeRef = useRef<{ triggerShake: () => void } | null>(null);
+
+  const bubbleClick = () => {
+    if (shakeRef.current) {
+      shakeRef.current.triggerShake();
+    }
+  };
 
   useEffect(() => {
     if (cloudTags.length === 0) {
@@ -88,6 +97,7 @@ function BubbleTags() {
           <div className={styles.bubbleContainer}>
             <img
               src="/src/assets/images/bubble2.png"
+              onClick={bubbleClick}
               alt="bubble"
               className={styles.imgBubble}
               onDragOver={(e) => e.preventDefault()}
@@ -136,6 +146,7 @@ function BubbleTags() {
         </ul>
       </div>
       <DiscoverButton bubbleTags={bubbleTags} />
+      <ShakeToRandom ref={shakeRef} />
     </>
   );
 }
