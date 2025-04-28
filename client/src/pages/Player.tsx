@@ -1,8 +1,8 @@
+import SpotifyPlayer from "../components/SpotifyPlayer";
 import { useFetchDataContext } from "../context/FetchDataContext";
 
 const Player = () => {
   const { musicList } = useFetchDataContext();
-  console.log(musicList);
 
   return (
     <div>
@@ -12,7 +12,7 @@ const Player = () => {
             <p>ID: {item.id}</p>
             <p>Popularity: {item.popularity}</p>
             <p>
-              URL:{" "}
+              URL: <SpotifyPlayer uri={item.url} />
               <a href={item.url} target="_blank" rel="noopener noreferrer">
                 {item.url}
               </a>
