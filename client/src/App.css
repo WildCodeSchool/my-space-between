@@ -6,15 +6,11 @@
 }
 
 body {
-<<<<<<< HEAD
   line-height: 1.7;
   color: #eee;
   margin: 0;
-=======
-  background: radial-gradient(circle, #5C39C4 0%, #1C0759 100%);
->>>>>>> 9e1c285f9bd4eeab48cbc46a0deb22bf3e27528f
+  background: radial-gradient(circle, #5c39c4 0%, #1c0759 100%);
 }
-
 
 html,
 body,
