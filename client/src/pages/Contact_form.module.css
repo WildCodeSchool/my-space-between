@@ -1,0 +1,49 @@
+body {
+    background: radial-gradient(circle, #5C39C4 0%, #1C0759 100%);
+}
+
+.contactContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: 2rem;
+  text-align: center;
+  color: #fff;
+  line-height: 1.6;
+}
+
+.contactContainer h2 {
+  font-family: 'Karantina', cursive;
+  font-weight: 400;
+  letter-spacing: 5px;
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+}
+
+.form {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+input, textarea {
+    width: 30rem;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border: 2px solid #ccc;
+    border-radius: 0.4rem;
+    background: #fff;
+    color: #000;
+    font-size: 1rem;
+}
+
+button {
+    width: 4rem;
+    height: 2rem;
+    border: 0.1rem solid black;
+    border-radius: 0.2rem;
+}
