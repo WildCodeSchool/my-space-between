@@ -3,6 +3,7 @@ import { useMusicDataContext } from "../context/MusicContext";
 import { useFetchDataContext } from "../context/FetchDataContext";
 import { useNavigate } from "react-router-dom";
 import { SelectedMusicModel } from "../models/SelectedMusic";
+import { PopularityLevels } from "../models/PopularityLevels";
 
 export const getAccessToken = async () => {
   const CLIENT_ID = import.meta.env.VITE_CLIENT_ID as string;
@@ -37,7 +38,7 @@ export const getAccessToken = async () => {
 
 interface DiscoverButtonProps {
   bubbleTags: string[];
-  filter: "Unknown" | "Low" | "Medium" | "Any";
+  filter: PopularityLevels;
 }
 
 interface DiscoverButtonProps {

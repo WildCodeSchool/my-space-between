@@ -1,9 +1,10 @@
 import styles from "./PopularityFilter.module.css";
 import { useState } from "react";
+import { PopularityLevels } from "../models/PopularityLevels";
 
 interface PopularityFilterProps {
-  selected: "Unknown" | "Low" | "Medium" | "Any";
-  onChange: (value: "Unknown" | "Low" | "Medium" | "Any") => void;
+  selected: PopularityLevels;
+  onChange: (value: PopularityLevels) => void;
 }
 
 const PopularityFilter: React.FC<PopularityFilterProps> = ({
