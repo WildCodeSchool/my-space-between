@@ -1,7 +1,7 @@
 import styles from "../components/DiscoverButton.module.css";
 import { useMusicDataContext } from "../context/MusicContext";
 import { useFetchDataContext } from "../context/FetchDataContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { SelectedMusicModel } from "../models/SelectedMusic";
 
 export const getAccessToken = async () => {
