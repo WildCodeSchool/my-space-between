@@ -7,11 +7,9 @@
 }
 
 body {
-  font-size: 16px;
-  line-height: 1.7;
-  color: #eee;
-  margin: 0;
+  background: radial-gradient(circle, #5C39C4 0%, #1C0759 100%);
 }
+
 
 html,
 body,
