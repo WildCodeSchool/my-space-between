@@ -1,4 +1,5 @@
 import { useFetchDataContext } from "../context/FetchDataContext";
+import DisplaySelectedTagsOnPlayer from "../components/DisplaySelectedTagsOnPlayer";
 
 const Player = () => {
   const { musicList } = useFetchDataContext();
@@ -6,6 +7,7 @@ const Player = () => {
 
   return (
     <div>
+      <DisplaySelectedTagsOnPlayer />
       {musicList.length > 0 ? (
         musicList.map((item) => (
           <div key={item.id}>
