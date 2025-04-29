@@ -37,8 +37,7 @@ if (!rootElement) {
 }
 
 createRoot(rootElement).render(
-  <StrictMode>
-        <RouterProvider router={router} />      
+  <StrictMode>    
     <FetchDataProvider>
       <MusicProvider>
         <RouterProvider router={router} />
