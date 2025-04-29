@@ -1,0 +1,251 @@
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.3rem;
+  color: white;
+}
+
+.bubbleTagsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100svh;
+  position: relative;
+  gap: 5px;
+  font-size: larger;
+}
+
+.topCloudTagList {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  justify-content: space-around;
+  filter: drop-shadow(0 5px 4px rgba(0, 0, 0, 0.9));
+  width: 80%;
+  max-width: 500px;
+  font-size: large;
+  user-select: none;
+}
+
+.topCloudTagList li {
+  width: 100px;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.dragging {
+  opacity: 0.5;
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+  cursor: grabbing !important;
+}
+
+.botCloudTagList {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0 0;
+  justify-content: space-around;
+  filter: drop-shadow(0 5px 4px rgba(0, 0, 0, 0.9));
+  width: 80%;
+  max-width: 500px;
+  font-size: large;
+  align-items: flex-end;
+  user-select: none;
+}
+
+.botCloudTagList li {
+  width: 100px;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.bubbleContainer {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  animation: float 6s ease-in-out infinite;
+  overflow: hidden;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.bubbleWrapper {
+  position: absolute;
+}
+
+.bubbleContainer ul {
+  list-style: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+.imgBubble {
+  width: 100%;
+  max-width: 600px;
+  user-select: none;
+}
+
+@keyframes float {
+  0% {
+    transform: translate(-50%, -50%) translateY(0px);
+    filter: drop-shadow(0 5px 4px rgba(0, 0, 0, 0.9));
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-10px);
+    filter: drop-shadow(0 25px 6px rgba(0, 0, 0, 0.2));
+  }
+  100% {
+    transform: translate(-50%, -50%) translateY(0px);
+    filter: drop-shadow(0 5px 4px rgba(0, 0, 0, 0.9));
+  }
+}
+
+/* ---------------------- BUBBLE TAGS --------------------- */
+
+.bubbleTag1 button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  padding: 0 5px 0 5px;
+  font-size: 1.3rem;
+}
+.bubbleTag2 button {
+  position: absolute;
+  top: 35%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  color: black;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  padding: 0 5px 0 5px;
+  font-size: 1.3rem;
+}
+.bubbleTag3 button {
+  position: absolute;
+  top: 25%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  color: black;
+  background-color: white;
+  border-radius: 20px;
+  padding: 0 5px 0 5px;
+  font-size: 1.3rem;
+}
+.bubbleTag4 button {
+  position: absolute;
+  top: 70%;
+  left: 65%;
+  transform: translate(-50%, -50%);
+  color: black;
+  background-color: white;
+  border-radius: 20px;
+  padding: 0 5px 0 5px;
+  font-size: 1.3rem;
+}
+
+.bubbleTag5 button {
+  position: absolute;
+  top: 75%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  color: black;
+  background-color: white;
+  border-radius: 20px;
+  padding: 0 5px 0 5px;
+  font-size: 1.3rem;
+}
+
+.bottomButtons {
+  position: fixed;
+  bottom: 20px;
+  display: flex;
+  justify-content: center;
+  left: 50%;
+  transform: translate(-50%);
+  gap: 10px;
+}
+
+@media screen and (min-width: 1000px) {
+  .bubbleTagsContainer {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 220px;
+    width: 100%;
+    height: 100svh;
+    position: relative;
+  }
+
+  .topCloudTagList {
+    flex-wrap: wrap-reverse;
+    align-items: center;
+    flex-direction: column;
+    width: auto;
+    gap: 20px;
+  }
+
+  .botCloudTagList {
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+    gap: 20px;
+  }
+
+  .bubbleContainer {
+    flex-shrink: 0;
+    width: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    overflow: visible;
+  }
+
+  .imgBubble {
+    object-fit: contain;
+    max-width: 500px;
+    height: auto;
+  }
+
+  .imgBubble {
+    width: 100%;
+    width: 500px;
+    user-select: none;
+  }
+
+  .topCloudTagList li {
+    font-size: xx-large;
+    text-align: center;
+    width: 300px;
+  }
+
+  .botCloudTagList li {
+    font-size: xx-large;
+    text-align: center;
+    width: 300px;
+  }
+
+  .bottomButtons {
+    gap: 30px;
+  }
+}
