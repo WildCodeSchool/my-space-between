@@ -19,8 +19,24 @@ body {
   font-family: 'Karantina', cursive;
   font-weight: 400;
   letter-spacing: 5px;
-  margin-bottom: 1rem;
-  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  margin-top: 7rem;
+  font-size: 2rem;
+}
+
+.underline {
+  width: 60%;
+  height: 0.2rem;
+  background-color: white;
+  margin: 0 auto 2rem;
+  border-radius: 1px;
+}
+
+.paragraph {
+  font-family: 'Jaldi', sans-serif;
+  font-size: 1rem;
+  color: white;
+  margin: 0 0 1rem;
 }
 
 .form {
@@ -34,16 +50,34 @@ input, textarea {
     width: 30rem;
     padding: 0.5rem;
     margin-top: 0.5rem;
-    border: 2px solid #ccc;
+    border: 0.1rem solid black;
     border-radius: 0.4rem;
-    background: #fff;
+    box-shadow: 6px 6px 1px rgba(0,0,0, 0.1);
+    background: transparent;
     color: #000;
     font-size: 1rem;
 }
 
 button {
-    width: 4rem;
-    height: 2rem;
     border: 0.1rem solid black;
     border-radius: 0.2rem;
+    box-shadow: 6px 6px 1px rgba(0,0,0, 0.1);
+    text-align: center;
+    color: white;
+    background: transparent;
+    padding: 0.5rem 1.25rem;
+    margin-top: 1rem;
+}
+
+.errorMessage {
+    color: #ff4d4f;
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+    text-align: left;
+}
+
+.successMessage {
+    color: #4BB543;
+    font-size: 1rem;
+    margin-top: 1rem;
 }

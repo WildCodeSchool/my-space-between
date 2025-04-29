@@ -3,7 +3,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import useRecaptcha from '../../useRecaptcha';
 import styles from './Contact_form.module.css'
 
-const ContactForm = () => {
+export const ContactForm = () => {
   const [name, setName] = useState('');
   const [surname, setSurName] = useState('');
   const [email, setEmail] = useState('');
@@ -56,8 +56,15 @@ const ContactForm = () => {
 
   return (    
     <form onSubmit={handleSubmit} className= {styles.contactContainer}>
+      <h2>Contact</h2>
+       <div className={styles.underline}></div>
+          <p className={styles.paragraph}>
+        "Une question ? Un projet ? Envoyez-nous un message !"
+      </p>
+
       <section className={styles.form}>
-        <h2>Contact</h2>
+         
+
         <label htmlFor="name">Name</label>
         <input
           type="text"
@@ -66,7 +73,7 @@ const ContactForm = () => {
           placeholder="Name"
           onChange={e => setName(e.target.value)}
         />
-        {errors.name && <p style={{ color: 'red' }}>{errors.name}</p>}
+        {errors.name && <p className={styles.errorMessage}>{errors.name}</p>}
       </section>
 
       <section className={styles.form}>
@@ -78,7 +85,7 @@ const ContactForm = () => {
           placeholder="Surname"
           onChange={e => setSurName(e.target.value)}
         />
-        {errors.surname && <p style={{ color: 'red' }}>{errors.surname}</p>}
+        {errors.surname && <p className={styles.errorMessage}>{errors.surname}</p>}
       </section>
 
       <section className={styles.form}>
@@ -90,7 +97,7 @@ const ContactForm = () => {
           placeholder="Email"
           onChange={e => setEmail(e.target.value)}
         />
-        {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
+        {errors.email && <p className={styles.errorMessage}>{errors.email}</p>}
       </section>
 
       <section className={styles.form}>
@@ -101,7 +108,7 @@ const ContactForm = () => {
           placeholder="Message"
           onChange={e => setMessage(e.target.value)}
         />
-        {errors.message && <p style={{ color: 'red' }}>{errors.message}</p>}
+        {errors.message && <p className={styles.errorMessage}>{errors.message}</p>}
       </section>
 
       <ReCAPTCHA
@@ -109,14 +116,14 @@ const ContactForm = () => {
         sitekey="6LfQkCErAAAAADNf4XaMqDIgJtyyBPYy5KIhPJs3"
         onChange={handleRecaptcha}
       />
-      {errors.captcha && <p style={{ color: 'red' }}>{errors.captcha}</p>}
+      {errors.captcha && <p className={styles.errorMessage}>{errors.captcha}</p>}
 
-      {errors.global && <p style={{ color: 'red', marginTop: '10px' }}>{errors.global}</p>}
-      {successMessage && <p style={{ color: 'green', marginTop: '10px' }}>{successMessage}</p>}
+      {errors.global && <p className={styles.errorMessage}>{errors.global}</p>}
+      {successMessage && <p className={styles.successMessage}>{successMessage}</p>}
 
       <button className={styles.form} type="submit">Send</button>
     </form>
   );
 };
 
-export default ContactForm;
+

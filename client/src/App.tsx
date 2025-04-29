@@ -1,12 +1,16 @@
 import './App.css';
-import ContactForm  from './pages/Contact_form';
+import { Outlet } from "react-router"
+import BurgerMenu from "./components/BurgerMenu";
 
 function App() {
   return (
-    <div className="App">
-      <ContactForm />
-    </div>
+    <>
+      <BurgerMenu />
+      <Outlet />
+    </>
   );
 }
 
 export default App;
+
+
