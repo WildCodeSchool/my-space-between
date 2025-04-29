@@ -4,7 +4,8 @@
   left: 50%;
   transform: translateX(-50%);
   width: auto;
-  max-width: 90%;
+  width: auto;
+  min-width: 320px;
 }
 
 .bubbleTagsList {
@@ -13,7 +14,7 @@
   justify-content: space-around;
   list-style: none;
   padding: 0;
-  gap: 20px;
+  gap: 10px 5px;
 }
 
 .bubbleTagsList li {
