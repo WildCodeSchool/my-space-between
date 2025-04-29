@@ -3,7 +3,6 @@ import DisplaySelectedTagsOnPlayer from "../components/DisplaySelectedTagsOnPlay
 
 const Player = () => {
   const { musicList } = useFetchDataContext();
-  console.log(musicList);
 
   return (
     <div>
