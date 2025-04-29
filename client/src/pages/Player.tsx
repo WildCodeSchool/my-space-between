@@ -6,7 +6,7 @@ const Player = () => {
   const { musicList } = useFetchDataContext();
 
   return (
-    <div className={styles.GlobalPlayer}>
+    <section className={styles.GlobalPlayer}>
       {musicList.length > 0 ? (
         musicList.map((item) => (
           <div key={item.id}>
@@ -56,7 +56,7 @@ const Player = () => {
       ) : (
         <p>No data available</p>
       )}
-    </div>
+    </section>
   );
 };
 
