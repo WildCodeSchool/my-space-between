@@ -1,0 +1,47 @@
+.GlobalPlayer {
+  font-family: "Jaldi", sans-serif;
+  display: flex;
+}
+
+.UrlPlayer {
+  display: none;
+}
+
+.windowPlayer iframe {
+  border-style: none;
+  width: 350px;
+  height: 400px;
+}
+
+.playerId {
+  display: none;
+}
+
+.pictureArtisteProfil {
+  width: 100px;
+  height: 100px;
+}
+.pictureInPlayer {
+  display: none;
+}
+.pictureAlbumPlayer {
+  width: 50px;
+  height: 50px;
+}
+.listAlbumPlayer {
+  display: flex;
+  gap: 5px;
+}
+.listAlbumPlayer h3 {
+  display: none;
+}
+.listAlbumPlayer p {
+  display: none;
+}
+.sectionInfoPlayer {
+  background-color: rgb(51, 3, 118);
+  border-radius: 10px;
+
+  width: 500px;
+  padding: 10px;
+}
