@@ -5,9 +5,8 @@ import App from "./App";
 import { About } from "./pages/About";
 import { FetchDataProvider } from "./context/FetchDataContext";
 import { MusicProvider } from "./context/MusicContext";
-import Home from "./pages/Home"; 
-import Player from "./pages/Player"; 
-
+import Home from "./pages/Home";
+import Player from "./pages/Player";
 
 const router = createBrowserRouter([
   {
@@ -17,12 +16,15 @@ const router = createBrowserRouter([
         path: "/", // The root path
         element: <Home />,
       }, // Renders the App component for the home page
-      { path: "/player", 
-        element: <Player /> },
+      { path: "/player", element: <Player /> },
       {
-    path: "/about",
-    element: <About />,
-  },
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/callback",
+        element: <Home />,
+      },
     ],
   },
   // Renders the App component for the home page
@@ -31,7 +33,7 @@ const router = createBrowserRouter([
 
 const rootElement = document.getElementById("root");
 if (!rootElement) {
-  throw new Error("Your HTML document should contain a <div id=\"root\"></div>");
+  throw new Error('Your HTML document should contain a <div id="root"></div>');
 }
 
 createRoot(rootElement).render(
