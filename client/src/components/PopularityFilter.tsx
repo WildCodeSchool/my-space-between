@@ -1,6 +1,6 @@
 import styles from "./PopularityFilter.module.css";
 import { useState } from "react";
-import { PopularityLevels } from "../models/PopularityLevels";
+import { PopularityLevels } from "../context/PopularityLevelsContext";
 
 interface PopularityFilterProps {
   selected: PopularityLevels;

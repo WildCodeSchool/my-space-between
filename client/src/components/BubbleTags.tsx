@@ -3,7 +3,7 @@ import styles from "./BubbleTags.module.css";
 import { useMusicDataContext } from "../context/MusicContext";
 import DiscoverButton from "./DiscoverButton";
 import PopularityFilter from "./PopularityFilter";
-import { PopularityLevels } from "../models/PopularityLevels";
+import { PopularityLevels } from "../context/PopularityLevelsContext";
 
 function BubbleTags() {
   const { tags } = useMusicDataContext();
