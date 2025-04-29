@@ -4,7 +4,7 @@ const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
 const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI;
 const SCOPE = import.meta.env.VITE_SCOPE;
 const AUTH_ENDPOINT = import.meta.env.VITE_AUTH_ENDPOINT;
-const TOKEN_ENDPOINT = "https://accounts.spotify.com/api/token";
+const TOKEN_ENDPOINT = import.meta.env.VITE_TOKEN_ENDPOINT;
 import styles from "./LoginButton.module.css";
 
 const LoginButton = () => {
