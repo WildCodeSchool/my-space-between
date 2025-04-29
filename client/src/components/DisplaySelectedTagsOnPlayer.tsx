@@ -3,16 +3,18 @@ import { useMusicDataContext } from "../context/MusicContext";
 
 function DisplaySelectedTagsOnPlayer() {
   const { bubbleTags } = useMusicDataContext();
-  const selectedTags = bubbleTags;
 
   return (
-    <div className={styles.selectedTagsContainer}>
-      <ul className={styles.selectedTagsList}>
-        {selectedTags.map((tag, index) => (
-          <li key={index} className={styles.selectedTagItem}>
-            {tag}
-          </li>
-        ))}
+    <div className={styles.bubbleTagsContainer}>
+      <ul className={styles.bubbleTagsList}>
+        {bubbleTags.map((tag, index) => {
+          const classname = `bubbleTag${index + 1}`;
+          return (
+            <li key={index + 1} className={styles[classname]}>
+              {tag}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

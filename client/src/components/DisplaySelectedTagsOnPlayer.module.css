@@ -1,0 +1,10 @@
+.bubbleTagsList {
+  display: flex;
+}
+
+.bubbleTagsList li {
+  color: black;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  padding: 0 5px 0 5px;
+}
