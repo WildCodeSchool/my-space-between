@@ -1,4 +1,4 @@
-import { createContext, useContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useState } from "react";
 
 export enum PopularityLevels {
   Any,
@@ -7,7 +7,7 @@ export enum PopularityLevels {
   High,
 }
 
-interface PopularityFilterContextValue {
+interface PopularityLevelsContextValue {
   popularityFilter: PopularityLevels;
   setPopularityFilter: React.Dispatch<React.SetStateAction<PopularityLevels>>;
 }
@@ -16,8 +16,8 @@ interface PopularityFilterProviderProps {
   children: ReactNode;
 }
 
-export const PopularityFilterContext = createContext<
-  PopularityFilterContextValue | undefined
+export const PopularityLevelsContext = createContext<
+  PopularityLevelsContextValue | undefined
 >(undefined);
 
 export const PopularityFilterProvider: React.FC<
@@ -28,13 +28,13 @@ export const PopularityFilterProvider: React.FC<
   );
 
   return (
-    <PopularityFilterContext.Provider
+    <PopularityLevelsContext
       value={{
         popularityFilter,
         setPopularityFilter,
       }}
     >
       {children}
-    </PopularityFilterContext.Provider>
+    </PopularityLevelsContext>
   );
 };
