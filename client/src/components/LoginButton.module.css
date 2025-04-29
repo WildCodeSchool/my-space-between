@@ -1,0 +1,77 @@
+.container {
+  position: fixed;
+  top: 20px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+}
+
+.profilPic {
+  border-radius: 50%;
+  height: 40px;
+  z-index: 4;
+}
+
+.spotifyButton {
+  height: 40px;
+  z-index: 4;
+}
+
+.container button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 4;
+}
+
+.username {
+  visibility: hidden;
+  font-family: "Karantina", sans-serif;
+  letter-spacing: 2px;
+  z-index: 4;
+}
+
+.login {
+  visibility: hidden;
+  font-family: "Karantina", sans-serif;
+  letter-spacing: 2px;
+  z-index: 4;
+}
+
+.name {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: white;
+  font-size: x-large;
+  z-index: 4;
+}
+
+.disconnect {
+  visibility: hidden;
+  padding-top: 5px;
+  padding-left: 17px;
+  opacity: 0;
+  letter-spacing: 2px;
+  font-family: "Karantina", sans-serif;
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
+  z-index: 4;
+}
+
+.disconnect.hovered {
+  visibility: visible;
+  opacity: 1;
+  z-index: 4;
+}
+
+@media screen and (min-width: 768px) {
+  .username {
+    visibility: visible;
+  }
+
+  .login {
+    visibility: visible;
+  }
+}
