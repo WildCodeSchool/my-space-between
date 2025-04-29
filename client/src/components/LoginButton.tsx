@@ -86,7 +86,6 @@ const LoginButton = () => {
       REDIRECT_URI
     )}&response_type=code&scope=${encodeURIComponent(SCOPE)}`;
 
-    console.log("URL de redirection Spotify :", authUrl);
     window.location.href = authUrl;
   };
 
