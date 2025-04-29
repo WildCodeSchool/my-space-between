@@ -11,46 +11,58 @@
   font-size: 14px;
   text-align: center;
   padding: 0 15px;
+  z-index: 2;
 }
 
 .listContainer {
+  position: relative;
   padding: 10px 15px;
   background-color: #a88bfe;
   border-radius: 15px;
-  height: 100px;
+  max-height: 100px;
   max-width: 20%;
   min-width: 250px;
+  z-index: 3;
+  overflow: auto;
 }
 
 .resultList {
-  overflow: auto;
   width: 100%;
   height: 100%;
+  z-index: 2;
 }
 .mainSearchMenu {
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  translate: -50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  z-index: 2;
 }
 .mainSearchMenu ul {
   list-style: none;
+  z-index: 2;
 }
 
 .mainSearchMenu li {
-  margin-left: 20px;
+  z-index: 2;
 }
 
 .mainSearchMenu li:hover {
   background-color: #7c62cc;
+  z-index: 2;
 }
 
-.resultList::-webkit-scrollbar {
-  width: 5px;
+.listContainer::-webkit-scrollbar {
+  width: 0px;
+  z-index: 3;
 }
 
-.resultList::-webkit-scrollbar-thumb {
+.listContainer::-webkit-scrollbar-thumb {
   background-color: #706f6f;
-  outline: 2px solid #706f6f;
   border-radius: 10px;
+  z-index: 3;
 }
