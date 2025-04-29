@@ -100,22 +100,51 @@ const LoginButton = () => {
     window.history.replaceState(null, "", newUrl);
   };
 
+  const [isHovered, setIsHovered] = useState(false);
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
   return (
-    <div>
+    <div className={styles.container}>
       {isConnected ? (
         <div>
-          <div className={styles.name}>
-            {userProfile && <p>{userProfile.display_name}</p>}
-          </div>
-          <div className={styles.profilPic}>
+          <div
+            className={styles.name}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            {userProfile && (
+              <p className={styles.username}>{userProfile.display_name}</p>
+            )}
+
             {userProfile && userProfile.images[0] && (
-              <img src={userProfile.images[0].url} alt="Photo de profil" />
+              <img
+                className={styles.profilPic}
+                src={userProfile.images[0].url}
+                alt="Photo de profil"
+              />
             )}
           </div>
-          <button onClick={handleLogout}>Se déconnecter</button>
+          <button
+            className={`${styles.disconnect} ${
+              isHovered ? styles.hovered : ""
+            }`}
+            onClick={handleLogout}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            Disconnect
+          </button>
         </div>
       ) : (
-        <button onClick={handleLogin}>Se connecter à Spotify</button>
+        <button onClick={handleLogin}>
+          <p className={styles.login}>Login </p>
+          <img
+            className={styles.spotifyButton}
+            src="/src/assets/images/spotifybtn.png"
+          />
+        </button>
       )}
     </div>
   );
