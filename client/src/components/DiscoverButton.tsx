@@ -134,6 +134,10 @@ const DiscoverButton: React.FC<DiscoverButtonProps> = ({
         );
 
         setMusicList([newSelectedMusic]);
+
+        if (bubbleTags.length === 0) {
+          bubbleTags.push(...tagsIfEmpty);
+        }
       } else {
         fetchMusicData(bubbleTags);
       }
