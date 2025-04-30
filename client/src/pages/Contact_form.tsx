@@ -121,7 +121,7 @@ export const ContactForm = () => {
       {errors.global && <p className={styles.errorMessage}>{errors.global}</p>}
       {successMessage && <p className={styles.successMessage}>{successMessage}</p>}
 
-      <button className={styles.form} type="submit">Send</button>
+      <button className={styles.buttonContact} type="submit">Send</button>
     </form>
   );
 };

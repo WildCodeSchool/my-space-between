@@ -54,7 +54,7 @@ input, textarea {
     font-size: 1rem;
 }
 
-button {
+.buttonContact {
     border: 0.1rem solid black;
     border-radius: 0.2rem;
     box-shadow: 6px 6px 1px rgba(0,0,0, 0.1);
