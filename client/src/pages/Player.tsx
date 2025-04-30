@@ -1,10 +1,18 @@
 import SpotifyPlayer from "../components/SpotifyPlayer";
 import { useFetchDataContext } from "../context/FetchDataContext";
 import styles from "./Player.module.css";
+import { useState } from "react";
+import DisplayPopularityFilterOnPlayer from "../components/DisplayPopularityFilterOnPlayer";
 import DisplaySelectedTagsOnPlayer from "../components/DisplaySelectedTagsOnPlayer";
+import ArtistInfo from "../components/ArtistInfo";
 
 const Player = () => {
   const { musicList } = useFetchDataContext();
+
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleButton = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <>
@@ -21,42 +29,6 @@ const Player = () => {
                   rel="noopener noreferrer"
                 ></a>
               </div>
-              <section className={styles.sectionInfoPlayer}>
-                {item.artistImage && (
-                  <img
-                    className={styles.pictureArtisteProfil}
-                    src={item.artistImage}
-                    alt={`${item.artist}'s image`}
-                  />
-                )}
-                <p>Artist: {item.artist}</p>
-                <p>Name: {item.name}</p>
-                <p>Followers: {item.followers}</p>
-                <p>Genre: {item.genre}</p>
-                <p>Popularity: {item.popularity}</p>
-                {item.image && (
-                  <img
-                    className={styles.pictureInPlayer}
-                    src={item.image}
-                    alt={item.name}
-                  />
-                )}
-                <div className={styles.listAlbumPlayer}>
-                  <h3>Albums:</h3>
-                  {item.albums.map((album, index) => (
-                    <div key={index}>
-                      <p>Album Name: {album.name}</p>
-                      {album.image && (
-                        <img
-                          className={styles.pictureAlbumPlayer}
-                          src={album.image}
-                          alt={album.name}
-                        />
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </section>
             </div>
           ))
         ) : (
@@ -65,6 +37,20 @@ const Player = () => {
       </section>
       <div>
         <DisplaySelectedTagsOnPlayer />
+      </div>
+      <div>
+        <DisplaySelectedTagsOnPlayer />
+      </div>
+      <div>
+        <DisplayPopularityFilterOnPlayer />
+      </div>
+      <div className={`${isOpen ? styles.open : ""} ${styles.artistInfo}`}>
+        <ArtistInfo />
+      </div>
+      <div className={styles.bottomButtons}>
+        <button className={isOpen ? styles.clicked : ""} onClick={toggleButton}>
+          Info
+        </button>
       </div>
     </>
   );
