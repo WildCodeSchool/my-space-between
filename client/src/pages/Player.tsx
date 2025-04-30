@@ -13,14 +13,14 @@ const Player = () => {
           musicList.map((item) => (
             <div key={item.id}>
               <p className={styles.playerId}>ID: {item.id}</p>
-              <p className={styles.windowPlayer}>
+              <div className={styles.windowPlayer}>
                 <SpotifyPlayer uri={item.url} />
                 <a
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
                 ></a>
-              </p>
+              </div>
               <section className={styles.sectionInfoPlayer}>
                 {item.artistImage && (
                   <img
