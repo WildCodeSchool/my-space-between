@@ -5,6 +5,14 @@
   font-family: "jaldi", sans-serif;
 }
 
+
+body {
+  line-height: 1.7;
+  color: #eee;
+  margin: 0;
+  background: radial-gradient(circle, #5c39c4 0%, #1c0759 100%);
+}
+
 html,
 body,
 #root {

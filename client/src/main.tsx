@@ -9,6 +9,7 @@ import { MusicProvider } from "./context/MusicContext";
 import Home from "./pages/Home"; 
 import Player from "./pages/Player"; 
 
+
 const router = createBrowserRouter([
   {
     element: <App />,
@@ -27,13 +28,17 @@ const router = createBrowserRouter([
     path: "/about",
     element: <About />,
   },
-    ],
+  {
+    path: "/callback",
+    element: <Home />,
+  },
+ ],
   },
   ]);
 
 const rootElement = document.getElementById("root");
 if (!rootElement) {
-  throw new Error("Your HTML document should contain a <div id=\"root\"></div>");
+  throw new Error('Your HTML document should contain a <div id="root"></div>');
 }
 
 createRoot(rootElement).render(

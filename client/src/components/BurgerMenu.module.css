@@ -1,80 +1,94 @@
+.burgerMenuWrapper {
+  position: fixed;
+  top: 3px;
+  left: 3px;
+  z-index: 4;
+}
+
 .menuBurger {
-    font-size: 2rem;
-    color: white;
-    background: none;
-    border: none;
-    cursor: pointer;
-    z-index: 2;
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    transition: transform 0.3s ease;
+  font-size: 2rem;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 4;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  transition: transform 0.3s ease;
 }
 
 .menuBurger.open {
-    transform: rotate(90deg);
+  transform: rotate(90deg);
+  z-index: 5;
 }
 
 .navBar {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    right: 1rem;
-    background-color: #554096;
-    border-radius: 12px;
-    padding: 1rem 1rem 1rem 1rem;
-    z-index: 1;
-    opacity: 0;
-    transform: translateY(-10px);
-    visibility: hidden;
-    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  background-color: #554096;
+  border-radius: 20px;
+  padding: 1rem 1rem 1rem 1rem;
+  opacity: 0;
+  transform: translateY(-10px);
+  visibility: hidden;
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
+  z-index: 4;
+  width: 90vw;
 }
 
 .navBar.open {
-    opacity: 1;
-    transform: translateY(0);
-    visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  width: 90vw;
+  z-index: 4;
 }
 
 .menuOpen {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    text-align: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  z-index: 4;
 }
 
 .menuOpen li {
-    margin: 1rem 0;
+  margin: 1rem 0;
+  z-index: 4;
 }
 
 .menuOpen a {
-    text-decoration: none;
-    color: white;
-    font-size: 1.5rem;
+  text-decoration: none;
+  color: white;
+  font-size: 1.5rem;
+  z-index: 43;
 }
 
 @media screen and (min-width: 768px) {
-    .menuBurger {
-        display: none;
-    }
+  .menuBurger {
+    display: none;
+  }
 
-    .navBar {
-        position: static;
-        display: block;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
-        background-color: transparent;
-        padding: 0;
-    }
+  .navBar {
+    position: static;
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    background-color: transparent;
+    padding: 0;
+  }
 
-    .menuOpen {
-        display: flex;
-        justify-content: start;
-        gap: 0.5rem;
-    }
+  .menuOpen {
+    display: flex;
+    justify-content: start;
+    gap: 0.5rem;
+  }
 
-    .menuOpen li {
-        margin: 1rem;
-    }
+  .menuOpen li {
+    margin: 1rem;
+  }
 }
