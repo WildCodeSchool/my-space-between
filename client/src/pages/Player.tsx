@@ -12,12 +12,12 @@ const Player = () => {
       <div>
         <DisplayPopularityFilterOnPlayer />
       </div>
-    </>
+    
 
     <div>
       <DisplaySelectedTagsOnPlayer />
     </div>
-
+</>
   );
 };
 
