@@ -6,6 +6,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
   const embedUrl = `https://open.spotify.com/embed/track/${urlChunk}`;
 
   const [player, setPlayer] = useState(undefined);
+  const [token, setToken] = useState<string | null>("");
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -14,11 +15,13 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
 
     document.body.appendChild(script);
 
+    setToken(localStorage.getItem("spotifyAccessToken"));
+
     window.onSpotifyWebPlaybackSDKReady = () => {
       const player = new window.Spotify.Player({
         name: "Web Playback SDK",
         getOAuthToken: (cb) => {
-          cb(props.token);
+          cb(`Bearer ${token}`);
         },
         volume: 0.5,
       });
@@ -37,8 +40,9 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
     };
   }, []);
 
+  console.log(token);
   return (
-    <>
+    <div>
       <iframe
         src={embedUrl}
         width="300"
@@ -46,7 +50,11 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
         allow="encrypted-media"
         title="Spotify Player"
       ></iframe>
-    </>
+      <h2>player</h2>
+      <div className="container">
+        <div className="main-wrapper"></div>
+      </div>
+    </div>
   );
 };
 

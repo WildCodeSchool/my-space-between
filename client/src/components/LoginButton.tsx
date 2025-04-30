@@ -3,53 +3,98 @@ import { useState, useEffect } from "react";
 const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
 const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI;
 const SCOPE = import.meta.env.VITE_SCOPE;
-const AUTH_ENDPOINT = import.meta.env.VITE_AUTH_ENDPOINT;
-const TOKEN_ENDPOINT = import.meta.env.VITE_TOKEN_ENDPOINT;
-import styles from "./LoginButton.module.css";
+
+interface UserProfile {
+  display_name: string;
+  images: { url: string }[];
+}
 
 const LoginButton = () => {
   const [isConnected, setIsConnected] = useState(false);
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
+  // -------------------
+  // PKCE helpers
+  function generateRandomString(length: number) {
+    const possible =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    return Array.from({ length }, () =>
+      possible.charAt(Math.floor(Math.random() * possible.length))
+    ).join("");
+  }
+
+  async function generateCodeChallenge(codeVerifier: string) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(codeVerifier);
+    const digest = await window.crypto.subtle.digest("SHA-256", data);
+    return btoa(String.fromCharCode(...new Uint8Array(digest)))
+      .replace(/\+/g, "-")
+      .replace(/\//g, "_")
+      .replace(/=+$/, "");
+  }
+
+  const handleLogin = async () => {
+    const codeVerifier = generateRandomString(128);
+    const codeChallenge = await generateCodeChallenge(codeVerifier);
+
+    localStorage.setItem("code_verifier", codeVerifier);
+
+    const args = new URLSearchParams({
+      response_type: "code",
+      client_id: CLIENT_ID,
+      scope: SCOPE,
+      redirect_uri: REDIRECT_URI,
+      code_challenge_method: "S256",
+      code_challenge: codeChallenge,
+    });
+
+    window.location.href = `https://accounts.spotify.com/authorize?${args.toString()}`;
+  };
 
   const getAuthCodeFromUrl = () => {
     const params = new URLSearchParams(window.location.search);
     return params.get("code");
   };
 
-  interface AccessTokenResponse {
-    access_token: string;
-    token_type: string;
-    expires_in: number;
-    refresh_token?: string;
-    scope?: string;
-  }
-
   const fetchAccessToken = async (authCode: string): Promise<void> => {
-    const response = await fetch(TOKEN_ENDPOINT, {
+    const codeVerifier = localStorage.getItem("code_verifier");
+    if (!codeVerifier) {
+      console.error("Pas de code_verifier trouvé.");
+      return;
+    }
+
+    const body = new URLSearchParams({
+      client_id: CLIENT_ID,
+      grant_type: "authorization_code",
+      code: authCode,
+      redirect_uri: REDIRECT_URI,
+      code_verifier: codeVerifier,
+    });
+
+    const response = await fetch("https://accounts.spotify.com/api/token", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: new URLSearchParams({
-        code: authCode,
-        redirect_uri: REDIRECT_URI,
-        grant_type: "authorization_code",
-        client_id: CLIENT_ID,
-        client_secret: import.meta.env.VITE_CLIENT_SECRET,
-      }),
+      body: body.toString(),
     });
 
-    const data: AccessTokenResponse = await response.json();
+    const data = await response.json();
     if (data.access_token) {
       localStorage.setItem("spotifyAccessToken", data.access_token);
       fetchUserProfile(data.access_token);
+      // Clean URL
+      window.history.replaceState(null, "", window.location.pathname);
     }
   };
-
-  interface UserProfile {
-    display_name: string;
-    images: { url: string }[];
-  }
 
   const fetchUserProfile = async (token: string): Promise<void> => {
     const response = await fetch("https://api.spotify.com/v1/me", {
@@ -62,6 +107,17 @@ const LoginButton = () => {
     localStorage.setItem("spotifyUserProfile", JSON.stringify(data));
     setUserProfile(data);
     setIsConnected(true);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("spotifyAccessToken");
+    localStorage.removeItem("spotifyUserProfile");
+    localStorage.removeItem("code_verifier");
+    setUserProfile(null);
+    setIsConnected(false);
+
+    const newUrl = window.location.origin + window.location.pathname;
+    window.history.replaceState(null, "", newUrl);
   };
 
   useEffect(() => {
@@ -81,67 +137,43 @@ const LoginButton = () => {
     }
   }, []);
 
-  const handleLogin = () => {
-    const authUrl = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(
-      REDIRECT_URI
-    )}&response_type=code&scope=${encodeURIComponent(SCOPE)}`;
-
-    window.location.href = authUrl;
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("spotifyAccessToken");
-    localStorage.removeItem("spotifyUserProfile");
-    setUserProfile(null);
-    setIsConnected(false);
-
-    const newUrl = window.location.origin + window.location.pathname;
-    window.history.replaceState(null, "", newUrl);
-  };
-
-  const [isHovered, setIsHovered] = useState(false);
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
   return (
-    <div className={styles.container}>
+    <div className="container">
       {isConnected ? (
         <div>
           <div
-            className={styles.name}
+            className="name"
             onMouseEnter={handleMouseEnter}
-            onMouseLeave={() => setIsHovered(false)}
+            onMouseLeave={handleMouseLeave}
           >
             {userProfile && (
-              <p className={styles.username}>{userProfile.display_name}</p>
+              <p className="username">{userProfile.display_name}</p>
             )}
 
             {userProfile && userProfile.images[0] && (
               <img
-                className={styles.profilPic}
+                className="profilPic"
                 src={userProfile.images[0].url}
                 alt="Photo de profil"
               />
             )}
           </div>
           <button
-            className={`${styles.disconnect} ${
-              isHovered ? styles.hovered : ""
-            }`}
+            className={`disconnect ${isHovered ? "hovered" : ""}`}
             onClick={handleLogout}
             onMouseEnter={handleMouseEnter}
-            onMouseLeave={() => setIsHovered(false)}
+            onMouseLeave={handleMouseLeave}
           >
             Disconnect
           </button>
         </div>
       ) : (
         <button onClick={handleLogin}>
-          <p className={styles.login}>Login </p>
+          <p className="login">Login</p>
           <img
-            className={styles.spotifyButton}
+            className="spotifyButton"
             src="/src/assets/images/spotifybtn.png"
+            alt="Spotify button"
           />
         </button>
       )}
