@@ -194,6 +194,7 @@ const DiscoverButton: React.FC<DiscoverButtonProps> = ({
       return albumsData.items.map((album: any) => ({
         name: album.name,
         image: album.images[0]?.url || "",
+        link: album.external_urls.spotify || "",
       }));
     } catch (err) {
       console.error("Error fetching albums data:", err);
