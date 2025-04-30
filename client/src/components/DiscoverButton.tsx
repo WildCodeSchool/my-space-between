@@ -194,6 +194,7 @@ const DiscoverButton: React.FC<DiscoverButtonProps> = ({
       return albumsData.items.map((album: any) => ({
         name: album.name,
         image: album.images[0]?.url || "",
+        link: album.external_urls.spotify || "",
       }));
     } catch (err) {
       console.error("Error fetching albums data:", err);
@@ -214,7 +215,7 @@ const DiscoverButton: React.FC<DiscoverButtonProps> = ({
         onClick={handleDiscover}
         disabled={loading}
       >
-        {loading ? "Loading..." : "Go Discover"}
+        {loading ? "Loading..." : "Discover"}
       </button>
       {error && <p>Error: {error}</p>}
     </div>
