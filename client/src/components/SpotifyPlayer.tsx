@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const SpotifyPlayer = ({ uri }: { uri: string }) => {
   const currentTrack = uri.split("/");
