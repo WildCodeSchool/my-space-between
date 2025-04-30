@@ -49,6 +49,7 @@
   gap: 10px;
   overflow-y: hidden;
   overflow-x: scroll;
+  scroll-behavior: smooth;
   width: 100%;
 }
 
