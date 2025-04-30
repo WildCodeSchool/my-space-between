@@ -3,7 +3,7 @@ import { useMusicDataContext } from "../context/MusicContext";
 import { useFetchDataContext } from "../context/FetchDataContext";
 import { useNavigate } from "react-router";
 import { SelectedMusicModel } from "../models/SelectedMusic";
-import { PopularityLevels } from "../models/PopularityLevels";
+import { PopularityLevels } from "../context/PopularityLevelsContext";
 
 export const getAccessToken = async () => {
   const CLIENT_ID = import.meta.env.VITE_CLIENT_ID as string;

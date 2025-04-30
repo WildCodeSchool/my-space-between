@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useFetchDataContext } from "../context/FetchDataContext";
+import DisplayPopularityFilterOnPlayer from "../components/DisplayPopularityFilterOnPlayer";
 import DisplaySelectedTagsOnPlayer from "../components/DisplaySelectedTagsOnPlayer";
 import ArtistInfo from "../components/ArtistInfo";
 import styles from "./Player.module.css";
@@ -17,7 +18,9 @@ const Player = () => {
       <div>
         <DisplaySelectedTagsOnPlayer />
       </div>
-
+      <div>
+        <DisplayPopularityFilterOnPlayer />
+      </div>
       <div className={`${isOpen ? styles.open : ""} ${styles.artistInfo}`}>
         <ArtistInfo />
       </div>
