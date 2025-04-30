@@ -5,6 +5,7 @@ import App from "./App";
 import { About } from "./pages/About";
 import { FetchDataProvider } from "./context/FetchDataContext";
 import { MusicProvider } from "./context/MusicContext";
+import { PopularityFilterProvider } from "./context/PopularityLevelsContext";
 import Home from "./pages/Home";
 import Player from "./pages/Player";
 
@@ -13,9 +14,9 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "/", // The root path
+        path: "/",
         element: <Home />,
-      }, // Renders the App component for the home page
+      },
       { path: "/player", element: <Player /> },
       {
         path: "/about",
@@ -40,7 +41,9 @@ createRoot(rootElement).render(
   <StrictMode>
     <FetchDataProvider>
       <MusicProvider>
-        <RouterProvider router={router} />
+        <PopularityFilterProvider>
+          <RouterProvider router={router} />
+        </PopularityFilterProvider>
       </MusicProvider>
     </FetchDataProvider>
   </StrictMode>
