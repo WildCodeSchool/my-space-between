@@ -7,6 +7,7 @@ import { FetchDataProvider } from "./context/FetchDataContext";
 import { MusicProvider } from "./context/MusicContext";
 import Home from "./pages/Home";
 import Player from "./pages/Player";
+import { Link } from "react-router-dom"
 
 const router = createBrowserRouter([
   {
@@ -16,7 +17,8 @@ const router = createBrowserRouter([
         path: "/", // The root path
         element: <Home />,
       }, // Renders the App component for the home page
-      { path: "/player", element: <Player /> },
+      { path: "/player", 
+        element: <Player /> },
       {
         path: "/about",
         element: <About />,
@@ -27,8 +29,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-  // Renders the App component for the home page
-  // Try adding a new route! For example, "/about" with an About component
 ]);
 
 const rootElement = document.getElementById("root");
