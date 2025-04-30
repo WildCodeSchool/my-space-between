@@ -215,7 +215,7 @@ const DiscoverButton: React.FC<DiscoverButtonProps> = ({
         onClick={handleDiscover}
         disabled={loading}
       >
-        {loading ? "Loading..." : "Go Discover"}
+        {loading ? "Loading..." : "Discover"}
       </button>
       {error && <p>Error: {error}</p>}
     </div>
