@@ -1,53 +1,9 @@
 .container {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.playerSection {
-  background: #1db954;
-  padding: 20px 30px;
-  border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-}
-
-.playerContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.controls {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 15px;
-}
-
-.button {
-  background: #ffffff;
-  border: none;
-  border-radius: 50%;
-  padding: 15px;
-  width: 60px;
-  height: 60px;
-  font-size: 24px;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.button:hover {
-  background: #e6e6e6;
-  transform: scale(1.1);
-}
-
 .timeInfo {
-  font-size: 16px;
-  color: #fff;
+  text-align: center;
 }

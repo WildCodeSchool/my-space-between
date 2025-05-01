@@ -12,19 +12,24 @@ declare global {
 const SpotifyPlayer = ({ uri }: { uri: string }) => {
   const { musicList } = useFetchDataContext();
 
-  const track = {
-    name: musicList[0].name,
-    album: {
-      image: { url: musicList[0].image },
-    },
-    artist: { name: musicList[0].artist },
-  };
+  const [current_track, setTrack] = useState<any>(null);
+
+  useEffect(() => {
+    if (musicList.length > 0) {
+      setTrack({
+        name: musicList[0].name,
+        album: {
+          image: { url: musicList[0].image },
+        },
+        artist: { name: musicList[0].artist },
+      });
+    }
+  }, [musicList]);
 
   const [player, setPlayer] = useState<any>(null);
   const [deviceId, setDeviceId] = useState<string | null>(null);
   const [isPaused, setIsPaused] = useState(true);
   const [is_active, setActive] = useState(false);
-  const [current_track, setTrack] = useState(track);
   const [position, setPosition] = useState(0); // in milliseconds
   const [duration, setDuration] = useState(0); // in milliseconds
 
@@ -98,58 +103,72 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
         volume: 0.5,
       });
 
-      setPlayer(spotifyPlayer);
+      spotifyPlayer.connect().then((success: boolean) => {
+        if (success) {
+          console.log(
+            "The Web Playback SDK successfully connected to Spotify!"
+          );
 
-      spotifyPlayer.addListener(
-        "ready",
-        ({ device_id }: { device_id: string }) => {
-          console.log("Ready with Device ID", device_id);
-          setDeviceId(device_id);
+          setPlayer(spotifyPlayer);
 
-          setTimeout(() => {
-            playTrack(device_id);
-          }, 1000);
-        }
-      );
+          spotifyPlayer.addListener(
+            "ready",
+            ({ device_id }: { device_id: string }) => {
+              console.log("Ready with Device ID", device_id);
+              setDeviceId(device_id);
 
-      spotifyPlayer.addListener(
-        "not_ready",
-        ({ device_id }: { device_id: string }) => {
-          console.log("Device ID has gone offline", device_id);
-        }
-      );
+              setTimeout(() => {
+                playTrack(device_id);
+              }, 1000);
+            }
+          );
 
-      spotifyPlayer.addListener("player_state_changed", (state: any) => {
-        if (!state) return;
+          spotifyPlayer.addListener(
+            "not_ready",
+            ({ device_id }: { device_id: string }) => {
+              console.log("Device ID has gone offline", device_id);
+            }
+          );
 
-        setTrack(state.track_window.current_track);
-        setIsPaused(state.paused);
-
-        setPosition(state.position);
-        setDuration(state.duration);
-
-        if (spotifyPlayer) {
-          spotifyPlayer
-            .getCurrentState()
-            .then((state: any | null) => {
+          spotifyPlayer.addListener(
+            "player_state_changed",
+            async (state: any) => {
               if (!state) {
-                setActive(false);
-              } else {
-                setActive(true);
+                console.warn("No player state available yet.");
+                return;
               }
-            })
-            .catch((error: Error) => {
-              console.error("Error getting current state:", error);
-              setActive(false);
-            });
+
+              setTrack(state.track_window.current_track);
+              setIsPaused(state.paused);
+              setPosition(state.position);
+              setDuration(state.duration);
+
+              try {
+                if (typeof spotifyPlayer.getCurrentState === "function") {
+                  const currentState = await spotifyPlayer.getCurrentState();
+                  if (currentState) {
+                    setActive(true);
+                  } else {
+                    console.warn("No active Spotify state found.");
+                    setActive(false);
+                  }
+                } else {
+                  console.warn(
+                    "getCurrentState is not available on the player."
+                  );
+                }
+              } catch (error) {
+                console.error("Error getting current state:", error);
+                setActive(false);
+              }
+
+              console.log("Player state changed:", state);
+            }
+          );
         } else {
-          console.error("Spotify player is not initialized.");
+          console.error("Failed to connect to Spotify Web Playback SDK");
         }
-
-        console.log("Player state changed:", state);
       });
-
-      spotifyPlayer.connect();
     };
 
     return () => {
@@ -161,39 +180,40 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
   }, []);
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: NodeJS.Timeout | undefined;
 
     if (!isPaused) {
       interval = setInterval(() => {
         setPosition((prevPosition) => {
           if (prevPosition + 1000 < duration) {
-            return prevPosition + 1000; // Ajoute 1 seconde
+            return prevPosition + 1000;
           } else {
-            return duration; // Reste bloqué à la fin du morceau
+            return duration;
           }
         });
-      }, 1000); // toutes les 1 secondes
+      }, 1000);
     } else {
-      clearInterval(interval);
+      if (interval) {
+        clearInterval(interval);
+      }
     }
 
-    return () => clearInterval(interval); // Nettoyage quand on change
+    return () => clearInterval(interval);
   }, [isPaused, duration]);
 
   const togglePlay = async () => {
-    if (!player) {
-      console.error("No player initialized yet.");
-      return;
-    }
-
-    const token = localStorage.getItem("spotifyAccessToken");
-    if (!token) {
-      console.error("No Spotify access token found.");
-      alert("Spotify access token is missing. Please log in again.");
+    if (!player || !deviceId) {
+      console.error("Player or device not ready yet.");
+      alert("Lecteur Spotify non prêt. Attends quelques secondes...");
       return;
     }
 
     try {
+      if (typeof player.getCurrentState !== "function") {
+        console.warn("getCurrentState is not available on the player.");
+        return;
+      }
+
       const state = await player.getCurrentState();
       if (!state) {
         console.error(
@@ -275,9 +295,8 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
 
               <button
                 className={styles.button}
-                onClick={() => {
-                  togglePlay();
-                }}
+                onClick={togglePlay}
+                disabled={!player || !deviceId}
               >
                 {isPaused ? "▶️" : "⏸️"}
               </button>
