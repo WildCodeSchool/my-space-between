@@ -30,8 +30,9 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
   const [deviceId, setDeviceId] = useState<string | null>(null);
   const [isPaused, setIsPaused] = useState(true);
   const [is_active, setActive] = useState(false);
-  const [position, setPosition] = useState(0); // in milliseconds
-  const [duration, setDuration] = useState(0); // in milliseconds
+  const [position, setPosition] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [isPlayerReady, setPlayerReady] = useState(false); // Track if the player is ready
 
   console.log("current track : ", current_track);
 
@@ -116,6 +117,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
             ({ device_id }: { device_id: string }) => {
               console.log("Ready with Device ID", device_id);
               setDeviceId(device_id);
+              setPlayerReady(true); // Mark the player as ready
 
               setTimeout(() => {
                 playTrack(device_id);
@@ -127,6 +129,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
             "not_ready",
             ({ device_id }: { device_id: string }) => {
               console.log("Device ID has gone offline", device_id);
+              setPlayerReady(false); // Mark the player as not ready
             }
           );
 
@@ -144,7 +147,10 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
               setDuration(state.duration);
 
               try {
-                if (typeof spotifyPlayer.getCurrentState === "function") {
+                if (
+                  isPlayerReady &&
+                  typeof spotifyPlayer.getCurrentState === "function"
+                ) {
                   const currentState = await spotifyPlayer.getCurrentState();
                   if (currentState) {
                     setActive(true);
@@ -154,7 +160,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
                   }
                 } else {
                   console.warn(
-                    "getCurrentState is not available on the player."
+                    "Player is not ready or getCurrentState is unavailable."
                   );
                 }
               } catch (error) {
@@ -202,7 +208,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
   }, [isPaused, duration]);
 
   const togglePlay = async () => {
-    if (!player || !deviceId) {
+    if (!player || !deviceId || !isPlayerReady) {
       console.error("Player or device not ready yet.");
       alert("Lecteur Spotify non prêt. Attends quelques secondes...");
       return;
@@ -263,14 +269,10 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
     }
   });
 
-  window.addEventListener("popstate", function (event) {
+  window.addEventListener("popstate", function () {
     console.log("Retour arrière détecté");
     location.reload();
   });
-
-  function resetPlayerState() {
-    console.log("Réinitialisation de l'état du player");
-  }
 
   const formatTime = (milliseconds: number) => {
     const minutes = Math.floor(milliseconds / 60000);
