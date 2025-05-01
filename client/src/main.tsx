@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router";
-import { ContactForm } from "./pages/Contact_form"
+import { Contact } from "./pages/Contact"
 import App from "./App";
 import { About } from "./pages/About";
 import { FetchDataProvider } from "./context/FetchDataContext";
@@ -16,14 +16,15 @@ const router = createBrowserRouter([
     children: [
 
   {path: "/contact",
-    element: <ContactForm />,
+    element: <Contact/>,
   },
   {
   path: "/", 
     element: <Home />,
   },
   { path: "/player", 
-        element: <Player /> },
+        element: <Player /> 
+      },
   {
     path: "/about",
     element: <About />,
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
   },
  ],
   },
-  ]);
+]);
 
 const rootElement = document.getElementById("root");
 if (!rootElement) {
