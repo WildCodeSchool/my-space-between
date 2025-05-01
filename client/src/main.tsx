@@ -7,16 +7,15 @@ import { FetchDataProvider } from "./context/FetchDataContext";
 import { MusicProvider } from "./context/MusicContext";
 import Home from "./pages/Home";
 import Player from "./pages/Player";
-import { Link } from "react-router-dom"
 
 const router = createBrowserRouter([
   {
     element: <App />,
     children: [
       {
-        path: "/", // The root path
+        path: "/", 
         element: <Home />,
-      }, // Renders the App component for the home page
+      }, 
       { path: "/player", 
         element: <Player /> },
       {
