@@ -39,10 +39,16 @@ const LoginButton = () => {
       }),
     });
 
+    if (!response.ok) {
+      console.error("Failed to fetch access token", await response.text());
+      return;
+    }
+
     const data: AccessTokenResponse = await response.json();
     if (data.access_token) {
       localStorage.setItem("spotifyAccessToken", data.access_token);
       fetchUserProfile(data.access_token);
+      window.history.replaceState(null, "", window.location.pathname);
     }
   };
 
@@ -71,13 +77,31 @@ const LoginButton = () => {
     if (savedToken && savedProfile) {
       setUserProfile(JSON.parse(savedProfile));
       setIsConnected(true);
-    } else if (savedToken) {
+
+      // Nettoyer l'URL (enlève ?code=XXXX)
+      window.history.replaceState(null, "", window.location.pathname);
+      return;
+    }
+
+    if (savedToken) {
       fetchUserProfile(savedToken);
-    } else {
-      const authCode = getAuthCodeFromUrl();
-      if (authCode) {
-        fetchAccessToken(authCode);
-      }
+
+      // Nettoyer l'URL
+      window.history.replaceState(null, "", window.location.pathname);
+      return;
+    }
+
+    const authCode = getAuthCodeFromUrl();
+
+    if (authCode) {
+      fetchAccessToken(authCode)
+        .then(() => {
+          // 🔥 Dès que fetchAccessToken est fait, on nettoie l'URL
+          window.history.replaceState(null, "", window.location.pathname);
+        })
+        .catch((error) => {
+          console.error("Error fetching access token:", error);
+        });
     }
   }, []);
 
