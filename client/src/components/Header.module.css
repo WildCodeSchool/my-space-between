@@ -1,0 +1,8 @@
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Karantina', cursive;
+    letter-spacing: 5px;
+    font-size: 2.5rem;
+}
