@@ -14,12 +14,10 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "/", 
+        path: "/",
         element: <Home />,
-      }, 
-      { path: "/player", 
-        element: <Player />, 
       },
+      { path: "/player", element: <Player /> },
       {
         path: "/about",
         element: <About />,
@@ -38,13 +36,11 @@ if (!rootElement) {
 }
 
 createRoot(rootElement).render(
-  <StrictMode>
-    <FetchDataProvider>
-      <MusicProvider>
-        <PopularityFilterProvider>
-          <RouterProvider router={router} />
-        </PopularityFilterProvider>
-      </MusicProvider>
-    </FetchDataProvider>
-  </StrictMode>
+  <FetchDataProvider>
+    <MusicProvider>
+      <PopularityFilterProvider>
+        <RouterProvider router={router} />
+      </PopularityFilterProvider>
+    </MusicProvider>
+  </FetchDataProvider>
 );
