@@ -22,8 +22,8 @@ export const Contact = () => {
     if (!emailRegex.test(email)) {
     validationErrors.email = "Invalid email";
     }
-    else if (email.endsWith('@tempmail.com')) {
-    validationErrors.email = "Disposable emails are not allowed";
+    else {
+    setSuccessMessage(" Adresse email valide !");
     }
 
     if (!message.trim()) validationErrors.message = "The message is mandatory";
