@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./BurgerMenu.module.css";
+import { Link } from "react-router-dom";
 
 function BurgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,13 +19,13 @@ function BurgerMenu() {
       <nav className={`${styles.navBar} ${isOpen ? styles.open : ""}`}>
         <ul className={styles.menuOpen}>
           <li>
-            <a href="#">Home</a>
+            <Link to="/">Home</Link>
           </li>
           <li>
-            <a href="#">About</a>
+            <Link to="/about">About</Link>
           </li>
           <li>
-            <a href="#">Contact</a>
+            <Link to="/contact">Contact</Link>
           </li>
         </ul>
       </nav>
