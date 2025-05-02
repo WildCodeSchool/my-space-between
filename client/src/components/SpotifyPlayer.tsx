@@ -32,7 +32,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
   const [is_active, setActive] = useState(false);
   const [position, setPosition] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [isPlayerReady, setPlayerReady] = useState(false); // Track if the player is ready
+  const [isPlayerReady, setPlayerReady] = useState(false);
 
   console.log("current track : ", current_track);
 
@@ -43,8 +43,6 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
       alert("Spotify access token is missing. Please log in again.");
       return;
     }
-
-    console.log("Using Spotify access token:", token);
 
     const trackId = uri.split("/").pop();
     const trackUri = `spotify:track:${trackId}`;
@@ -117,7 +115,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
             ({ device_id }: { device_id: string }) => {
               console.log("Ready with Device ID", device_id);
               setDeviceId(device_id);
-              setPlayerReady(true); // Mark the player as ready
+              setPlayerReady(true);
 
               setTimeout(() => {
                 playTrack(device_id);
@@ -226,7 +224,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
           "No active device. Please start playback on Web Player first."
         );
         alert(
-          "Spotify Web Player n'est pas actif. Clique sur 'Connecter' sur ton compte Spotify !"
+          "Spotify Web Player n'est pas actif. Connecte-toi à ton compte Spotify !"
         );
         return;
       }
