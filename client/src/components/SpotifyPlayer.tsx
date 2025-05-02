@@ -27,7 +27,6 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
 
   console.log("current track : ", current_track);
 
-  // 🔥 Nouvelle fonction pour jouer un morceau
   const playTrack = async (device_id: string) => {
     const token = localStorage.getItem("spotifyAccessToken");
     if (!token) {
@@ -85,12 +84,10 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
 
       setPlayer(player);
 
-      // --- Events
       player.addListener("ready", ({ device_id }: { device_id: string }) => {
         console.log("Ready with Device ID", device_id);
         setDeviceId(device_id);
 
-        // 🔥 Dès que prêt, joue la track
         playTrack(device_id);
       });
 
@@ -114,7 +111,6 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
       player.connect();
     };
 
-    // Nettoyage (si le composant est démonté)
     return () => {
       if (player) {
         player.disconnect();
