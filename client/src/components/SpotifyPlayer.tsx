@@ -110,14 +110,6 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
             "The Web Playback SDK successfully connected to Spotify!"
           );
 
-<<<<<<< HEAD
-      player.addListener("ready", ({ device_id }: { device_id: string }) => {
-        console.log("Ready with Device ID", device_id);
-        setDeviceId(device_id);
-
-        playTrack(device_id);
-      });
-=======
           setPlayer(spotifyPlayer);
 
           spotifyPlayer.addListener(
@@ -126,7 +118,6 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
               console.log("Ready with Device ID", device_id);
               setDeviceId(device_id);
               setPlayerReady(true); // Mark the player as ready
->>>>>>> 2d5b7665d901e5591a2ac964d20d3e4211eeb8dc
 
               setTimeout(() => {
                 playTrack(device_id);
