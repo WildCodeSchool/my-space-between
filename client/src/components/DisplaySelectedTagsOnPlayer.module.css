@@ -1,0 +1,35 @@
+.bubbleTagsContainer {
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  width: auto;
+  min-width: 320px;
+}
+
+.bubbleTagsList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  list-style: none;
+  padding: 0;
+  gap: 10px 5px;
+}
+
+.bubbleTagsList li {
+  color: black;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  padding: 0 5px 0 5px;
+  gap: 5px;
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
+  user-select: none;
+}
+
+@media (min-width: 1000px) {
+  .bubbleTagsContainer {
+    left: 25%;
+    transform: translate(-50%, 0);
+  }
+}
