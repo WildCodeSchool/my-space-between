@@ -14,6 +14,7 @@ function TrackPlayingCard() {
               <img src={item.image} alt={item.name} className={styles.image} />
               <p className={styles.artist}>{item.artist}</p>
               <p className={styles.trackName}> {item.name}</p>
+              <p className={styles.popularity}>{item.popularity}</p>
               <div className={styles.windowPlayer}>
                 <SpotifyPlayer uri={item.url} />
               </div>

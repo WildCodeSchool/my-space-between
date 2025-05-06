@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useFetchDataContext } from "../context/FetchDataContext";
 import styles from "./SpotifyPlayer.module.css";
+import NextButton from "./NextButton";
 
 declare global {
   interface Window {
@@ -13,19 +14,6 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
   const { musicList } = useFetchDataContext();
 
   const [current_track, setTrack] = useState<any>(null);
-
-  useEffect(() => {
-    if (musicList.length > 0) {
-      setTrack({
-        name: musicList[0].name,
-        album: {
-          image: { url: musicList[0].image },
-        },
-        artist: { name: musicList[0].artist },
-      });
-    }
-  }, [musicList]);
-
   const [player, setPlayer] = useState<any>(null);
   const [deviceId, setDeviceId] = useState<string | null>(null);
   const [isPaused, setIsPaused] = useState(true);
@@ -34,18 +22,14 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
   const [duration, setDuration] = useState(0);
   const [isPlayerReady, setPlayerReady] = useState(false);
 
-  console.log("current track : ", current_track);
+  const token = localStorage.getItem("spotifyAccessToken");
 
-  const playTrack = async (device_id: string) => {
-    const token = localStorage.getItem("spotifyAccessToken");
+  const playTrack = async (device_id: string, trackUri: string) => {
     if (!token) {
       console.error("No Spotify access token found.");
       alert("Spotify access token is missing. Please log in again.");
       return;
     }
-
-    const trackId = uri.split("/").pop();
-    const trackUri = `spotify:track:${trackId}`;
 
     try {
       const response = await fetch(
@@ -79,8 +63,6 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("spotifyAccessToken");
-
     if (!token) {
       console.error("No Spotify access token found.");
       return;
@@ -116,10 +98,6 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
               console.log("Ready with Device ID", device_id);
               setDeviceId(device_id);
               setPlayerReady(true);
-
-              setTimeout(() => {
-                playTrack(device_id);
-              }, 1000);
             }
           );
 
@@ -127,7 +105,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
             "not_ready",
             ({ device_id }: { device_id: string }) => {
               console.log("Device ID has gone offline", device_id);
-              setPlayerReady(false); // Mark the player as not ready
+              setPlayerReady(false);
             }
           );
 
@@ -156,17 +134,11 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
                     console.warn("No active Spotify state found.");
                     setActive(false);
                   }
-                } else {
-                  console.warn(
-                    "Player is not ready or getCurrentState is unavailable."
-                  );
                 }
               } catch (error) {
                 console.error("Error getting current state:", error);
                 setActive(false);
               }
-
-              console.log("Player state changed:", state);
             }
           );
         } else {
@@ -184,7 +156,27 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
   }, []);
 
   useEffect(() => {
-    let interval: NodeJS.Timeout | undefined;
+    if (deviceId && musicList.length > 0 && isPlayerReady) {
+      const newTrackId = musicList[0].id;
+      const currentTrackId = current_track?.id;
+
+      if (newTrackId !== currentTrackId) {
+        console.log("Playing new track after fetch:", newTrackId);
+
+        setTrack({
+          name: musicList[0].name,
+          album: { image: { url: musicList[0].image } },
+          artist: { name: musicList[0].artist },
+          id: musicList[0].id, // Ajout important pour que current_track ait aussi un ID
+        });
+
+        playTrack(deviceId, `spotify:track:${newTrackId}`);
+      }
+    }
+  }, [musicList, deviceId, isPlayerReady, current_track]);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout | undefined = undefined;
 
     if (!isPaused) {
       interval = setInterval(() => {
@@ -213,11 +205,6 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
     }
 
     try {
-      if (typeof player.getCurrentState !== "function") {
-        console.warn("getCurrentState is not available on the player.");
-        return;
-      }
-
       const state = await player.getCurrentState();
       if (!state) {
         console.error(
@@ -245,33 +232,6 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
     }
   };
 
-  interface ErrorEvent {
-    message: string;
-  }
-
-  function handleError(error: ErrorEvent): void {
-    if (error.message.includes("404")) {
-      console.log(
-        "Erreur 404 détectée : Relancer la page ou réinitialiser la session."
-      );
-
-      location.reload();
-    } else {
-      console.log("Autre erreur:", error);
-    }
-  }
-
-  window.addEventListener("error", function (event) {
-    if (event.message.includes("404")) {
-      handleError(event);
-    }
-  });
-
-  window.addEventListener("popstate", function () {
-    console.log("Retour arrière détecté");
-    location.reload();
-  });
-
   const formatTime = (milliseconds: number) => {
     const minutes = Math.floor(milliseconds / 60000);
     const seconds = Math.floor((milliseconds % 60000) / 1000);
@@ -286,9 +246,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
             <div className={styles.controls}>
               <button
                 className={styles.button}
-                onClick={() => {
-                  player.previousTrack();
-                }}
+                onClick={() => player.previousTrack()}
               >
                 ⏮️
               </button>
@@ -301,14 +259,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
                 {isPaused ? "▶️" : "⏸️"}
               </button>
 
-              <button
-                className={styles.button}
-                onClick={() => {
-                  player.nextTrack();
-                }}
-              >
-                ⏭️
-              </button>
+              <NextButton />
             </div>
 
             <div className={styles.timeInfo}>

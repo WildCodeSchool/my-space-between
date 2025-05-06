@@ -93,7 +93,6 @@ const LoginButton = () => {
       setUserProfile(JSON.parse(savedProfile));
       setIsConnected(true);
 
-      // Nettoyer l'URL (enlève ?code=XXXX)
       window.history.replaceState(null, "", window.location.pathname);
       return;
     }
@@ -101,7 +100,6 @@ const LoginButton = () => {
     if (savedToken) {
       fetchUserProfile(savedToken);
 
-      // Nettoyer l'URL
       window.history.replaceState(null, "", window.location.pathname);
       return;
     }
@@ -111,7 +109,6 @@ const LoginButton = () => {
     if (authCode) {
       fetchAccessToken(authCode)
         .then(() => {
-          // 🔥 Dès que fetchAccessToken est fait, on nettoie l'URL
           window.history.replaceState(null, "", window.location.pathname);
         })
         .catch((error) => {
@@ -161,7 +158,7 @@ const LoginButton = () => {
               userProfile.images.length > 0 && (
                 <img
                   className={styles.profilPic}
-                  src={userProfile.images[0].url}
+                  src={userProfile.images[0]?.url || ""}
                   alt="Photo de profil"
                 />
               )}
