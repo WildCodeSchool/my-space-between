@@ -35,7 +35,7 @@ function NextButton() {
           handleDiscover();
         }}
       >
-        Next
+        ⏭️
       </button>
     </div>
   );

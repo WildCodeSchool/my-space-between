@@ -67,15 +67,15 @@ export const FetchDataProvider = ({ children }: { children: ReactNode }) => {
       tagsIfEmpty.push(randomTag);
     }
 
-    const randomOffset = Math.floor(Math.random() * 150) + 1;
+    const randomOffset = Math.floor(Math.random() * 1000);
     const API_URL =
       bubbleTags.length === 0
-        ? `https://api.spotify.com/v1/search?q=${tagsIfEmpty.join(
+        ? `https://api.spotify.com/v1/search?q="${tagsIfEmpty.join(
             "+"
-          )}&type=track&limit=1&offset=${randomOffset}`
-        : `https://api.spotify.com/v1/search?q=${bubbleTags.join(
+          )}"&type=track&limit=1&offset=${randomOffset}`
+        : `https://api.spotify.com/v1/search?q="${bubbleTags.join(
             "+"
-          )}&type=track&limit=1&offset=${randomOffset}`;
+          )}"&type=track&limit=1&offset=${randomOffset}`;
 
     setLoading(true);
     setError(null);

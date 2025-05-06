@@ -371,4 +371,8 @@ export const Tags: string[] = [
   "Desi Beats",
   "Zulu Traditional",
   "Cajun",
+  "Wild",
+  "Code",
+  "School",
+  "Phonk",
 ];

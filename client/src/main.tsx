@@ -8,6 +8,7 @@ import { MusicProvider } from "./context/MusicContext";
 import { PopularityFilterProvider } from "./context/PopularityLevelsContext";
 import Home from "./pages/Home";
 import Player from "./pages/Player";
+import { EasterEgg } from "./pages/Easteregg";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/callback",
         element: <Home />,
+      },
+      {
+        path: "/easteregg",
+        element: <EasterEgg />,
       },
     ],
   },

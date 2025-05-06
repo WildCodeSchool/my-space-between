@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useFetchDataContext } from "../context/FetchDataContext";
 import styles from "./SpotifyPlayer.module.css";
 import NextButton from "./NextButton";
+import { useMusicDataContext } from "../context/MusicContext";
+import { PopularityLevelsContext } from "../context/PopularityLevelsContext";
 
 declare global {
   interface Window {
@@ -21,6 +23,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
   const [position, setPosition] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isPlayerReady, setPlayerReady] = useState(false);
+  const [hasFetchedNext, setHasFetchedNext] = useState(false); // Moved here
 
   const token = localStorage.getItem("spotifyAccessToken");
 
@@ -181,8 +184,21 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
     if (!isPaused) {
       interval = setInterval(() => {
         setPosition((prevPosition) => {
-          if (prevPosition + 1000 < duration) {
-            return prevPosition + 1000;
+          const newPosition = prevPosition + 1000;
+
+          // 🎯 Vérification de la fin du morceau
+          if (
+            duration > 0 &&
+            newPosition >= duration - 2000 &&
+            !hasFetchedNext
+          ) {
+            console.log("🎵 La musique touche à sa fin !");
+            setHasFetchedNext(true); // 🔒 Eviter de relancer plusieurs fois
+            handleDiscover(); // 👈 ou ton fetch pour charger la suivante
+          }
+
+          if (newPosition < duration) {
+            return newPosition;
           } else {
             return duration;
           }
@@ -195,7 +211,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
     }
 
     return () => clearInterval(interval);
-  }, [isPaused, duration]);
+  }, [isPaused, duration, hasFetchedNext]); // Added `hasFetchedNext` to dependencies
 
   const togglePlay = async () => {
     if (!player || !deviceId || !isPlayerReady) {
@@ -236,6 +252,28 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
     const minutes = Math.floor(milliseconds / 60000);
     const seconds = Math.floor((milliseconds % 60000) / 1000);
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+  };
+
+  const { bubbleTags } = useMusicDataContext();
+  const popularityLevelsContext = useContext(PopularityLevelsContext);
+  const popularityFilter = popularityLevelsContext?.popularityFilter;
+  const { fetchMusicData, loading, error } = useFetchDataContext();
+
+  const handleDiscover = async () => {
+    try {
+      await fetchMusicData(
+        bubbleTags,
+        String(popularityFilter) || "defaultPopularity",
+        []
+      );
+      if (!loading && !error) {
+        console.log("Data fetched successfully. Proceeding to next step.");
+      } else {
+        console.error("Failed to fetch music data. Navigation aborted.");
+      }
+    } catch (err) {
+      console.error("Error during fetch:", err);
+    }
   };
 
   return (
