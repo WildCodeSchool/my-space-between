@@ -375,4 +375,11 @@ export const Tags: string[] = [
   "Code",
   "School",
   "Phonk",
+  "60s",
+  "70s",
+  "80s",
+  "90s",
+  "2000",
+  "2010s",
+  "2020s",
 ];

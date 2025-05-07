@@ -16,6 +16,8 @@ interface FetchDataContextType {
   ) => Promise<void>;
   fetchArtistData: (artistId: string, token: string) => Promise<any>;
   fetchAlbumsData: (artistId: string, token: string) => Promise<any>;
+  musicHistory: SelectedMusicModel[];
+  setMusicHistory: React.Dispatch<React.SetStateAction<SelectedMusicModel[]>>;
 }
 
 const FetchDataContext = createContext<FetchDataContextType | undefined>(
@@ -136,6 +138,10 @@ export const FetchDataProvider = ({ children }: { children: ReactNode }) => {
           albumsData
         );
 
+        musicHistory.push(newSelectedMusic);
+        setMusicHistory(musicHistory);
+        console.log("Music history:", musicHistory);
+
         setMusicList([newSelectedMusic]);
 
         if (bubbleTags.length === 0) {
@@ -205,6 +211,8 @@ export const FetchDataProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const [musicHistory, setMusicHistory] = useState<SelectedMusicModel[]>([]);
+
   return (
     <FetchDataContext.Provider
       value={{
@@ -217,6 +225,8 @@ export const FetchDataProvider = ({ children }: { children: ReactNode }) => {
         fetchMusicData,
         fetchArtistData,
         fetchAlbumsData,
+        musicHistory,
+        setMusicHistory,
       }}
     >
       {children}

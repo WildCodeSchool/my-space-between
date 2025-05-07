@@ -4,6 +4,7 @@ import styles from "./SpotifyPlayer.module.css";
 import NextButton from "./NextButton";
 import { useMusicDataContext } from "../context/MusicContext";
 import { PopularityLevelsContext } from "../context/PopularityLevelsContext";
+import PreviousButton from "./PreviousButton";
 
 declare global {
   interface Window {
@@ -23,7 +24,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
   const [position, setPosition] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isPlayerReady, setPlayerReady] = useState(false);
-  const [hasFetchedNext, setHasFetchedNext] = useState(false); // Moved here
+  const [hasFetchedNext, setHasFetchedNext] = useState(false);
 
   const token = localStorage.getItem("spotifyAccessToken");
 
@@ -170,7 +171,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
           name: musicList[0].name,
           album: { image: { url: musicList[0].image } },
           artist: { name: musicList[0].artist },
-          id: musicList[0].id, // Ajout important pour que current_track ait aussi un ID
+          id: musicList[0].id,
         });
 
         playTrack(deviceId, `spotify:track:${newTrackId}`);
@@ -186,15 +187,14 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
         setPosition((prevPosition) => {
           const newPosition = prevPosition + 1000;
 
-          // 🎯 Vérification de la fin du morceau
           if (
             duration > 0 &&
             newPosition >= duration - 2000 &&
             !hasFetchedNext
           ) {
             console.log("🎵 La musique touche à sa fin !");
-            setHasFetchedNext(true); // 🔒 Eviter de relancer plusieurs fois
-            handleDiscover(); // 👈 ou ton fetch pour charger la suivante
+            setHasFetchedNext(true);
+            handleDiscover();
           }
 
           if (newPosition < duration) {
@@ -211,7 +211,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
     }
 
     return () => clearInterval(interval);
-  }, [isPaused, duration, hasFetchedNext]); // Added `hasFetchedNext` to dependencies
+  }, [isPaused, duration, hasFetchedNext]);
 
   const togglePlay = async () => {
     if (!player || !deviceId || !isPlayerReady) {
@@ -276,18 +276,37 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
     }
   };
 
+  const skipTime = async (milliseconds: number) => {
+    if (!player || !isPlayerReady) {
+      console.error("Player not ready for seek action");
+      return;
+    }
+
+    try {
+      const state = await player.getCurrentState();
+      if (!state) {
+        console.error("No player state found");
+        return;
+      }
+
+      let newPosition = state.position + milliseconds;
+      if (newPosition < 0) newPosition = 0;
+      if (newPosition > state.duration) newPosition = state.duration;
+
+      await player.seek(newPosition);
+      console.log(`Skipped to ${newPosition} ms`);
+    } catch (error) {
+      console.error("Error skipping in track:", error);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <section className={styles.playerSection}>
         {deviceId ? (
           <div className={styles.playerContainer}>
             <div className={styles.controls}>
-              <button
-                className={styles.button}
-                onClick={() => player.previousTrack()}
-              >
-                ⏮️
-              </button>
+              <PreviousButton />
 
               <button
                 className={styles.button}
@@ -298,6 +317,10 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
               </button>
 
               <NextButton />
+            </div>
+            <div className={styles.controls}>
+              <button onClick={() => skipTime(-10000)}>-10s ⏪</button>
+              <button onClick={() => skipTime(10000)}>⏩ +10s</button>
             </div>
 
             <div className={styles.timeInfo}>
