@@ -15,6 +15,18 @@ function EasterEgg() {
       setBubbleTags([]);
       navigate("/easteregg");
     }
+
+    if (
+      bubbleTags.includes("Bay") &&
+      bubbleTags.includes("Tone") &&
+      bubbleTags.includes("Year")
+    ) {
+      setBubbleTags([]);
+      window.open(
+        "https://chiantox.bandcamp.com/album/concrete-love-amour-beton",
+        "_blank"
+      );
+    }
   }, [bubbleTags, navigate, setBubbleTags]);
 
   return <></>;

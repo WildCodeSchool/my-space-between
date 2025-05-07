@@ -17,12 +17,14 @@ const SearchBar = () => {
       return;
     }
 
-    const filteredResults = tags.filter(
-      (tag) =>
-        tag.toLowerCase().startsWith(value.toLowerCase()) &&
-        !bubbleTags.includes(tag) &&
-        !cloudTags.includes(tag)
-    );
+    const filteredResults = tags
+      .filter(
+        (tag) =>
+          tag.toLowerCase().startsWith(value.toLowerCase()) &&
+          !bubbleTags.includes(tag) &&
+          !cloudTags.includes(tag)
+      )
+      .sort((a, b) => a.localeCompare(b));
 
     setResults(filteredResults);
   };
