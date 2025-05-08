@@ -69,7 +69,7 @@ const LoginButton = () => {
     setUserProfile(data);
     setIsConnected(true);
   };
-
+  console.log(userProfile);
   useEffect(() => {
     const savedToken = localStorage.getItem("spotifyAccessToken");
     const savedProfile = localStorage.getItem("spotifyUserProfile");
