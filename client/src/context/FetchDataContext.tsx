@@ -113,6 +113,15 @@ export const FetchDataProvider = ({ children }: { children: ReactNode }) => {
           return true;
         };
 
+        if (
+          musicHistory.some(
+            (music) => music.name === item.name || music.id === item.id
+          )
+        ) {
+          console.log("Duplicate item found, fetching again...");
+          return fetchMusicData(bubbleTags, filter, tags);
+        }
+
         if (!isValid()) {
           return fetchMusicData(bubbleTags, filter, tags);
         }
