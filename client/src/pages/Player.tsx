@@ -1,5 +1,5 @@
 import styles from "./Player.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DisplayPopularityFilterOnPlayer from "../components/DisplayPopularityFilterOnPlayer";
 import DisplaySelectedTagsOnPlayer from "../components/DisplaySelectedTagsOnPlayer";
 import ArtistInfo from "../components/ArtistInfo";
@@ -7,6 +7,18 @@ import TrackPlayingCard from "../components/TrackPlayingCard";
 
 const Player = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const navEntries = performance.getEntriesByType("navigation");
+    const navigationEntry = navEntries[0] as PerformanceNavigationTiming;
+
+    const wasReloaded = navigationEntry.type === "reload";
+
+    if (wasReloaded && window.location.pathname === "/player") {
+      window.location.replace("/");
+    }
+  }, []);
+
   const toggleButton = () => {
     setIsOpen(!isOpen);
   };
