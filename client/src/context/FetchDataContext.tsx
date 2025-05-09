@@ -69,7 +69,7 @@ export const FetchDataProvider = ({ children }: { children: ReactNode }) => {
       tagsIfEmpty.push(randomTag);
     }
 
-    const randomOffset = Math.floor(Math.random() * 150);
+    const randomOffset = Math.floor(Math.random() * 1000);
     const API_URL =
       bubbleTags.length === 0
         ? `https://api.spotify.com/v1/search?q="${tagsIfEmpty.join(
