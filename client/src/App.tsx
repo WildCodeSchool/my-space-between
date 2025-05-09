@@ -1,5 +1,5 @@
 import "./App.css";
-import { Outlet } from "react-router";
+import { Outlet, useLocation } from "react-router-dom";
 import BurgerMenu from "./components/BurgerMenu";
 import LoginButton from "./components/LoginButton";
 import { Header } from "./components/Header";
