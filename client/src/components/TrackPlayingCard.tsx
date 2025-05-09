@@ -1,6 +1,7 @@
 import styles from "./TrackPlayingCard.module.css";
 import { useFetchDataContext } from "../context/FetchDataContext";
 import SpotifyPlayer from "./SpotifyPlayer";
+import AddToFavoriteButton from "./AddToFavoriteButton";
 
 function TrackPlayingCard() {
   const { musicList } = useFetchDataContext();
@@ -16,6 +17,9 @@ function TrackPlayingCard() {
               <p className={styles.trackName}> {item.name}</p>
               <div className={styles.windowPlayer}>
                 <SpotifyPlayer uri={item.url} />
+                <div className={styles.addToFavoriteButton}>
+                  <AddToFavoriteButton music={item} />
+                </div>
               </div>
             </div>
           ))
