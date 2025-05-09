@@ -14,10 +14,12 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "/",
+        path: "/", 
         element: <Home />,
+      }, 
+      { path: "/player", 
+        element: <Player />, 
       },
-      { path: "/player", element: <Player /> },
       {
         path: "/about",
         element: <About />,
@@ -28,8 +30,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-  // Renders the App component for the home page
-  // Try adding a new route! For example, "/about" with an About component
 ]);
 
 const rootElement = document.getElementById("root");

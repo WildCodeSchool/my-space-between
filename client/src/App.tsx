@@ -4,6 +4,7 @@ import BurgerMenu from "./components/BurgerMenu";
 import LoginButton from "./components/LoginButton";
 import { useEffect, useState } from "react";
 import { useFetchDataContext } from "./context/FetchDataContext";
+import { Header } from "./components/Header";
 
 function App() {
   const { musicList } = useFetchDataContext();
@@ -104,6 +105,7 @@ function App() {
 
   return (
     <>
+      <Header />
       <BurgerMenu />
       <LoginButton />
       <Outlet />
