@@ -8,18 +8,17 @@ import { MusicProvider } from "./context/MusicContext";
 import { PopularityFilterProvider } from "./context/PopularityLevelsContext";
 import Home from "./pages/Home";
 import Player from "./pages/Player";
+import { EasterEgg } from "./pages/Easteregg";
 
 const router = createBrowserRouter([
   {
     element: <App />,
     children: [
       {
-        path: "/", 
+        path: "/",
         element: <Home />,
-      }, 
-      { path: "/player", 
-        element: <Player />, 
       },
+      { path: "/player", element: <Player /> },
       {
         path: "/about",
         element: <About />,
@@ -27,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/callback",
         element: <Home />,
+      },
+      {
+        path: "/easteregg",
+        element: <EasterEgg />,
       },
     ],
   },
@@ -38,13 +41,11 @@ if (!rootElement) {
 }
 
 createRoot(rootElement).render(
-  <StrictMode>
-    <FetchDataProvider>
-      <MusicProvider>
-        <PopularityFilterProvider>
-          <RouterProvider router={router} />
-        </PopularityFilterProvider>
-      </MusicProvider>
-    </FetchDataProvider>
-  </StrictMode>
+  <FetchDataProvider>
+    <MusicProvider>
+      <PopularityFilterProvider>
+        <RouterProvider router={router} />
+      </PopularityFilterProvider>
+    </MusicProvider>
+  </FetchDataProvider>
 );
