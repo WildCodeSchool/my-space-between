@@ -13,7 +13,6 @@ const VolumeControl: React.FC<VolumeControlProps> = ({ player }) => {
 
   useEffect(() => {
     if (player) {
-      console.log(`Changement de volume : ${volume * 100}%`);
       player.setVolume(volume).catch((err) =>
         console.error("Erreur lors du changement de volume :", err)
       );
