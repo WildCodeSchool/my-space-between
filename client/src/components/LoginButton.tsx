@@ -39,10 +39,21 @@ const LoginButton = () => {
       }),
     });
 
-    const data: AccessTokenResponse = await response.json();
-    if (data.access_token) {
-      localStorage.setItem("spotifyAccessToken", data.access_token);
-      fetchUserProfile(data.access_token);
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Failed to fetch access token", errorText);
+      return;
+    }
+
+    try {
+      const data: AccessTokenResponse = await response.json();
+      if (data.access_token) {
+        localStorage.setItem("spotifyAccessToken", data.access_token);
+        fetchUserProfile(data.access_token);
+        window.history.replaceState(null, "", window.location.pathname);
+      }
+    } catch (error) {
+      console.error("Failed to parse access token response as JSON", error);
     }
   };
 
@@ -58,12 +69,21 @@ const LoginButton = () => {
       },
     });
 
-    const data: UserProfile = await response.json();
-    localStorage.setItem("spotifyUserProfile", JSON.stringify(data));
-    setUserProfile(data);
-    setIsConnected(true);
-  };
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Failed to fetch user profile", errorText);
+      return;
+    }
 
+    try {
+      const data: UserProfile = await response.json();
+      localStorage.setItem("spotifyUserProfile", JSON.stringify(data));
+      setUserProfile(data);
+      setIsConnected(true);
+    } catch (error) {
+      console.error("Failed to parse user profile response as JSON", error);
+    }
+  };
   useEffect(() => {
     const savedToken = localStorage.getItem("spotifyAccessToken");
     const savedProfile = localStorage.getItem("spotifyUserProfile");
@@ -71,13 +91,28 @@ const LoginButton = () => {
     if (savedToken && savedProfile) {
       setUserProfile(JSON.parse(savedProfile));
       setIsConnected(true);
-    } else if (savedToken) {
+
+      window.history.replaceState(null, "", window.location.pathname);
+      return;
+    }
+
+    if (savedToken) {
       fetchUserProfile(savedToken);
-    } else {
-      const authCode = getAuthCodeFromUrl();
-      if (authCode) {
-        fetchAccessToken(authCode);
-      }
+
+      window.history.replaceState(null, "", window.location.pathname);
+      return;
+    }
+
+    const authCode = getAuthCodeFromUrl();
+
+    if (authCode) {
+      fetchAccessToken(authCode)
+        .then(() => {
+          window.history.replaceState(null, "", window.location.pathname);
+        })
+        .catch((error) => {
+          console.error("Error fetching access token:", error);
+        });
     }
   }, []);
 
@@ -117,13 +152,15 @@ const LoginButton = () => {
               <p className={styles.username}>{userProfile.display_name}</p>
             )}
 
-            {userProfile && userProfile.images[0] && (
-              <img
-                className={styles.profilPic}
-                src={userProfile.images[0].url}
-                alt="Photo de profil"
-              />
-            )}
+            {userProfile &&
+              userProfile.images &&
+              userProfile.images.length > 0 && (
+                <img
+                  className={styles.profilPic}
+                  src={userProfile.images[0]?.url || ""}
+                  alt="Photo de profil"
+                />
+              )}
           </div>
           <button
             className={`${styles.disconnect} ${
