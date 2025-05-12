@@ -40,3 +40,25 @@
     transform: translate(-50%, -50%);
   }
 }
+
+@media (max-height: 785px) {
+  .image {
+    height: 100px;
+    width: 90%;
+    object-fit: cover;
+  }
+
+  .globalPlayer {
+    top: 53%;
+  }
+}
+
+@media (max-height: 640px) {
+  .image {
+    display: none;
+  }
+
+  .globalPlayer {
+    top: 53%;
+  }
+}

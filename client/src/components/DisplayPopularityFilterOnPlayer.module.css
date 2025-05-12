@@ -6,7 +6,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(111, 64, 150);
+  background: rgba(255, 255, 255, 0.13);
+  backdrop-filter: blur(14.3px);
+  -webkit-backdrop-filter: blur(14.3px);
+  border: 1px solid rgba(255, 255, 255, 0.39);
   border-radius: 25px;
   width: 248px;
   height: 47px;

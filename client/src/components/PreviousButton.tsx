@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { useFetchDataContext } from "../context/FetchDataContext";
+import styles from "./PreviousButton.module.css";
 
 function PreviousButton() {
   const { musicHistory, setMusicHistory } = useFetchDataContext();
   const { musicList, setMusicList } = useFetchDataContext();
+  const [showMessage, setShowMessage] = useState(false);
 
   function handlePrevious() {
     if (musicHistory.length > 0) {
@@ -10,7 +13,10 @@ function PreviousButton() {
       setMusicList([previousMusic]);
       setMusicHistory(musicHistory.slice(0, musicHistory.length - 1));
     } else {
-      console.log("No previous music data available.");
+      setShowMessage(true);
+      setTimeout(() => {
+        setShowMessage(false);
+      }, 2000);
     }
   }
 
@@ -24,6 +30,9 @@ function PreviousButton() {
       >
         ⏮️
       </button>
+      {showMessage && (
+        <p className={styles.message}>Pas de musique précédente</p>
+      )}
     </div>
   );
 }

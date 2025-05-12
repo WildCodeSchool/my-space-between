@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./S01-Us02-SearchBar.module.css";
+import styles from "./SearchBar.module.css";
 import { useMusicDataContext } from "../context/MusicContext";
 
 const SearchBar = () => {
