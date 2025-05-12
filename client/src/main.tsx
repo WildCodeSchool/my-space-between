@@ -2,47 +2,48 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router";
 import App from "./App";
-
-// Import additional components for new routes
-// Try creating these components in the "pages" folder
-
+import { About } from "./pages/About";
 import { FetchDataProvider } from "./context/FetchDataContext";
 import { MusicProvider } from "./context/MusicContext";
+import { PopularityFilterProvider } from "./context/PopularityLevelsContext";
+import Home from "./pages/Home";
+import Player from "./pages/Player";
 
-// import About from "./pages/About";
-// import Contact from "./pages/Contact";
-import Home from "./pages/Home"; //
-import Player from "./pages/Player"; //
-
-/* ************************************************************************* */
-
-// Create router configuration with routes
-// You can add more routes as you build out your app!
 const router = createBrowserRouter([
   {
     element: <App />,
     children: [
       {
-        path: "/", // The root path
+        path: "/", 
         element: <Home />,
-      }, // Renders the App component for the home page
-      { path: "/player", element: <Player /> },
+      }, 
+      { path: "/player", 
+        element: <Player />, 
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/callback",
+        element: <Home />,
+      },
     ],
   },
-  // Renders the App component for the home page
-  // Try adding a new route! For example, "/about" with an About component
 ]);
 
 const rootElement = document.getElementById("root");
-if (rootElement == null) {
-  throw new Error(`Your HTML Document should contain a <div id="root"></div>`);
+if (!rootElement) {
+  throw new Error('Your HTML document should contain a <div id="root"></div>');
 }
 
 createRoot(rootElement).render(
   <StrictMode>
     <FetchDataProvider>
       <MusicProvider>
-        <RouterProvider router={router} />
+        <PopularityFilterProvider>
+          <RouterProvider router={router} />
+        </PopularityFilterProvider>
       </MusicProvider>
     </FetchDataProvider>
   </StrictMode>

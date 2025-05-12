@@ -1,12 +1,15 @@
 import "./App.css";
-
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router";
 import BurgerMenu from "./components/BurgerMenu";
+import LoginButton from "./components/LoginButton";
+import { Header } from "./components/Header";
 
 function App() {
   return (
     <>
+      <Header />
       <BurgerMenu />
+      <LoginButton />
       <Outlet />
     </>
   );

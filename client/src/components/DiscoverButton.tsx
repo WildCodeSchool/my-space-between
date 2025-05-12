@@ -1,8 +1,9 @@
 import styles from "../components/DiscoverButton.module.css";
 import { useMusicDataContext } from "../context/MusicContext";
 import { useFetchDataContext } from "../context/FetchDataContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { SelectedMusicModel } from "../models/SelectedMusic";
+import { PopularityLevels } from "../context/PopularityLevelsContext";
 
 export const getAccessToken = async () => {
   const CLIENT_ID = import.meta.env.VITE_CLIENT_ID as string;
@@ -37,9 +38,17 @@ export const getAccessToken = async () => {
 
 interface DiscoverButtonProps {
   bubbleTags: string[];
+  filter: PopularityLevels;
 }
 
-const DiscoverButton: React.FC<DiscoverButtonProps> = ({ bubbleTags }) => {
+interface DiscoverButtonProps {
+  bubbleTags: string[];
+}
+
+const DiscoverButton: React.FC<DiscoverButtonProps> = ({
+  bubbleTags,
+  filter,
+}) => {
   const navigate = useNavigate();
   const { tags } = useMusicDataContext();
 
@@ -88,6 +97,20 @@ const DiscoverButton: React.FC<DiscoverButtonProps> = ({ bubbleTags }) => {
         result.tracks.items.length > 0
       ) {
         const item = result.tracks.items[0];
+
+        const popularity = item.popularity;
+
+        const isValid = () => {
+          if (filter === "Unknown") return popularity >= 0 && popularity <= 5;
+          if (filter === "Low") return popularity >= 6 && popularity <= 15;
+          if (filter === "Medium") return popularity >= 16 && popularity <= 30;
+          return true;
+        };
+
+        if (!isValid()) {
+          return fetchMusicData(bubbleTags);
+        }
+
         const artistId = item.artists[0]?.id;
 
         if (!artistId) {
@@ -111,6 +134,10 @@ const DiscoverButton: React.FC<DiscoverButtonProps> = ({ bubbleTags }) => {
         );
 
         setMusicList([newSelectedMusic]);
+
+        if (bubbleTags.length === 0) {
+          bubbleTags.push(...tagsIfEmpty);
+        }
       } else {
         fetchMusicData(bubbleTags);
       }
@@ -167,6 +194,7 @@ const DiscoverButton: React.FC<DiscoverButtonProps> = ({ bubbleTags }) => {
       return albumsData.items.map((album: any) => ({
         name: album.name,
         image: album.images[0]?.url || "",
+        link: album.external_urls.spotify || "",
       }));
     } catch (err) {
       console.error("Error fetching albums data:", err);
@@ -185,10 +213,10 @@ const DiscoverButton: React.FC<DiscoverButtonProps> = ({ bubbleTags }) => {
         type="button"
         className={styles.discoverButton}
         onClick={handleDiscover}
+        disabled={loading}
       >
-        Go Discover
+        {loading ? "Loading..." : "Discover"}
       </button>
-      {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
     </div>
   );

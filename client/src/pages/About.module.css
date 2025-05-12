@@ -1,0 +1,94 @@
+.aboutContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100svh;
+  width: 100%;
+  padding: 2rem;
+  text-align: center;
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+}
+
+.section {
+  width: 100%;
+  margin-bottom: 2.5rem;
+}
+
+.section:not(:first-of-type) {
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.aboutContainer h2,
+.aboutContainer h3 {
+  font-family: 'Karantina', cursive;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 5px;
+  margin: 0;
+}
+
+.aboutContainer h2 {
+  font-size: 2.5rem;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.aboutContainer h3 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.underline {
+  width: 100%;
+  max-width: 60%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.5);
+  margin: 0 auto 2rem;
+  border-radius: 1px;
+}
+
+.section p {
+  font-family: 'Jaldi', sans-serif;
+  font-size: 1rem;
+  color: white;
+  margin: 0 0 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .aboutContainer {
+    padding: 3rem 1.5rem;
+  }
+
+  .aboutContainer h2 {
+    font-size: 2rem;
+  }
+
+  .aboutContainer h3 {
+    font-size: 1.25rem;
+  }
+
+  .underline {
+    max-width: 80%;
+  }
+
+  .section:not(:first-of-type) {
+    max-width: 90%;
+  }
+}
+
+
+
+  
+  
+
+  
+
+
+ 
+  
+  

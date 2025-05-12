@@ -1,13 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import styles from "./BubbleTags.module.css";
 import { useMusicDataContext } from "../context/MusicContext";
 import DiscoverButton from "./DiscoverButton";
+import PopularityFilter from "./PopularityFilter";
+import { PopularityLevels } from "../context/PopularityLevelsContext";
+import { PopularityLevelsContext } from "../context/PopularityLevelsContext";
 
 function BubbleTags() {
   const { tags } = useMusicDataContext();
 
   const { bubbleTags, setBubbleTags } = useMusicDataContext();
   const [cloudTags, setCloudTags] = useState<string[]>([]);
+  const context = useContext(PopularityLevelsContext);
+
+  const popularityFilter = context?.popularityFilter ?? PopularityLevels.Any;
+  const setPopularityFilter = context?.setPopularityFilter;
 
   useEffect(() => {
     if (cloudTags.length === 0) {
@@ -135,7 +142,13 @@ function BubbleTags() {
           ))}
         </ul>
       </div>
-      <DiscoverButton bubbleTags={bubbleTags} />
+      <div className={styles.bottomButtons}>
+        <PopularityFilter
+          onChange={(value) => setPopularityFilter?.(value)}
+          selected={popularityFilter}
+        />
+        <DiscoverButton bubbleTags={bubbleTags} filter={popularityFilter} />
+      </div>
     </>
   );
 }
