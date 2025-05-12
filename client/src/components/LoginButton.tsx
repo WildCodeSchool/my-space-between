@@ -84,7 +84,6 @@ const LoginButton = () => {
       console.error("Failed to parse user profile response as JSON", error);
     }
   };
-  console.log(userProfile);
   useEffect(() => {
     const savedToken = localStorage.getItem("spotifyAccessToken");
     const savedProfile = localStorage.getItem("spotifyUserProfile");

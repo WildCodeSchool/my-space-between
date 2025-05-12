@@ -10,19 +10,12 @@ function NextButton() {
   const { fetchMusicData, loading, error } = useFetchDataContext();
 
   const handleDiscover = async () => {
-    try {
-      await fetchMusicData(
-        bubbleTags,
-        String(popularityFilter) || "defaultPopularity",
-        []
-      );
-      if (!loading && !error) {
-        console.log("Data fetched successfully. Proceeding to next step.");
-      } else {
-        console.error("Failed to fetch music data. Navigation aborted.");
-      }
-    } catch (err) {
-      console.error("Error during fetch:", err);
+    await fetchMusicData(
+      bubbleTags,
+      String(popularityFilter) || "defaultPopularity",
+      []
+    );
+    if (!loading && !error) {
     }
   };
 

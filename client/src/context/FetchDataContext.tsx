@@ -118,7 +118,6 @@ export const FetchDataProvider = ({ children }: { children: ReactNode }) => {
             (music) => music.name === item.name || music.id === item.id
           )
         ) {
-          console.log("Duplicate item found, fetching again...");
           return fetchMusicData(bubbleTags, filter, tags);
         }
 
@@ -149,7 +148,6 @@ export const FetchDataProvider = ({ children }: { children: ReactNode }) => {
 
         musicHistory.push(newSelectedMusic);
         setMusicHistory(musicHistory);
-        console.log("Music history:", musicHistory);
 
         setMusicList([newSelectedMusic]);
 
@@ -223,7 +221,7 @@ export const FetchDataProvider = ({ children }: { children: ReactNode }) => {
   const [musicHistory, setMusicHistory] = useState<SelectedMusicModel[]>([]);
 
   return (
-    <FetchDataContext.Provider
+    <FetchDataContext
       value={{
         musicList,
         setMusicList,
@@ -239,7 +237,7 @@ export const FetchDataProvider = ({ children }: { children: ReactNode }) => {
       }}
     >
       {children}
-    </FetchDataContext.Provider>
+    </FetchDataContext>
   );
 };
 
