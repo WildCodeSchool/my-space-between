@@ -13,3 +13,19 @@
   justify-content: center;
   align-items: center;
 }
+
+.volumeControl {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.volumeLabel {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.volumeSlider {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}

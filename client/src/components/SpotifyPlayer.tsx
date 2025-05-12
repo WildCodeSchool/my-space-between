@@ -26,9 +26,19 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
   const [duration, setDuration] = useState(0);
   const [isPlayerReady, setPlayerReady] = useState(false);
   const [hasFetchedNext, setHasFetchedNext] = useState(false);
+  const [volume, setVolume] = useState(0.5);
+
 
   const token = localStorage.getItem("spotifyAccessToken");
 
+  const handleVolumeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newVolume = parseFloat(e.target.value);
+    setVolume(newVolume);
+    if (player && typeof player.setVolume === "function") {
+      await player.setVolume(newVolume);
+    }
+  };
+  
   const playTrack = async (device_id: string, trackUri: string) => {
     if (!token) {
       handleLogin();
@@ -83,6 +93,10 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
       spotifyPlayer.connect().then((success: boolean) => {
         if (success) {
           setPlayer(spotifyPlayer);
+          spotifyPlayer.getVolume().then((vol: number) => {
+            setVolume(vol);
+          });
+          
 
           spotifyPlayer.addListener(
             "ready",
@@ -262,7 +276,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
           <div className={styles.playerContainer}>
             <div className={styles.controls}>
               <PreviousButton />
-
+  
               <button
                 className={styles.button}
                 onClick={togglePlay}
@@ -270,16 +284,32 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
               >
                 {isPaused ? "▶️" : "⏸️"}
               </button>
-
+  
               <NextButton />
             </div>
+  
             <div className={styles.controls}>
               <button onClick={() => skipTime(-10000)}>-10s ⏪</button>
               <button onClick={() => skipTime(10000)}>⏩ +10s</button>
             </div>
-
+  
             <div className={styles.timeInfo}>
               {formatTime(position)} / {formatTime(duration)}
+            </div>
+  
+          
+            <div className={styles.volumeControl}>
+              <label htmlFor="volume" className={styles.volumeLabel}>Volume</label>
+              <input
+                id="volume"
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value={volume}
+                onChange={handleVolumeChange}
+                className={styles.volumeSlider}
+              />
             </div>
           </div>
         ) : (
