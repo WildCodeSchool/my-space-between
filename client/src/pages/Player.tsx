@@ -32,9 +32,6 @@ const Player = () => {
         <DisplaySelectedTagsOnPlayer />
       </div>
       <div>
-        <DisplaySelectedTagsOnPlayer />
-      </div>
-      <div>
         <DisplayPopularityFilterOnPlayer />
       </div>
       <div className={`${isOpen ? styles.open : ""} ${styles.artistInfo}`}>
