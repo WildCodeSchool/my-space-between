@@ -5,6 +5,7 @@ import LoginButton from "./components/LoginButton";
 import { useEffect, useState } from "react";
 import { useFetchDataContext } from "./context/FetchDataContext";
 import { Header } from "./components/Header";
+import Tutorial from "./components/Tutorial";
 
 function App() {
   const { musicList } = useFetchDataContext();
@@ -104,9 +105,25 @@ function App() {
     }
   }, [location.pathname]);
 
+  const [showTutorial, setShowTutorial] = useState(false);
+  useEffect(() => {
+    const tutorialShown = localStorage.getItem("tutorialShown");
+    if (!tutorialShown) {
+      setShowTutorial(true);
+      localStorage.setItem("tutorialShown", "true");
+    }
+  }, []);
+
   return (
     <>
       <Header />
+      {showTutorial && (
+        <Tutorial
+          onClose={() => {
+            setShowTutorial(false);
+          }}
+        />
+      )}
       <BurgerMenu />
       <LoginButton />
       <Outlet />
