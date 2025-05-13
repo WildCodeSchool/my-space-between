@@ -19,13 +19,13 @@ function BurgerMenu() {
       <nav className={`${styles.navBar} ${isOpen ? styles.open : ""}`}>
         <ul className={styles.menuOpen}>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/">HOME</Link>
           </li>
           <li>
-            <Link to="/about">About</Link>
+            <Link to="/about">ABOUT</Link>
           </li>
           <li>
-            <Link to="/contact">Contact</Link>
+            <Link to="/contact">CONTACT</Link>
           </li>
         </ul>
       </nav>
