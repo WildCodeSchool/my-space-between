@@ -24,3 +24,7 @@ body,
   height: 100svh;
   user-select: none;
 }
+
+p {
+  font-family: "Jaldi", sans-serif;
+}
