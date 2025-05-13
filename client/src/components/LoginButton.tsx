@@ -159,7 +159,6 @@ const LoginButton = () => {
                   className={styles.profilPic}
                   src={userProfile.images[0]?.url || ""}
                   alt="Photo de profil"
-                  data-step="2"
                 />
               )}
           </div>
