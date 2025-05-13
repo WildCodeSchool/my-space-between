@@ -72,6 +72,7 @@ function App() {
   }
 
   useEffect(() => {
+    setDominantColors(new Map());
     musicList.forEach((item: MusicItem) => {
       const img = new Image();
       img.crossOrigin = "Anonymous";

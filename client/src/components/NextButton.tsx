@@ -2,6 +2,7 @@ import { useMusicDataContext } from "../context/MusicContext";
 import { PopularityLevelsContext } from "../context/PopularityLevelsContext";
 import { useFetchDataContext } from "../context/FetchDataContext";
 import { useContext } from "react";
+import styles from "./NextButton.module.css";
 
 function NextButton() {
   const { bubbleTags } = useMusicDataContext();
@@ -28,7 +29,11 @@ function NextButton() {
           handleDiscover();
         }}
       >
-        ⏭️
+        <img
+          src="src/assets/images/skip.png"
+          alt="Next"
+          className={styles.nextButton}
+        />
       </button>
     </div>
   );
