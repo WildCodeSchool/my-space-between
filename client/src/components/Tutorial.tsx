@@ -3,14 +3,14 @@ import styles from "./Tutorial.module.css";
 
 function Tutorial() {
   const [currentStep, setCurrentStep] = useState<number | null>(null);
-  const [isClosed, setIsClosed] = useState(false); // New state to track if .introduction is closed
+  const [isClosed, setIsClosed] = useState(false);
 
   const tutorialSteps = [
     "You can use our app without logging in, but to unlock all features, we recommend connecting your Spotify account by clicking the Spotify logo. A premium subscription is required for full playback.",
     "The Idea Bubble at the center of the screen is the heart of the app — it helps you find music based on what you're looking for. You can add up to 5 tags inside to guide your discovery.",
     "There are two ways to add tags: search for one using the bar above, or simply click or drag one of the floating suggestions around the bubble into it. You can also remove tags by clicking them.",
     "Looking for hidden gems or just curious to explore? Filter your search by popularity — pick Unknown, Low, or Medium to adjust how known the tracks are, or choose Any for a fully open search.",
-    "Ready to dive in? Just hit Discover to start listening! Use the player to skip, explore, and save your hidden gems to your Spotify favorites. Or you can let the music play on loop, no need to lift a finger. :)",
+    "Ready to dive in? Just hit Discover to start listening! Use the player to skip, explore, and save your hidden gems to your Spotify favorites. Or you can just let the music play — it keeps going with new tracks automatically.",
   ];
 
   function handleSeeTheTutorial() {
@@ -33,6 +33,13 @@ function Tutorial() {
 
   return (
     <>
+      {currentStep !== null && (
+        <img
+          src={`src/assets/images/tutorial.png`}
+          alt={`Step ${currentStep + 1}`}
+          className={styles[`stepImage${currentStep + 1}`]}
+        />
+      )}
       {currentStep !== null && <div className={styles.overlay}></div>}
       <div
         className={`${styles.introduction} ${isClosed ? styles.closed : ""}`}
@@ -62,6 +69,7 @@ function Tutorial() {
           <div className={styles.tutorialStep}>
             <h2>{`Step ${currentStep + 1}`}</h2>
             <p>{tutorialSteps[currentStep]}</p>
+
             <div className={styles.buttonContainer}>
               <button className={styles.okButton} onClick={handleOk}>
                 Ok
