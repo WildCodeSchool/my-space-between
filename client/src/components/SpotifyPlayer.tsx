@@ -6,6 +6,8 @@ import { useMusicDataContext } from "../context/MusicContext";
 import { PopularityLevelsContext } from "../context/PopularityLevelsContext";
 import PreviousButton from "./PreviousButton";
 import handleLogin from "./LoginButton";
+import VolumeControl from "./VolumeBar";
+
 
 declare global {
   interface Window {
@@ -296,21 +298,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
             <div className={styles.timeInfo}>
               {formatTime(position)} / {formatTime(duration)}
             </div>
-  
-          
-            <div className={styles.volumeControl}>
-              <label htmlFor="volume" className={styles.volumeLabel}>Volume</label>
-              <input
-                id="volume"
-                type="range"
-                min="0"
-                max="1"
-                step="0.01"
-                value={volume}
-                onChange={handleVolumeChange}
-                className={styles.volumeSlider}
-              />
-            </div>
+            <VolumeControl player={player} />
           </div>
         ) : (
           <p>Connecting to Spotify...</p>

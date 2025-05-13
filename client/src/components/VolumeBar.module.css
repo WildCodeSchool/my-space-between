@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+}
+
+.label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+
+}
+
+.slider {
+    width: 100%;
+    max-width: 200px;
+}

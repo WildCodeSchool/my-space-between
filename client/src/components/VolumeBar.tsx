@@ -1,4 +1,5 @@
 import { useState, useEffect, ChangeEvent } from "react";
+import styles from "./VolumeBar.module.css";
 
 interface SpotifyPlayer {
   setVolume: (volume: number) => Promise<void>;
@@ -25,8 +26,8 @@ const VolumeControl: React.FC<VolumeControlProps> = ({ player }) => {
   };
 
   return (
-    <div className="p-4">
-      <label htmlFor="volume" className="block text-sm font-medium mb-1">
+    <div className={styles.container}>
+      <label htmlFor="volume" className={styles.label}>
         Volume : {Math.round(volume * 100)}%
       </label>
       <input
@@ -37,7 +38,7 @@ const VolumeControl: React.FC<VolumeControlProps> = ({ player }) => {
         step="0.01"
         value={volume}
         onChange={handleChange}
-        className="w-full"
+        className={styles.slider}
       />
     </div>
   );
