@@ -12,4 +12,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 30px;
+}
+
+.playButton {
+  height: 25px;
+}
+
+.pauseButton {
+  height: 25px;
+}
+
+.forwardButton {
+  height: 25px;
+}
+
+.backwardButton {
+  height: 25px;
 }

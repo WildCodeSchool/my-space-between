@@ -28,7 +28,11 @@ function PreviousButton() {
           handlePrevious();
         }}
       >
-        ⏮️
+        <img
+          src="src/assets/images/previous.png"
+          alt="Previous"
+          className={styles.previousButton}
+        />
       </button>
       {showMessage && (
         <p className={styles.message}>Pas de musique précédente</p>
