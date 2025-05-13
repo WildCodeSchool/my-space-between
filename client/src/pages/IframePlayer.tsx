@@ -1,8 +1,8 @@
 const IframePlayer = () => {
-  const musicUrl = "https://open.spotify.com/embed/track/ID_TRACK";
-
+  const musicUrl = "https://open.spotify.com/embed/track/{item.id}";
+  // retrouver le track actuel via le context
   return (
-    <div style={{ margin: "auto", maxWidth: 600 }}>
+    <div>
       <iframe
         src={musicUrl}
         width="100%"

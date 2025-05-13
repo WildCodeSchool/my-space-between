@@ -60,7 +60,6 @@ const LoginButton = () => {
   interface UserProfile {
     display_name: string;
     images: { url: string }[];
-    product: string; //ici pour les valeurs possibles
   }
 
   const fetchUserProfile = async (token: string): Promise<void> => {
@@ -79,16 +78,10 @@ const LoginButton = () => {
     try {
       const data: UserProfile = await response.json();
       localStorage.setItem("spotifyUserProfile", JSON.stringify(data));
-      localStorage.setItem("spotifyProduct", data.product); //ici j'enregistre le type de compte
+      console.log(data);
+
       setUserProfile(data);
       setIsConnected(true);
-
-      // ici je redirige, si premium /SDK-player, sinon /iframe-player
-      if (data.product === "premium") {
-        window.location.href = "/player";
-      } else {
-        window.location.href = "iframe-player";
-      }
     } catch (error) {
       console.error("Failed to parse user profile response as JSON", error);
     }

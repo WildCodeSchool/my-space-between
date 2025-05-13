@@ -17,6 +17,8 @@ const Player = () => {
     if (wasReloaded && window.location.pathname === "/player") {
       window.location.replace("/");
     }
+    // check localstorage "spotifyProduct" si la cle existe en free ou n'existe pas, envoie le lecteur iframe sinon envoie le lecteur SDK
+    //affichage conditionnel a la place de trackplayingcard , iframe-player
   }, []);
 
   const toggleButton = () => {
