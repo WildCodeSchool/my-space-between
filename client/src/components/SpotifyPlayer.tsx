@@ -307,10 +307,14 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
               </button>
   
               <NextButton />
-            </div>
-            <div className={styles.controls}>
-              <button onClick={() => skipTime(-10000)}>-10s ⏪</button>
-              <button onClick={() => skipTime(10000)}>⏩ +10s</button>
+
+              <button onClick={() => skipTime(10000)}>
+                <img
+                  src="src/assets/images/avancer.png"
+                  alt="forward"
+                  className={styles.forwardButton}
+                />
+              </button>
             </div>
   
             <div className={styles.timeInfo}>

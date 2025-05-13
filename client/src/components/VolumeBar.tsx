@@ -39,6 +39,7 @@ const VolumeControl: React.FC<VolumeControlProps> = ({ player }) => {
         value={volume}
         onChange={handleChange}
         className={styles.slider}
+        style={{ "--volume-fill": `${volume * 100}%` } as React.CSSProperties}
       />
     </div>
   );

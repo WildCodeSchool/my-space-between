@@ -2,17 +2,44 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-
 }
 
 .label {
     font-size: 0.9rem;
     font-weight: 500;
     white-space: nowrap;
-
 }
 
 .slider {
     width: 100%;
     max-width: 200px;
+    appearance: none;
+    height: 8px;
+    border-radius: 4px;
+    background: linear-gradient(to right,
+            #fff var(--volume-fill, 50%),
+            #a5a5a5 var(--volume-fill, 50%));
+    outline: none;
+    cursor: pointer;
+}
+
+
+.slider::-webkit-slider-thumb {
+    appearance: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    margin-top: -4px;
+    border: none;
+}
+
+.slider::-moz-range-thumb {
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    border: none;
 }
