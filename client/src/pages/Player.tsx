@@ -4,21 +4,23 @@ import DisplayPopularityFilterOnPlayer from "../components/DisplayPopularityFilt
 import DisplaySelectedTagsOnPlayer from "../components/DisplaySelectedTagsOnPlayer";
 import ArtistInfo from "../components/ArtistInfo";
 import TrackPlayingCard from "../components/TrackPlayingCard";
+import IframePlayer from "../components/IframePlayer";
 
 const Player = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [spotifyProduct, setSpotifyProduct] = useState<string | null>(null);
 
   useEffect(() => {
     const navEntries = performance.getEntriesByType("navigation");
     const navigationEntry = navEntries[0] as PerformanceNavigationTiming;
-
     const wasReloaded = navigationEntry.type === "reload";
 
     if (wasReloaded && window.location.pathname === "/player") {
       window.location.replace("/");
     }
-    // check localstorage "spotifyProduct" si la cle existe en free ou n'existe pas, envoie le lecteur iframe sinon envoie le lecteur SDK
-    //affichage conditionnel a la place de trackplayingcard , iframe-player
+
+    const product = localStorage.getItem("spotifyProduct");
+    setSpotifyProduct(product);
   }, []);
 
   const toggleButton = () => {
@@ -28,20 +30,20 @@ const Player = () => {
   return (
     <>
       <div>
-        <TrackPlayingCard />
+        {spotifyProduct === "premium" ? <TrackPlayingCard /> : <IframePlayer />}
       </div>
-      <div>
-        <DisplaySelectedTagsOnPlayer />
-      </div>
+
       <div>
         <DisplaySelectedTagsOnPlayer />
       </div>
       <div>
         <DisplayPopularityFilterOnPlayer />
       </div>
+
       <div className={`${isOpen ? styles.open : ""} ${styles.artistInfo}`}>
         <ArtistInfo />
       </div>
+
       <div className={styles.bottomButtons}>
         <button className={isOpen ? styles.clicked : ""} onClick={toggleButton}>
           Info

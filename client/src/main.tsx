@@ -8,7 +8,7 @@ import { MusicProvider } from "./context/MusicContext";
 import { PopularityFilterProvider } from "./context/PopularityLevelsContext";
 import Home from "./pages/Home";
 import Player from "./pages/Player";
-import IframePlayer from "./pages/IframePlayer";
+import IframePlayer from "./components/IframePlayer";
 import { EasterEgg } from "./pages/Easteregg";
 
 const router = createBrowserRouter([
