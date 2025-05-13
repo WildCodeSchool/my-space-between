@@ -277,6 +277,13 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
         {deviceId ? (
           <div className={styles.playerContainer}>
             <div className={styles.controls}>
+              <button onClick={() => skipTime(-10000)}>
+                <img
+                  src="src/assets/images/reculer.png"
+                  alt="backward"
+                  className={styles.backwardButton}
+                />
+              </button>
               <PreviousButton />
   
               <button
@@ -284,12 +291,23 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
                 onClick={togglePlay}
                 disabled={!player || !deviceId}
               >
-                {isPaused ? "▶️" : "⏸️"}
+                {isPaused ? (
+                  <img
+                    src="src/assets/images/play.png"
+                    alt="play"
+                    className={styles.playButton}
+                  />
+                ) : (
+                  <img
+                    src="src/assets/images/pause.png"
+                    alt="pause"
+                    className={styles.pauseButton}
+                  />
+                )}
               </button>
   
               <NextButton />
             </div>
-  
             <div className={styles.controls}>
               <button onClick={() => skipTime(-10000)}>-10s ⏪</button>
               <button onClick={() => skipTime(10000)}>⏩ +10s</button>
