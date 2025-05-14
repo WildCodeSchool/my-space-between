@@ -5,7 +5,7 @@ export const About = () => {
     <div className={styles.aboutContainer}>
       <section className={styles.section}>
         <h2>ABOUT</h2>
-        <div className={styles.underline}></div>
+        
         <p>
           Welcome to Le Chineur, a music platform designed for everyone who
           can't go a day without listening to their favorite tunes.
