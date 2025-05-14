@@ -1,12 +1,22 @@
 .playerFrame {
   position: fixed;
   top: 50%;
-  left: 30%;
+  left: 25%;
   transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 70%;
   height: 100%;
   text-align: center;
+}
+iframe {
+  border-style: none;
+  height: 362px;
+}
+
+@media (max-width: 1000px) {
+  .playerFrame {
+    left: 50%;
+  }
 }

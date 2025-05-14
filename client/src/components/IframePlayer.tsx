@@ -12,7 +12,7 @@ const IframePlayer = () => {
       <iframe
         src={musicUrl}
         width="40%"
-        height="236"
+        height="450"
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
         loading="lazy"
       ></iframe>

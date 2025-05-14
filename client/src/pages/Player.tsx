@@ -18,14 +18,27 @@ const Player = () => {
     if (wasReloaded && window.location.pathname === "/player") {
       window.location.replace("/");
     }
+  }, []);
 
-    const product = localStorage.getItem("spotifyProduct");
-    setSpotifyProduct(product);
+  useEffect(() => {
+    try {
+      const storedProfile = localStorage.getItem("spotifyUserProfile");
+      const product = storedProfile
+        ? JSON.parse(storedProfile)?.product || "free"
+        : "free";
+
+      setSpotifyProduct(product);
+    } catch (error) {
+      console.error("Erreur de parsing JSON : ", error);
+      setSpotifyProduct("free");
+    }
   }, []);
 
   const toggleButton = () => {
     setIsOpen(!isOpen);
   };
+
+  console.log(spotifyProduct);
 
   return (
     <>
