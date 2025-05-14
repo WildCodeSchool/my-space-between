@@ -58,7 +58,6 @@ function App() {
     b = Math.floor(b / pixelCount);
 
     callback(`rgb(${r},${g},${b})`);
-    console.log(`Dominant color: rgb(${r},${g},${b})`);
   }
 
   function darkenColor(color: string, amount: number): string {

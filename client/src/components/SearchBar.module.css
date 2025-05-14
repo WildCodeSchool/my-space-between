@@ -23,7 +23,6 @@
   max-height: 180px;
   max-width: 20%;
   min-width: 250px;
-  z-index: 3;
   overflow: auto;
   z-index: 4;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
@@ -72,4 +71,14 @@
   background-color: #706f6f;
   border-radius: 10px;
   z-index: 4;
+}
+
+@media screen and (min-width: 800px) {
+  .researchBar {
+    z-index: 10;
+  }
+
+  .mainSearchMenu {
+    z-index: 10;
+  }
 }

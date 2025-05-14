@@ -9,6 +9,10 @@
   border: 1px solid rgba(255, 255, 255, 0.39);
 }
 
+.discoverButton:active {
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
 @media screen and (min-width: 1000px) {
   .discoverButton {
     height: 80px;
