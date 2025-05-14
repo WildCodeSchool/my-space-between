@@ -25,6 +25,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
   const [duration, setDuration] = useState(0);
   const [isPlayerReady, setPlayerReady] = useState(false);
   const [hasFetchedNext, setHasFetchedNext] = useState(false);
+  const [volume, setVolume] = useState(0.5);
 
   const token = localStorage.getItem("spotifyAccessToken");
 
@@ -91,6 +92,9 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
       spotifyPlayer.connect().then((success: boolean) => {
         if (success) {
           setPlayer(spotifyPlayer);
+          spotifyPlayer.getVolume().then((vol: number) => {
+            setVolume(vol);
+          });
 
           spotifyPlayer.addListener(
             "ready",
@@ -335,6 +339,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
             <div className={styles.timeInfo}>
               {formatTime(position)} / {formatTime(duration)}
             </div>
+            <VolumeControl player={player} />
           </div>
         ) : (
           <p>Connecting to Spotify...</p>
