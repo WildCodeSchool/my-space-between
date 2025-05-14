@@ -1,20 +1,33 @@
-import { useState } from "react";
-import { useFetchDataContext } from "../context/FetchDataContext";
+import styles from "./Player.module.css";
+import { useState, useEffect } from "react";
 import DisplayPopularityFilterOnPlayer from "../components/DisplayPopularityFilterOnPlayer";
 import DisplaySelectedTagsOnPlayer from "../components/DisplaySelectedTagsOnPlayer";
 import ArtistInfo from "../components/ArtistInfo";
-import styles from "./Player.module.css";
+import TrackPlayingCard from "../components/TrackPlayingCard";
 
 const Player = () => {
-  const { musicList } = useFetchDataContext();
-
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const navEntries = performance.getEntriesByType("navigation");
+    const navigationEntry = navEntries[0] as PerformanceNavigationTiming;
+
+    const wasReloaded = navigationEntry.type === "reload";
+
+    if (wasReloaded && window.location.pathname === "/player") {
+      window.location.replace("/");
+    }
+  }, []);
+
   const toggleButton = () => {
     setIsOpen(!isOpen);
   };
 
   return (
     <>
+      <div>
+        <TrackPlayingCard />
+      </div>
       <div>
         <DisplaySelectedTagsOnPlayer />
       </div>

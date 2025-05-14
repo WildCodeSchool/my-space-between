@@ -1,4 +1,3 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router";
 import { Contact } from "./pages/Contact";
@@ -9,6 +8,7 @@ import { MusicProvider } from "./context/MusicContext";
 import { PopularityFilterProvider } from "./context/PopularityLevelsContext";
 import Home from "./pages/Home";
 import Player from "./pages/Player";
+import { EasterEgg } from "./pages/Easteregg";
 
 const router = createBrowserRouter([
      {
@@ -34,6 +34,10 @@ const router = createBrowserRouter([
     path: "/callback",
     element: <Home />,
      },
+     {
+    path: "/easteregg",
+    element: <EasterEgg />,
+     },
     ],
   },
 ]);
@@ -44,13 +48,11 @@ if (!rootElement) {
 }
 
 createRoot(rootElement).render(
-  <StrictMode>    
-    <FetchDataProvider>
-      <MusicProvider>
-        <PopularityFilterProvider>
-          <RouterProvider router={router} />
-        </PopularityFilterProvider>
-      </MusicProvider>
-    </FetchDataProvider>
-  </StrictMode>
+  <FetchDataProvider>
+    <MusicProvider>
+      <PopularityFilterProvider>
+        <RouterProvider router={router} />
+      </PopularityFilterProvider>
+    </MusicProvider>
+  </FetchDataProvider>
 );

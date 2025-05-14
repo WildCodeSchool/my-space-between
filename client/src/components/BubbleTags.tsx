@@ -5,6 +5,7 @@ import DiscoverButton from "./DiscoverButton";
 import PopularityFilter from "./PopularityFilter";
 import { PopularityLevels } from "../context/PopularityLevelsContext";
 import { PopularityLevelsContext } from "../context/PopularityLevelsContext";
+import EasterEgg from "./EasterEgg";
 
 function BubbleTags() {
   const { tags } = useMusicDataContext();
@@ -148,6 +149,9 @@ function BubbleTags() {
           selected={popularityFilter}
         />
         <DiscoverButton bubbleTags={bubbleTags} filter={popularityFilter} />
+      </div>
+      <div>
+        <EasterEgg />
       </div>
     </>
   );
