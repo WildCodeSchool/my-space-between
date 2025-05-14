@@ -1,7 +1,7 @@
 .container {
   position: fixed;
-  top: 28px;
-  right: 20px;
+  top: 20px;
+  right: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -67,6 +67,11 @@
 }
 
 @media screen and (min-width: 768px) {
+  .container {
+    top: 28px;
+    right: 20px;
+  }
+
   .username {
     visibility: visible;
   }
