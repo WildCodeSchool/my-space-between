@@ -5,6 +5,7 @@ import LoginButton from "./components/LoginButton";
 import { useEffect, useState } from "react";
 import { useFetchDataContext } from "./context/FetchDataContext";
 import { Header } from "./components/Header";
+import Tutorial from "./components/Tutorial";
 
 function App() {
   const { musicList } = useFetchDataContext();
@@ -58,7 +59,6 @@ function App() {
     b = Math.floor(b / pixelCount);
 
     callback(`rgb(${r},${g},${b})`);
-    console.log(`Dominant color: rgb(${r},${g},${b})`);
   }
 
   function darkenColor(color: string, amount: number): string {
@@ -104,9 +104,25 @@ function App() {
     }
   }, [location.pathname]);
 
+  const [showTutorial, setShowTutorial] = useState(false);
+  useEffect(() => {
+    const tutorialShown = localStorage.getItem("tutorialShown");
+    if (!tutorialShown) {
+      setShowTutorial(true);
+      localStorage.setItem("tutorialShown", "true");
+    }
+  }, []);
+
   return (
     <>
       <Header />
+      {showTutorial && (
+        <Tutorial
+          onClose={() => {
+            setShowTutorial(false);
+          }}
+        />
+      )}
       <BurgerMenu />
       <LoginButton />
       <Outlet />
