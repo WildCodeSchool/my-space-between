@@ -5,6 +5,7 @@ import NextButton from "./NextButton";
 import { useMusicDataContext } from "../context/MusicContext";
 import { PopularityLevelsContext } from "../context/PopularityLevelsContext";
 import PreviousButton from "./PreviousButton";
+import VolumeControl from "./VolumeBar";
 
 declare global {
   interface Window {
