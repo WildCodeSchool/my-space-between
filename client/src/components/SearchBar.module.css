@@ -5,27 +5,31 @@
   max-width: 25%;
   min-width: 250px;
   border-radius: 15px;
-  background-color: #3b0fbf;
+  background-color: #2e2e2e21;
   color: white;
   border: solid 1px white;
   font-size: 14px;
   text-align: center;
   padding: 0 15px;
-  z-index: 4;
+  z-index: 6;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) inset;
 }
 
 .listContainer {
   position: relative;
   padding: 10px 15px;
-  background-color: rgb(106, 71, 210);
+  background-color: rgba(78, 78, 78, 0.26);
   border-radius: 15px;
-  max-height: 100px;
+  max-height: 180px;
   max-width: 20%;
   min-width: 250px;
-  z-index: 3;
   overflow: auto;
   z-index: 4;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  background: rgba(255, 255, 255, 0.13);
+  backdrop-filter: blur(14.3px);
+  -webkit-backdrop-filter: blur(14.3px);
+  border: 1px solid rgba(255, 255, 255, 0.39);
 }
 
 .resultList {
@@ -54,7 +58,7 @@
 }
 
 .mainSearchMenu li:hover {
-  background-color: #7c62cc;
+  background-color: #31313146;
   z-index: 4;
 }
 
@@ -67,4 +71,14 @@
   background-color: #706f6f;
   border-radius: 10px;
   z-index: 4;
+}
+
+@media screen and (min-width: 800px) {
+  .researchBar {
+    z-index: 10;
+  }
+
+  .mainSearchMenu {
+    z-index: 10;
+  }
 }
