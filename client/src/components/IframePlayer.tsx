@@ -15,7 +15,7 @@ const IframePlayer = () => {
     <div className={styles.playerFrame}>
       <iframe
         src={musicUrl}
-        width="40%"
+        width="300"
         height="450"
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
         loading="lazy"
