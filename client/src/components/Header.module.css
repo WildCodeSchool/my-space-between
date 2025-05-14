@@ -1,14 +1,13 @@
 .title {
-  position: fixed;    
-  top: 0;            
-  left: 50%;          
-  transform: translateX(-50%); 
+  position: fixed;
+  top: 35px;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Karantina', cursive;
+  font-family: "Karantina", cursive;
   letter-spacing: 5px;
   font-size: 2.5rem;
-  z-index: 1000;      
+  z-index: 0;
 }
-

@@ -12,10 +12,14 @@
   padding: 2rem;
   text-align: center;
   color: #fff;
-  font-family: "Arial", sans-serif;
+  font-family: "Jaldi", sans-serif;
   line-height: 1.6;
   overflow-y: auto;
   box-sizing: border-box;
+}
+
+.aboutContainer::-webkit-scrollbar {
+  display: none;
 }
 
 .section {
@@ -30,7 +34,7 @@
 
 .aboutContainer h2,
 .aboutContainer h3 {
-  font-family: 'Karantina', cursive;
+  font-family: "Karantina", cursive;
   font-weight: 400;
   line-height: 1.4;
   letter-spacing: 5px;
@@ -59,7 +63,7 @@
 }
 
 .section p {
-  font-family: 'Jaldi', sans-serif;
+  font-family: "Jaldi", sans-serif;
   font-size: 1rem;
   color: white;
   margin: 0rem;
@@ -86,15 +90,3 @@
     max-width: 90%;
   }
 }
-
-
-
-  
-  
-
-  
-
-
- 
-  
-  

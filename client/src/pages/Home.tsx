@@ -1,5 +1,5 @@
 import BubbleTags from "../components/BubbleTags";
-import SearchBar from "../components/S01-Us02-SearchBar";
+import SearchBar from "../components/SearchBar";
 
 const Home = () => {
   return (
