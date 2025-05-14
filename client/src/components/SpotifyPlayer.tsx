@@ -81,7 +81,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
 
     window.onSpotifyWebPlaybackSDKReady = () => {
       spotifyPlayer = new window.Spotify.Player({
-        name: "Mon super lecteur Web",
+        name: "My amazing player",
         getOAuthToken: (cb: (token: string) => void) => {
           cb(token);
         },
@@ -90,16 +90,11 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
 
       spotifyPlayer.connect().then((success: boolean) => {
         if (success) {
-          console.log(
-            "The Web Playback SDK successfully connected to Spotify!"
-          );
-
           setPlayer(spotifyPlayer);
 
           spotifyPlayer.addListener(
             "ready",
             ({ device_id }: { device_id: string }) => {
-              console.log("Ready with Device ID", device_id);
               setDeviceId(device_id);
               setPlayerReady(true);
             }
@@ -108,7 +103,6 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
           spotifyPlayer.addListener(
             "not_ready",
             ({ device_id }: { device_id: string }) => {
-              console.log("Device ID has gone offline", device_id);
               setPlayerReady(false);
             }
           );
@@ -153,7 +147,6 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
 
     return () => {
       if (spotifyPlayer) {
-        console.log("Disconnecting Spotify player...");
         spotifyPlayer.disconnect();
       }
     };
@@ -165,8 +158,6 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
       const currentTrackId = current_track?.id;
 
       if (newTrackId !== currentTrackId) {
-        console.log("Playing new track after fetch:", newTrackId);
-
         setTrack({
           name: musicList[0].name,
           album: { image: { url: musicList[0].image } },
@@ -192,7 +183,6 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
             newPosition >= duration - 2000 &&
             !hasFetchedNext
           ) {
-            console.log("🎵 La musique touche à sa fin !");
             setHasFetchedNext(true);
             handleDiscover();
           }
@@ -233,14 +223,12 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
       }
 
       if (state.paused) {
-        console.log("Attempting to resume playback...");
         await player.resume();
-        console.log("Playback resumed.");
+
         setIsPaused(false);
       } else {
-        console.log("Attempting to pause playback...");
         await player.pause();
-        console.log("Playback paused.");
+
         setIsPaused(true);
       }
     } catch (error) {
@@ -267,7 +255,6 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
         []
       );
       if (!loading && !error) {
-        console.log("Data fetched successfully. Proceeding to next step.");
       } else {
         console.error("Failed to fetch music data. Navigation aborted.");
       }
@@ -294,7 +281,6 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
       if (newPosition > state.duration) newPosition = state.duration;
 
       await player.seek(newPosition);
-      console.log(`Skipped to ${newPosition} ms`);
     } catch (error) {
       console.error("Error skipping in track:", error);
     }
