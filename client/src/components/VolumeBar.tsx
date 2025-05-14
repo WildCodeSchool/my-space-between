@@ -10,7 +10,10 @@ interface VolumeControlProps {
 }
 
 const VolumeControl: React.FC<VolumeControlProps> = ({ player }) => {
-  const [volume, setVolume] = useState(0.5);
+  const [volume, setVolume] = useState<number>(() => {
+    const savedVolume = localStorage.getItem("volume");
+    return savedVolume ? parseFloat(savedVolume) : 0.5;
+  });
 
   useEffect(() => {
     if (player) {
@@ -18,6 +21,7 @@ const VolumeControl: React.FC<VolumeControlProps> = ({ player }) => {
         console.error("Erreur lors du changement de volume :", err)
       );
     }
+    localStorage.setItem("volume", volume.toString());
   }, [volume, player]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

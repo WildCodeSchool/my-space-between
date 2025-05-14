@@ -32,15 +32,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
 
 
   const token = localStorage.getItem("spotifyAccessToken");
-
-  const handleVolumeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newVolume = parseFloat(e.target.value);
-    setVolume(newVolume);
-    if (player && typeof player.setVolume === "function") {
-      await player.setVolume(newVolume);
-    }
-  };
-  
+   
   const playTrack = async (device_id: string, trackUri: string) => {
     if (!token) {
       handleLogin();
