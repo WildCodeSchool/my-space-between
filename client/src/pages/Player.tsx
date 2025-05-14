@@ -38,8 +38,6 @@ const Player = () => {
     setIsOpen(!isOpen);
   };
 
-  console.log(spotifyProduct);
-
   return (
     <>
       <div>
