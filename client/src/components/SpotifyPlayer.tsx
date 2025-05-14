@@ -6,6 +6,8 @@ import { useMusicDataContext } from "../context/MusicContext";
 import { PopularityLevelsContext } from "../context/PopularityLevelsContext";
 import PreviousButton from "./PreviousButton";
 import handleLogin from "./LoginButton";
+import VolumeControl from "./VolumeBar";
+
 
 declare global {
   interface Window {
@@ -26,9 +28,11 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
   const [duration, setDuration] = useState(0);
   const [isPlayerReady, setPlayerReady] = useState(false);
   const [hasFetchedNext, setHasFetchedNext] = useState(false);
+  const [volume, setVolume] = useState(0.5);
+
 
   const token = localStorage.getItem("spotifyAccessToken");
-
+   
   const playTrack = async (device_id: string, trackUri: string) => {
     if (!token) {
       handleLogin();
@@ -83,6 +87,10 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
       spotifyPlayer.connect().then((success: boolean) => {
         if (success) {
           setPlayer(spotifyPlayer);
+          spotifyPlayer.getVolume().then((vol: number) => {
+            setVolume(vol);
+          });
+          
 
           spotifyPlayer.addListener(
             "ready",
@@ -269,7 +277,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
                 />
               </button>
               <PreviousButton />
-
+  
               <button
                 className={styles.button}
                 onClick={togglePlay}
@@ -289,7 +297,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
                   />
                 )}
               </button>
-
+  
               <NextButton />
 
               <button onClick={() => skipTime(10000)}>
@@ -300,10 +308,11 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
                 />
               </button>
             </div>
-
+  
             <div className={styles.timeInfo}>
               {formatTime(position)} / {formatTime(duration)}
             </div>
+            <VolumeControl player={player} />
           </div>
         ) : (
           <p>Connecting to Spotify...</p>
