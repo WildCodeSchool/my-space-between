@@ -1,31 +1,37 @@
 .contactContainer {
+  --headerHeight : 5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 100vh;
+  justify-content: flex-start;
   width: 100%;
-  padding: 2rem;
   text-align: center;
   color: #fff;
   line-height: 1.6;
+   position: fixed;
+  top: var(--headerHeight);
+  left: 50%;
+  transform: translateX(-50%);
+  overflow-y: auto;
+  height: calc(100dvh - var(--headerHeight));
+  box-sizing: border-box;
+  padding: 3rem;
+}
+
+.contactContainer::-webkit-scrollbar {
+  display: none;
 }
 
 .contactContainer h2 {
   font-family: 'Karantina', cursive;
   font-weight: 400;
   letter-spacing: 5px;
+  line-height: 1.4;
   margin-bottom: 0.5rem;
   margin-top: 2rem;
   font-size: 2.5rem;
-}
-
-.underline {
+  border-bottom: 1px solid white;
   width: 60%;
-  height: 0.2rem;
-  background-color: white;
-  margin: 0 auto 2rem;
-  border-radius: 1px;
 }
 
 .paragraph {
@@ -76,4 +82,14 @@ input, textarea {
     color: #4BB543;
     font-size: 1rem;
     margin-top: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  input, textarea {
+    width: 20rem;
+  } 
+
+  .contactContainer h2 {
+    font-size: 2rem;
+  }
 }

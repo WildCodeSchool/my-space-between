@@ -23,7 +23,7 @@ export const Contact = () => {
     validationErrors.email = "Invalid email";
     }
     else {
-    setSuccessMessage(" Adresse email valide !");
+    setSuccessMessage(" Valid email address !");
     }
 
     if (!message.trim()) validationErrors.message = "The message is mandatory";
@@ -37,11 +37,9 @@ export const Contact = () => {
   return (    
     <form action={handleSubmit} className= {styles.contactContainer}>
       <h2>CONTACT</h2>
-       <div className={styles.underline}></div>
-
-
+      
           <p className={styles.paragraph}>
-        "Une question ? Un projet ? Envoyez-nous un message !"
+        "A question ? A project ? Send us a message !"
       </p>
 
       <section className={styles.form}>
