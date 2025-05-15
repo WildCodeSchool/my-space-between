@@ -11,37 +11,37 @@ import Player from "./pages/Player";
 import { EasterEgg } from "./pages/Easteregg";
 
 const router = createBrowserRouter([
-     {
-      element: <App />,
-      children: [
-     {
-      path: "/contact",
-      element: <Contact />,
-     },
-     {
-      path: "/",
-      element: <Home />,
-     },
-     { 
-      path: "/player", 
-      element: <Player /> 
-     },
-     {
-      path: "/about",
-      element: <About />,
-     },
-     {
-    path: "/callback",
-    element: <Home />,
-     },
-     {
-    path: "/easteregg",
-    element: <EasterEgg />,
-     },
+  {
+    element: <App />,
+    children: [
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/player",
+        element: <Player />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/callback",
+        element: <Home />,
+      },
+      {
+        path: "/easteregg",
+        element: <EasterEgg />,
+      },
     ],
   },
 ]);
-  
+
 const rootElement = document.getElementById("root");
 if (!rootElement) {
   throw new Error('Your HTML document should contain a <div id="root"></div>');

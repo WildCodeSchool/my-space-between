@@ -78,6 +78,7 @@ const LoginButton = () => {
     try {
       const data: UserProfile = await response.json();
       localStorage.setItem("spotifyUserProfile", JSON.stringify(data));
+
       setUserProfile(data);
       setIsConnected(true);
     } catch (error) {
