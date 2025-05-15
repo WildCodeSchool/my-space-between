@@ -39,28 +39,50 @@ export const About = () => {
         <p><strong>Damien:</strong> Rock chameleon, from garage to hard rock, he digests it all and spits out good music.</p>
       </section>
 
-      <section className={styles.section}>
+      <section className={styles.githubContainer}>
         <p>You can also see our Github links !</p>
+        <div className={styles.github}>
           <a
           href="https://github.com/Salvak613"
           target="_blank"
           rel="noopener noreferrer"
-          ><strong>Jules</strong></a>
+          >
+          <img 
+          src="https://avatars.githubusercontent.com/u/201595920?v=4"
+          alt="Avatar of a cat">
+          </img>
+          </a>
           <a
           href="https://github.com/MeertAdrien"
           target="_blank"
           rel="noopener noreferrer"
-          ><strong>Adrien</strong></a>
+          >
+          <img 
+          src="https://avatars.githubusercontent.com/u/201602435?v=4"
+          alt="Avatar of a man">
+          </img>
+          </a>
           <a
           href="https://github.com/Jerome0510"
           target="_blank"
           rel="noopener noreferrer"
-          ><strong>Jérôme</strong></a>
-              <a
+          >
+          <img
+          src="https://avatars.githubusercontent.com/u/200201178?v=4"
+          alt="Avatar of a cement mixer">
+          </img>
+          </a>
+          <a
           href="https://github.com/MrLuffy59"
           target="_blank"
           rel="noopener noreferrer"
-          ><strong>Damien</strong></a> 
+          >
+          <img 
+          src="https://avatars.githubusercontent.com/u/201595777?v=4"
+          alt="Avatar of a helmet">
+          </img>
+          </a> 
+          </div>
       </section>
 
       <section className={styles.section}>
