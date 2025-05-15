@@ -49,7 +49,7 @@ export const About = () => {
           >
           <img 
           src="https://avatars.githubusercontent.com/u/201595920?v=4"
-          alt="Avatar of a cat">
+          alt="Jules">
           </img>
           </a>
           <a
@@ -59,7 +59,7 @@ export const About = () => {
           >
           <img 
           src="https://avatars.githubusercontent.com/u/201602435?v=4"
-          alt="Avatar of a man">
+          alt="Adrien">
           </img>
           </a>
           <a
@@ -69,7 +69,7 @@ export const About = () => {
           >
           <img
           src="https://avatars.githubusercontent.com/u/200201178?v=4"
-          alt="Avatar of a cement mixer">
+          alt="Jérôme">
           </img>
           </a>
           <a
@@ -79,7 +79,7 @@ export const About = () => {
           >
           <img 
           src="https://avatars.githubusercontent.com/u/201595777?v=4"
-          alt="Avatar of a helmet">
+          alt="Damien">
           </img>
           </a> 
           </div>
