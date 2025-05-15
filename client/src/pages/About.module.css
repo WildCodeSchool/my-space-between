@@ -33,9 +33,6 @@
 .section a {
   color: white;
   text-decoration: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .section:not(:first-of-type) {
