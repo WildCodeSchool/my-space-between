@@ -15,7 +15,7 @@ const Player = () => {
     const navigationEntry = navEntries[0] as PerformanceNavigationTiming;
     const wasReloaded = navigationEntry.type === "reload";
 
-    if (wasReloaded && window.location.pathname === "/player") {
+    if (window.location.pathname === "/player" && wasReloaded) {
       window.location.replace("/");
     }
   }, []);
