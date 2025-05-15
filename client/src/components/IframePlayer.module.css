@@ -1,0 +1,28 @@
+.playerFrame {
+  position: fixed;
+  top: 50%;
+  left: 25%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  gap: 6px;
+}
+iframe {
+  border-style: none;
+  height: 362px;
+}
+
+@media (max-width: 1000px) {
+  .playerFrame {
+    left: 50%;
+  }
+}
+@media (min-widht: 1000px) {
+  iframe {
+    width: 100%;
+  }
+}

@@ -5,9 +5,7 @@ import NextButton from "./NextButton";
 import { useMusicDataContext } from "../context/MusicContext";
 import { PopularityLevelsContext } from "../context/PopularityLevelsContext";
 import PreviousButton from "./PreviousButton";
-import handleLogin from "./LoginButton";
 import VolumeControl from "./VolumeBar";
-
 
 declare global {
   interface Window {
@@ -30,12 +28,12 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
   const [hasFetchedNext, setHasFetchedNext] = useState(false);
   const [volume, setVolume] = useState(0.5);
 
-
   const token = localStorage.getItem("spotifyAccessToken");
-   
+
   const playTrack = async (device_id: string, trackUri: string) => {
     if (!token) {
-      handleLogin();
+      console.error("No Spotify access token found.");
+      alert("Spotify access token is missing. Please log in again.");
       return;
     }
 
@@ -56,15 +54,23 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
 
       if (!response.ok) {
         const errorData = await response.json();
+        console.error(
+          "Failed to start playback:",
+          response.statusText,
+          errorData
+        );
         if (response.status === 401) {
-          handleLogin();
+          alert("Spotify token is invalid or expired. Please log in again.");
         }
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error starting playback:", error);
+    }
   };
 
   useEffect(() => {
     if (!token) {
+      console.error("No Spotify access token found.");
       return;
     }
 
@@ -77,7 +83,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
 
     window.onSpotifyWebPlaybackSDKReady = () => {
       spotifyPlayer = new window.Spotify.Player({
-        name: "Lecteur Web du Chineur !",
+        name: "My amazing player",
         getOAuthToken: (cb: (token: string) => void) => {
           cb(token);
         },
@@ -90,7 +96,6 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
           spotifyPlayer.getVolume().then((vol: number) => {
             setVolume(vol);
           });
-          
 
           spotifyPlayer.addListener(
             "ready",
@@ -111,6 +116,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
             "player_state_changed",
             async (state: any) => {
               if (!state) {
+                console.warn("No player state available yet.");
                 return;
               }
 
@@ -128,14 +134,18 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
                   if (currentState) {
                     setActive(true);
                   } else {
+                    console.warn("No active Spotify state found.");
                     setActive(false);
                   }
                 }
               } catch (error) {
+                console.error("Error getting current state:", error);
                 setActive(false);
               }
             }
           );
+        } else {
+          console.error("Failed to connect to Spotify Web Playback SDK");
         }
       });
     };
@@ -200,6 +210,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
 
   const togglePlay = async () => {
     if (!player || !deviceId || !isPlayerReady) {
+      console.error("Player or device not ready yet.");
       alert("Lecteur Spotify non prêt. Attends quelques secondes...");
       return;
     }
@@ -207,18 +218,27 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
     try {
       const state = await player.getCurrentState();
       if (!state) {
-        handleLogin();
+        console.error(
+          "No active device. Please start playback on Web Player first."
+        );
+        alert(
+          "Spotify Web Player n'est pas actif. Connecte-toi à ton compte Spotify !"
+        );
         return;
       }
 
       if (state.paused) {
         await player.resume();
+
         setIsPaused(false);
       } else {
         await player.pause();
+
         setIsPaused(true);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error during togglePlay:", error);
+    }
   };
 
   const formatTime = (milliseconds: number) => {
@@ -240,18 +260,24 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
         []
       );
       if (!loading && !error) {
+      } else {
+        console.error("Failed to fetch music data. Navigation aborted.");
       }
-    } catch (err) {}
+    } catch (err) {
+      console.error("Error during fetch:", err);
+    }
   };
 
   const skipTime = async (milliseconds: number) => {
     if (!player || !isPlayerReady) {
+      console.error("Player not ready for seek action");
       return;
     }
 
     try {
       const state = await player.getCurrentState();
       if (!state) {
+        console.error("No player state found");
         return;
       }
 
@@ -260,7 +286,9 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
       if (newPosition > state.duration) newPosition = state.duration;
 
       await player.seek(newPosition);
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error skipping in track:", error);
+    }
   };
 
   return (
@@ -277,7 +305,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
                 />
               </button>
               <PreviousButton />
-  
+
               <button
                 className={styles.button}
                 onClick={togglePlay}
@@ -297,7 +325,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
                   />
                 )}
               </button>
-  
+
               <NextButton />
 
               <button onClick={() => skipTime(10000)}>
@@ -308,7 +336,7 @@ const SpotifyPlayer = ({ uri }: { uri: string }) => {
                 />
               </button>
             </div>
-  
+
             <div className={styles.timeInfo}>
               {formatTime(position)} / {formatTime(duration)}
             </div>

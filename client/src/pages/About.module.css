@@ -30,6 +30,11 @@
   align-items: center;
 }
 
+.section a {
+  color: white;
+  text-decoration: none;
+}
+
 .section:not(:first-of-type) {
   max-width: 40rem;
   margin: 0 auto;

@@ -71,6 +71,14 @@ function App() {
     return `rgb(${darken(r)},${darken(g)},${darken(b)})`;
   }
 
+  function getLuminance(color: string): number {
+    const match = color.match(/\d+/g);
+    if (!match) return 0;
+    const [r, g, b] = match.map(Number);
+
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  }
+
   useEffect(() => {
     setDominantColors(new Map());
     musicList.forEach((item: MusicItem) => {
@@ -92,8 +100,13 @@ function App() {
     if (dominantColors.size > 0) {
       const lastColor = Array.from(dominantColors.values()).pop();
       if (lastColor) {
-        const darkerColor = darkenColor(lastColor, 50);
-        document.body.style.background = `radial-gradient(circle, ${lastColor} 0%, ${darkerColor} 100%)`;
+        const luminance = getLuminance(lastColor);
+        if (luminance > 180) {
+          document.body.style.background = `radial-gradient(circle, rgba(40, 40, 60, 1) 0%, rgba(10, 10, 20, 1) 100%)`;
+        } else {
+          const darkerColor = darkenColor(lastColor, 50);
+          document.body.style.background = `radial-gradient(circle, ${lastColor} 0%, ${darkerColor} 100%)`;
+        }
       }
     }
   }, [dominantColors]);
