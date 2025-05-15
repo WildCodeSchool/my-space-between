@@ -12,7 +12,11 @@ function TrackPlayingCard() {
         musicList.map((item) => (
           <div key={item.id} className={styles.card}>
             <img src={item.image} alt={item.name} className={styles.image} />
-            <h2 className={styles.trackName}>{item.name}</h2>
+            <h2 className={styles.trackName}>
+              {item.name.length > 24
+                ? item.name.slice(0, 24) + "..."
+                : item.name}
+            </h2>
             <h3 className={styles.artist}>{item.artist}</h3>
             <div className={styles.windowPlayer}>
               <SpotifyPlayer uri={item.url} />
