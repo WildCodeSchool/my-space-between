@@ -1,5 +1,7 @@
 import styles from "./IframePlayer.module.css";
 import { useFetchDataContext } from "../context/FetchDataContext";
+import PreviousButton from "./PreviousButton";
+import NextButton from "./NextButton";
 
 const IframePlayer = () => {
   const { musicList } = useFetchDataContext();
@@ -13,13 +15,15 @@ const IframePlayer = () => {
 
   return (
     <div className={styles.playerFrame}>
+      <PreviousButton />
       <iframe
         src={musicUrl}
-        width="300"
+        width="280"
         height="450"
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
         loading="lazy"
       ></iframe>
+      <NextButton />
     </div>
   );
 };
