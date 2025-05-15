@@ -40,6 +40,30 @@ export const About = () => {
       </section>
 
       <section className={styles.section}>
+        <p>You can also see our Github links !</p>
+          <a
+          href="https://github.com/Salvak613"
+          target="_blank"
+          rel="noopener noreferrer"
+          ><strong>Jules</strong></a>
+          <a
+          href="https://github.com/MeertAdrien"
+          target="_blank"
+          rel="noopener noreferrer"
+          ><strong>Adrien</strong></a>
+          <a
+          href="https://github.com/Jerome0510"
+          target="_blank"
+          rel="noopener noreferrer"
+          ><strong>Jérôme</strong></a>
+              <a
+          href="https://github.com/MrLuffy59"
+          target="_blank"
+          rel="noopener noreferrer"
+          ><strong>Damien</strong></a> 
+      </section>
+
+      <section className={styles.section}>
         <p>
           You? Maybe one day you'll join our team or become part of our community!
         </p>
