@@ -30,9 +30,13 @@ const SearchBar = () => {
   };
 
   const handleSelect = (result: string) => {
-    setSearchStyle("");
-    setResults([]);
-    setBubbleTags((prevTags) => [...prevTags, result]);
+    if (bubbleTags.length < 5) {
+      setSearchStyle("");
+      setResults([]);
+      setBubbleTags((prevTags) => [...prevTags, result]);
+    } else {
+      alert("You can only select 5 tags");
+    }
   };
 
   return (
