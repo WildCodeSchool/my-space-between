@@ -1,17 +1,17 @@
-import { useState } from 'react';
-import styles from './Contact.module.css'
+import { useState } from "react";
+import styles from "./Contact.module.css";
 
 export const Contact = () => {
-  const [name, setName] = useState('');
-  const [surname, setSurName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [name, setName] = useState("");
+  const [surname, setSurName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  const [successMessage, setSuccessMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleSubmit = async () => {
     setErrors({});
-    setSuccessMessage('');
+    setSuccessMessage("");
 
     const validationErrors: { [key: string]: string } = {};
 
@@ -20,10 +20,9 @@ export const Contact = () => {
 
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
     if (!emailRegex.test(email)) {
-    validationErrors.email = "Invalid email";
-    }
-    else {
-    setSuccessMessage(" Valid email address !");
+      validationErrors.email = "Invalid email";
+    } else {
+      setSuccessMessage(" Valid email address !");
     }
 
     if (!message.trim()) validationErrors.message = "The message is mandatory";
@@ -32,14 +31,14 @@ export const Contact = () => {
       setErrors(validationErrors);
       return;
     }
-};
+  };
 
-  return (    
-    <form action={handleSubmit} className= {styles.contactContainer}>
+  return (
+    <form action={handleSubmit} className={styles.contactContainer}>
       <h2>CONTACT</h2>
-      
-          <p className={styles.paragraph}>
-        "A question ? A project ? Send us a message !"
+
+      <p className={styles.paragraph}>
+        A question ? A suggestion ? Send us a message !
       </p>
 
       <section className={styles.form}>
@@ -49,7 +48,7 @@ export const Contact = () => {
           id="name"
           value={name}
           placeholder="Name"
-          onChange={e => setName(e.target.value)}
+          onChange={(e) => setName(e.target.value)}
         />
         {errors.name && <p className={styles.errorMessage}>{errors.name}</p>}
       </section>
@@ -61,9 +60,11 @@ export const Contact = () => {
           id="surname"
           value={surname}
           placeholder="Surname"
-          onChange={e => setSurName(e.target.value)}
+          onChange={(e) => setSurName(e.target.value)}
         />
-        {errors.surname && <p className={styles.errorMessage}>{errors.surname}</p>}
+        {errors.surname && (
+          <p className={styles.errorMessage}>{errors.surname}</p>
+        )}
       </section>
 
       <section className={styles.form}>
@@ -73,7 +74,7 @@ export const Contact = () => {
           id="email"
           value={email}
           placeholder="Email"
-          onChange={e => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
         />
         {errors.email && <p className={styles.errorMessage}>{errors.email}</p>}
       </section>
@@ -84,19 +85,21 @@ export const Contact = () => {
           id="message"
           value={message}
           placeholder="Message"
-          onChange={e => setMessage(e.target.value)}
+          onChange={(e) => setMessage(e.target.value)}
         />
-        {errors.message && <p className={styles.errorMessage}>{errors.message}</p>}
+        {errors.message && (
+          <p className={styles.errorMessage}>{errors.message}</p>
+        )}
       </section>
 
       {errors.global && <p className={styles.errorMessage}>{errors.global}</p>}
-      {successMessage && <p className={styles.successMessage}>{successMessage}</p>}
+      {successMessage && (
+        <p className={styles.successMessage}>{successMessage}</p>
+      )}
 
-      <button className={styles.buttonContact} type="submit">Send</button>
+      <button className={styles.buttonContact} type="submit">
+        Send
+      </button>
     </form>
   );
-
-}
-
-
-
+};
