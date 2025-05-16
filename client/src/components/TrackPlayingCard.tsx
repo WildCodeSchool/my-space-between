@@ -11,7 +11,14 @@ function TrackPlayingCard() {
       {musicList.length > 0 ? (
         musicList.map((item) => (
           <div key={item.id} className={styles.card}>
-            <img src={item.image} alt={item.name} className={styles.image} />
+            <a
+              href={item.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={item.name}
+            >
+              <img src={item.image} alt={item.name} className={styles.image} />
+            </a>
             <h2 className={styles.trackName}>
               {item.name.length > 24
                 ? item.name.slice(0, 24) + "..."

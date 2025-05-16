@@ -30,11 +30,11 @@
   align-items: center;
 }
 
-.github{
-   display:  flex;
-   align-items: center;
-   justify-content: center;  
-   gap: 0.3rem;
+.github {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
 }
 
 .githubContainer {
@@ -45,8 +45,8 @@
 
 .github img {
   height: 7rem;
-   border: 2px solid white;
-   border-radius: 4rem;
+  border: 2px solid white;
+  border-radius: 4rem;
 }
 
 .section:not(:first-of-type) {
@@ -100,7 +100,7 @@
   .section:not(:first-of-type) {
     max-width: 90%;
   }
-  
+
   .github img {
     height: 5rem;
   }
