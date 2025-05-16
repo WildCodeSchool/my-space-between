@@ -5,7 +5,7 @@ export const About = () => {
     <div className={styles.aboutContainer}>
       <section className={styles.section}>
         <h2>ABOUT</h2>
-        <div className={styles.underline}></div>
+        
         <p>
           Welcome to Le Chineur, a music platform designed for everyone who
           can't go a day without listening to their favorite tunes.
@@ -24,16 +24,65 @@ export const About = () => {
           you're coding, working out, daydreaming, or crying in the dark (hey,
           it happens), you'll find the perfect sound atmosphere just for you.
         </p>
+        <p>
+          Le Chineur goes further : we also highlight emerging or little-known artists, 
+          giving them greater visibility compared to the big names on the music scene, because they also deserve to be listened to.
+        </p>
       </section>
 
       <section className={styles.section}>
         <h3>WHO ARE WE?</h3>
-        <p>
-          We're a small team of web development students, passionate about
-          music, technology, and user experience. This project was born in an
-          educational setting, but we've poured our energy, creativity, and love
-          for great sound into it.
-        </p>
+        <p>We're four friends addicted to music (and coding). Let's introduce the team:</p>
+        <p><strong>Jules:</strong> Sound explorer, Salvak fanatic, and always on the lookout for underground gems.</p>
+        <p><strong>Adrien:</strong> Passionate headbanger, metal and rock lover who rocks the speakers.</p>
+        <p><strong>Jérôme:</strong> Flow addict, rap enthusiast, and hunter of killer beats.</p>
+        <p><strong>Damien:</strong> Rock chameleon, from garage to hard rock, he digests it all and spits out good music.</p>
+      </section>
+
+      <section className={styles.githubContainer}>
+        <p>You can also see our Github links !</p>
+        <div className={styles.github}>
+          <a
+          href="https://github.com/Salvak613"
+          target="_blank"
+          rel="noopener noreferrer"
+          >
+          <img 
+          src="https://avatars.githubusercontent.com/u/201595920?v=4"
+          alt="Jules">
+          </img>
+          </a>
+          <a
+          href="https://github.com/MeertAdrien"
+          target="_blank"
+          rel="noopener noreferrer"
+          >
+          <img 
+          src="https://avatars.githubusercontent.com/u/201602435?v=4"
+          alt="Adrien">
+          </img>
+          </a>
+          <a
+          href="https://github.com/Jerome0510"
+          target="_blank"
+          rel="noopener noreferrer"
+          >
+          <img
+          src="https://avatars.githubusercontent.com/u/200201178?v=4"
+          alt="Jérôme">
+          </img>
+          </a>
+          <a
+          href="https://github.com/MrLuffy59"
+          target="_blank"
+          rel="noopener noreferrer"
+          >
+          <img 
+          src="https://avatars.githubusercontent.com/u/201595777?v=4"
+          alt="Damien">
+          </img>
+          </a> 
+          </div>
       </section>
 
       <section className={styles.section}>

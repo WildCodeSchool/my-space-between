@@ -1,6 +1,6 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router";
+import { Contact } from "./pages/Contact";
 import App from "./App";
 import { About } from "./pages/About";
 import { FetchDataProvider } from "./context/FetchDataContext";
@@ -15,10 +15,17 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
+        path: "/contact",
+        element: <Contact />,
+      },
+      {
         path: "/",
         element: <Home />,
       },
-      { path: "/player", element: <Player /> },
+      {
+        path: "/player",
+        element: <Player />,
+      },
       {
         path: "/about",
         element: <About />,

@@ -1,0 +1,103 @@
+.contactContainer {
+  --headerHeight : 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  line-height: 1.6;
+   position: fixed;
+  top: var(--headerHeight);
+  left: 50%;
+  transform: translateX(-50%);
+  overflow-y: auto;
+  height: calc(100dvh - var(--headerHeight));
+  box-sizing: border-box;
+  padding: 3rem;
+}
+
+.contactContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.contactContainer h2 {
+  font-family: 'Karantina', cursive;
+  font-weight: 400;
+  letter-spacing: 5px;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+  margin-top: 2rem;
+  font-size: 2.5rem;
+  border-bottom: 1px solid white;
+  width: 60%;
+}
+
+.paragraph {
+  font-family: 'Jaldi', sans-serif;
+  font-size: 1rem;
+  color: white;
+  margin: 0 0 1rem;
+}
+
+.form {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+input, textarea {
+    width: 30rem;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border: 0.1rem solid black;
+    border-radius: 0.4rem;
+    box-shadow: 6px 6px 1px rgba(0,0,0, 0.1);
+    background: transparent;
+    color: #000;
+    font-size: 1rem;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+}
+input[autocompleted] {
+    background-color: transparent !important;
+}
+
+.buttonContact {
+    border: 0.1rem solid black;
+    border-radius: 0.2rem;
+    box-shadow: 6px 6px 1px rgba(0,0,0, 0.1);
+    text-align: center;
+    color: white;
+    background: transparent;
+    padding: 0.5rem 1.25rem;
+    margin-top: 1rem;
+}
+
+.errorMessage {
+    color: #ff4d4f;
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+    text-align: left;
+}
+
+.successMessage {
+    color: #4BB543;
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  input, textarea {
+    width: 20rem;
+  } 
+
+  .contactContainer h2 {
+    font-size: 2rem;
+  }
+}

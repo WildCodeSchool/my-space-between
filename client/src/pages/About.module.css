@@ -8,8 +8,8 @@
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  height: calc(100vh - 5rem);
-  padding: 2rem;
+  height: calc(100dvh - 5rem);
+  padding: 3rem;
   text-align: center;
   color: #fff;
   font-family: "Jaldi", sans-serif;
@@ -25,6 +25,28 @@
 .section {
   width: 100%;
   margin-bottom: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.github {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+.githubContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.github img {
+  height: 7rem;
+  border: 2px solid white;
+  border-radius: 4rem;
 }
 
 .section:not(:first-of-type) {
@@ -45,6 +67,8 @@
   font-size: 2.5rem;
   margin-top: 2rem;
   margin-bottom: 0.5rem;
+  border-bottom: 1px solid white;
+  width: 60%;
 }
 
 .aboutContainer h3 {
@@ -53,20 +77,11 @@
   margin-bottom: 1rem;
 }
 
-.underline {
-  width: 100%;
-  max-width: 60%;
-  height: 1px;
-  background-color: rgba(255, 255, 255, 0.5);
-  margin: 0 auto 2rem;
-  border-radius: 1px;
-}
-
 .section p {
   font-family: "Jaldi", sans-serif;
   font-size: 1rem;
   color: white;
-  margin: 0 0 1rem;
+  margin: 0rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -82,11 +97,11 @@
     font-size: 1.25rem;
   }
 
-  .underline {
-    max-width: 80%;
-  }
-
   .section:not(:first-of-type) {
     max-width: 90%;
+  }
+
+  .github img {
+    height: 5rem;
   }
 }

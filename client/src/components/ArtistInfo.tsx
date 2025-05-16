@@ -4,6 +4,10 @@ import { useFetchDataContext } from "../context/FetchDataContext";
 const ArtistInfo = () => {
   const { musicList } = useFetchDataContext();
 
+  const formatFollowers = (num: number | string) => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  };
+
   return (
     <>
       <div className={styles.artistInfoContainer}>
@@ -17,7 +21,7 @@ const ArtistInfo = () => {
                 )}{" "}
               </div>
               <h2>{item.artist} </h2>
-              <p>{item.followers} followers</p>
+              <p>{formatFollowers(item.followers)} followers</p>
               <p>Genre: {item.genre}</p>
 
               <div className={styles.albumsContainer}>
